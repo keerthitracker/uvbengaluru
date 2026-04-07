@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
-const UV_LOGO = 'https://d2atk76x06g5eh.cloudfront.net/website/india/navbar/logo.svg'
+const UV_LOGO = '/aadyaa-logo.svg'
 
 const navLinks = [
   { label: 'BIKES', href: '/bikes' },
@@ -50,10 +50,10 @@ export default function Navbar() {
           <Link href="/" className="flex flex-col items-start gap-0.5 group">
             <Image
               src={UV_LOGO}
-              alt="Ultraviolette"
+              alt="Aadyaa"
               width={110}
               height={22}
-              className="brightness-0 invert"
+              className="h-auto"
               priority
             />
             <span className="font-display text-[10px] font-bold text-[#C8FF00] tracking-[0.35em] uppercase leading-none">
@@ -122,10 +122,10 @@ export default function Navbar() {
         <div className="mb-4">
           <Image
             src={UV_LOGO}
-            alt="Ultraviolette"
+            alt="Aadyaa"
             width={140}
             height={28}
-            className="brightness-0 invert opacity-30"
+            className="h-auto opacity-60"
           />
         </div>
         {navLinks.map((link) => (

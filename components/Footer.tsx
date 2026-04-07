@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-const UV_LOGO = 'https://d2atk76x06g5eh.cloudfront.net/website/india/navbar/logo.svg'
+const UV_LOGO = '/aadyaa-logo.svg'
 
 export default function Footer() {
   return (
@@ -12,10 +12,10 @@ export default function Footer() {
           <div className="flex flex-col items-start gap-1 mb-5">
             <Image
               src={UV_LOGO}
-              alt="Ultraviolette"
+              alt="Aadyaa"
               width={120}
               height={24}
-              className="brightness-0 invert"
+              className="h-auto"
             />
             <span className="font-display text-[10px] font-bold text-[#C8FF00] tracking-[0.35em] uppercase">
               BENGALURU
