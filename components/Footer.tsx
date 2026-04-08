@@ -1,172 +1,137 @@
 import Link from 'next/link'
 import Image from 'next/image'
 
-const UV_LOGO = '/aadyaa-logo.svg'
+const vehicles = [
+  { name: 'X-47',            href: '/vehicles/x-47' },
+  { name: 'X-47 Desert Wing',href: '/vehicles/x-47-desert-wing' },
+  { name: 'F77 Superstreet', href: '/vehicles/f77-superstreet' },
+  { name: 'F77 Mach 2',      href: '/vehicles/f77-mach-2' },
+  { name: 'Tesseract',       href: '/vehicles/tesseract' },
+  { name: 'Shockwave',       href: '/vehicles/shockwave' },
+]
+
+const services = [
+  { name: 'Service & Repairs', href: '/service' },
+  { name: 'Book Test Ride',    href: '/test-ride' },
+  { name: 'Finance Options',   href: '/finance' },
+  { name: 'Contact Us',        href: '/contact' },
+]
+
+const legal = [
+  { name: 'Privacy Policy', href: '/privacy' },
+  { name: 'Terms of Use',   href: '/terms' },
+]
 
 export default function Footer() {
   return (
-    <footer className="bg-[#080808] border-t border-[#222]">
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-        {/* Brand */}
-        <div>
-          <div className="flex flex-col items-start gap-1 mb-5">
+    <footer style={{ background: '#111111', borderTop: '1px solid #2A2A2A' }}>
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
+          {/* Brand column */}
+          <div className="md:col-span-1">
             <Image
-              src={UV_LOGO}
-              alt="Aadyaa"
-              width={120}
-              height={24}
-              className="h-auto"
+              src="/images/uv-logo-footer.svg"
+              alt="UV Bengaluru"
+              width={180}
+              height={32}
+              className="h-8 w-auto mb-4"
             />
-            <span className="font-display text-[10px] font-bold text-[#C8FF00] tracking-[0.35em] uppercase">
-              BENGALURU
-            </span>
+            <p style={{ fontSize: '14px', color: '#666666', lineHeight: 1.6 }}>
+              Official Ultraviolette dealership in Nagarbhavi, Bengaluru.
+            </p>
           </div>
-          <p className="text-[#888] text-sm leading-relaxed mb-2">
-            Official Ultraviolette dealership in Nagarbhavi, Bengaluru.
-          </p>
-          <p className="text-[#666] text-xs mb-6">Operated by Aadya Inc.</p>
 
-          {/* Social Icons */}
-          <div className="flex items-center gap-4">
-            <a
-              href="https://instagram.com/uvbengaluru"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#666] hover:text-[#C8FF00] transition-colors"
-              aria-label="Instagram"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-              </svg>
-            </a>
-            <a
-              href="https://facebook.com/uvbengaluru"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#666] hover:text-[#C8FF00] transition-colors"
-              aria-label="Facebook"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-              </svg>
-            </a>
-            <a
-              href="https://youtube.com/@uvbengaluru"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#666] hover:text-[#C8FF00] transition-colors"
-              aria-label="YouTube"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
-              </svg>
-            </a>
-            <a
-              href="https://linkedin.com/company/uvbengaluru"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[#666] hover:text-[#C8FF00] transition-colors"
-              aria-label="LinkedIn"
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-              </svg>
-            </a>
+          {/* Vehicles */}
+          <div>
+            <h3 style={{ fontSize: '13px', letterSpacing: '0.12em', color: '#FFFFFF', fontWeight: 600, marginBottom: '16px' }} className="uppercase">
+              VEHICLES
+            </h3>
+            <ul className="space-y-3">
+              {vehicles.map((v) => (
+                <li key={v.href}>
+                  <Link href={v.href} style={{ fontSize: '14px', color: '#A0A0A0' }} className="hover:text-white transition-colors">
+                    {v.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
 
-        {/* Quick Links */}
-        <div>
-          <h3 className="font-display text-xs font-bold uppercase tracking-[0.25em] text-white mb-6">EXPLORE</h3>
-          <ul className="space-y-3">
-            {[
-              { label: 'Our Bikes', href: '/bikes' },
-              { label: 'Showroom', href: '/showroom' },
-              { label: 'Workshop & Service', href: '/workshop' },
-              { label: 'Book Test Ride', href: '/test-ride' },
-              { label: 'Contact Us', href: '/contact' },
-            ].map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="text-[#888] hover:text-[#C8FF00] transition-colors text-sm"
-                >
-                  {link.label}
-                </Link>
+          {/* Visit Us */}
+          <div>
+            <h3 style={{ fontSize: '13px', letterSpacing: '0.12em', color: '#FFFFFF', fontWeight: 600, marginBottom: '16px' }} className="uppercase">
+              VISIT US
+            </h3>
+            <ul className="space-y-3">
+              <li>
+                <Link href="/about" style={{ fontSize: '14px', color: '#A0A0A0' }} className="hover:text-white transition-colors">About Us</Link>
               </li>
+              <li>
+                <Link href="/contact" style={{ fontSize: '14px', color: '#A0A0A0' }} className="hover:text-white transition-colors">Showroom</Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Services */}
+          <div>
+            <h3 style={{ fontSize: '13px', letterSpacing: '0.12em', color: '#FFFFFF', fontWeight: 600, marginBottom: '16px' }} className="uppercase">
+              SERVICES
+            </h3>
+            <ul className="space-y-3">
+              {services.map((s) => (
+                <li key={s.href}>
+                  <Link href={s.href} style={{ fontSize: '14px', color: '#A0A0A0' }} className="hover:text-white transition-colors">
+                    {s.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact Us */}
+          <div>
+            <h3 style={{ fontSize: '13px', letterSpacing: '0.12em', color: '#FFFFFF', fontWeight: 600, marginBottom: '16px' }} className="uppercase">
+              CONTACT US
+            </h3>
+            <ul className="space-y-3">
+              <li style={{ fontSize: '14px', color: '#A0A0A0', lineHeight: 1.6 }}>
+                SJA Arcade, 904, 10th Cross Rd, ITI Layout, Papareddipalya, Naagarabhaavi, Bengaluru, Karnataka 560072
+              </li>
+              <li>
+                <a href="tel:+919606955530" style={{ fontSize: '14px', color: '#A0A0A0' }} className="hover:text-white transition-colors">
+                  📞 96069 55530
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://wa.me/919606955529?text=Hi%2C%20I%27m%20interested%20in%20Ultraviolette%20motorcycles"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ fontSize: '14px', color: '#A0A0A0' }}
+                  className="hover:text-white transition-colors"
+                >
+                  💬 WhatsApp: 96069 55529
+                </a>
+              </li>
+              <li style={{ fontSize: '14px', color: '#A0A0A0' }}>
+                🕙 10:00 AM – 7:00 PM, all days
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Bottom bar */}
+        <div style={{ borderTop: '1px solid #333333', marginTop: '48px', paddingTop: '24px' }} className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <p style={{ fontSize: '12px', color: '#666666', letterSpacing: '0.06em' }}>
+            © 2025 Aadya Inc. | Authorized Ultraviolette Dealer, Bengaluru
+          </p>
+          <div className="flex gap-6">
+            {legal.map((l) => (
+              <Link key={l.href} href={l.href} style={{ fontSize: '12px', color: '#666666' }} className="hover:text-white transition-colors">
+                {l.name}
+              </Link>
             ))}
-          </ul>
-        </div>
-
-        {/* Contact */}
-        <div>
-          <h3 className="font-display text-xs font-bold uppercase tracking-[0.25em] text-white mb-6">CONTACT</h3>
-          <ul className="space-y-4">
-            <li>
-              <p className="text-[#888] text-sm leading-relaxed">
-                SJA Arcade, 904, 10th Cross Rd<br />
-                ITI Layout, Papareddipalya<br />
-                Naagarabhaavi, Bengaluru<br />
-                Karnataka 560072
-              </p>
-            </li>
-            <li>
-              <a href="tel:+919606955530" className="text-[#888] hover:text-[#C8FF00] transition-colors text-sm">
-                96069 55530
-              </a>
-            </li>
-            <li>
-              <a href="https://wa.me/919606955529" target="_blank" rel="noopener noreferrer" className="text-[#888] hover:text-[#C8FF00] transition-colors text-sm flex items-center gap-1.5">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-                96069 55529
-              </a>
-            </li>
-            <li>
-              <a href="mailto:hello@uvbengaluru.com" className="text-[#888] hover:text-[#C8FF00] transition-colors text-sm">
-                hello@uvbengaluru.com
-              </a>
-            </li>
-            <li>
-              <p className="text-[#888] text-sm leading-relaxed">
-                Mon–Sun: 10:00 AM – 7:00 PM
-              </p>
-            </li>
-          </ul>
-        </div>
-
-        {/* Map */}
-        <div>
-          <h3 className="font-display text-xs font-bold uppercase tracking-[0.25em] text-white mb-6">FIND US</h3>
-          <a
-            href="https://maps.google.com/?q=SJA+Arcade+904+10th+Cross+Rd+ITI+Layout+Papareddipalya+Naagarabhaavi+Bengaluru+Karnataka+560072"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex flex-col items-center justify-center w-full h-40 bg-[#161616] border border-[#222] hover:border-[#C8FF00] transition-all duration-300 group"
-            aria-label="View on Google Maps"
-          >
-            <svg
-              className="w-8 h-8 text-[#444] group-hover:text-[#C8FF00] transition-colors mb-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            <p className="text-[#444] group-hover:text-[#C8FF00] text-xs uppercase tracking-widest transition-colors">
-              SJA Arcade, Nagarbhavi
-            </p>
-            <p className="text-[#333] group-hover:text-[#888] text-[10px] transition-colors mt-1">
-              View on Google Maps
-            </p>
-          </a>
-        </div>
-      </div>
-
-      <div className="border-t border-[#1a1a1a]">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 py-6 flex flex-col md:flex-row justify-between items-center gap-2">
-          <p className="text-[#444] text-xs">© 2025 Aadya Inc. | Authorized Ultraviolette Dealer, Bengaluru</p>
-          <p className="text-[#444] text-xs">uvbengaluru.com</p>
+          </div>
         </div>
       </div>
     </footer>

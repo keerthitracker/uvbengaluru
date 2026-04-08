@@ -12,7 +12,7 @@ const financeOptions = [
     title: 'EMI PLANS',
     desc: 'Work with leading banks and NBFCs for monthly EMI options tailored to your budget. Competitive interest rates on all Ultraviolette models with tenures from 12 to 60 months.',
     icon: (
-      <svg className="w-8 h-8 text-[#C8FF00]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-8 h-8 text-[#FF3B3B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
       </svg>
     ),
@@ -21,7 +21,7 @@ const financeOptions = [
     title: 'ZERO DOWN PAYMENT',
     desc: 'Select finance partners offer zero or minimal down payment options. Ask our team about current promotions and eligibility — making your Ultraviolette even more accessible.',
     icon: (
-      <svg className="w-8 h-8 text-[#C8FF00]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-8 h-8 text-[#FF3B3B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
@@ -30,7 +30,7 @@ const financeOptions = [
     title: 'INSURANCE BUNDLING',
     desc: 'We assist with comprehensive motor insurance from leading providers. Bundle with your finance for a single, hassle-free monthly payment that covers everything.',
     icon: (
-      <svg className="w-8 h-8 text-[#C8FF00]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg className="w-8 h-8 text-[#FF3B3B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
       </svg>
     ),
@@ -74,9 +74,9 @@ export default function FinancePage() {
       {/* Hero */}
       <section className="hero-gradient pt-32 pb-20 px-4 md:px-8 border-b border-[#1a1a1a]">
         <div className="max-w-7xl mx-auto">
-          <p className="text-[#C8FF00] text-xs uppercase tracking-[0.3em] mb-4 font-semibold">Finance &amp; Ownership</p>
+          <p className="text-[#FF3B3B] text-xs uppercase tracking-[0.3em] mb-4 font-semibold">Finance &amp; Ownership</p>
           <h1 className="font-display text-5xl md:text-7xl font-extrabold uppercase leading-none text-white mb-5">
-            MAKE YOUR <span className="text-[#C8FF00]">UV</span><br />
+            MAKE YOUR <span className="text-[#FF3B3B]">UV</span><br />
             YOURS TODAY
           </h1>
           <p className="text-[#888] text-lg max-w-xl leading-relaxed">
@@ -89,14 +89,14 @@ export default function FinancePage() {
       <section className="py-24 px-4 md:px-8 border-b border-[#1a1a1a]">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12">
-            <p className="text-[#C8FF00] text-xs uppercase tracking-[0.3em] mb-3 font-semibold">How We Help</p>
+            <p className="text-[#FF3B3B] text-xs uppercase tracking-[0.3em] mb-3 font-semibold">How We Help</p>
             <h2 className="font-display text-4xl md:text-5xl font-extrabold uppercase text-white">
               FINANCE OPTIONS
             </h2>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {financeOptions.map((option) => (
-              <div key={option.title} className="bg-[#111] border border-[#222] p-8 hover:border-[#C8FF00] transition-colors duration-300">
+              <div key={option.title} className="bg-[#111] border border-[#222] p-8 hover:border-[#E8231A] transition-colors duration-300">
                 <div className="mb-5">{option.icon}</div>
                 <h3 className="font-display text-xl font-extrabold uppercase text-white mb-3">{option.title}</h3>
                 <p className="text-[#888] text-sm leading-relaxed">{option.desc}</p>
@@ -111,7 +111,7 @@ export default function FinancePage() {
         <div className="max-w-7xl mx-auto">
           <div className="bg-[#111] border border-[#222] p-10">
             <div className="mb-8">
-              <p className="text-[#C8FF00] text-xs uppercase tracking-[0.3em] mb-3 font-semibold">Indicative Pricing</p>
+              <p className="text-[#FF3B3B] text-xs uppercase tracking-[0.3em] mb-3 font-semibold">Indicative Pricing</p>
               <h2 className="font-display text-4xl font-extrabold uppercase text-white">
                 ESTIMATE YOUR EMI
               </h2>
@@ -126,7 +126,7 @@ export default function FinancePage() {
                     <span className="text-white font-semibold">{ex.model}</span>
                     <span className="text-[#666] text-sm ml-3">{ex.price}</span>
                   </div>
-                  <span className="text-[#C8FF00] font-bold text-sm">{ex.emi}</span>
+                  <span className="text-[#FF3B3B] font-bold text-sm">{ex.emi}</span>
                 </div>
               ))}
             </div>
@@ -135,7 +135,7 @@ export default function FinancePage() {
             </p>
             <Link
               href="/contact"
-              className="inline-block bg-[#C8FF00] text-black font-bold uppercase tracking-widest px-7 py-4 text-sm hover:bg-[#d4ff33] transition-colors"
+              className="inline-block btn-primary transition-colors"
             >
               GET A CUSTOM QUOTE
             </Link>
@@ -147,7 +147,7 @@ export default function FinancePage() {
       <section className="py-24 px-4 md:px-8 border-b border-[#1a1a1a]">
         <div className="max-w-7xl mx-auto">
           <div className="mb-16 text-center">
-            <p className="text-[#C8FF00] text-xs uppercase tracking-[0.3em] mb-3 font-semibold">The Process</p>
+            <p className="text-[#FF3B3B] text-xs uppercase tracking-[0.3em] mb-3 font-semibold">The Process</p>
             <h2 className="font-display text-4xl md:text-5xl font-extrabold uppercase text-white">
               HOW IT WORKS
             </h2>
@@ -155,7 +155,7 @@ export default function FinancePage() {
           <div className="grid md:grid-cols-3 gap-8">
             {steps.map((step) => (
               <div key={step.step} className="bg-[#111] border border-[#222] p-8 relative">
-                <p className="font-display text-7xl font-extrabold text-[#C8FF00]/15 leading-none mb-4 select-none">{step.step}</p>
+                <p className="font-display text-7xl font-extrabold text-[#FF3B3B]/15 leading-none mb-4 select-none">{step.step}</p>
                 <h3 className="font-display text-xl font-extrabold uppercase text-white mb-3">{step.title}</h3>
                 <p className="text-[#888] text-sm leading-relaxed">{step.desc}</p>
               </div>
@@ -168,21 +168,21 @@ export default function FinancePage() {
       <section className="py-24 px-4 md:px-8 bg-[#0c0c0c] border-b border-[#1a1a1a]">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-12 items-start">
           <div className="lg:col-span-2">
-            <p className="text-[#C8FF00] text-xs uppercase tracking-[0.3em] mb-3 font-semibold">Added Benefits</p>
+            <p className="text-[#FF3B3B] text-xs uppercase tracking-[0.3em] mb-3 font-semibold">Added Benefits</p>
             <h2 className="font-display text-4xl md:text-5xl font-extrabold uppercase text-white mb-8">
               TAX &amp; SUBSIDY ADVANTAGES
             </h2>
             <div className="grid sm:grid-cols-2 gap-4">
               {taxBenefits.map((benefit) => (
-                <div key={benefit.title} className="bg-[#111] border border-[#222] p-6 hover:border-[#C8FF00] transition-colors duration-300">
+                <div key={benefit.title} className="bg-[#111] border border-[#222] p-6 hover:border-[#E8231A] transition-colors duration-300">
                   <h3 className="font-display text-base font-extrabold uppercase text-white mb-2">{benefit.title}</h3>
                   <p className="text-[#888] text-sm leading-relaxed">{benefit.desc}</p>
                 </div>
               ))}
             </div>
           </div>
-          <div className="bg-[#C8FF00]/5 border border-[#C8FF00]/20 p-8">
-            <h3 className="text-lg font-bold uppercase text-[#C8FF00] mb-4">SPEAK TO OUR FINANCE TEAM</h3>
+          <div className="bg-[#E8231A]/5 border border-[#E8231A]/20 p-8">
+            <h3 className="text-lg font-bold uppercase text-[#FF3B3B] mb-4">SPEAK TO OUR FINANCE TEAM</h3>
             <p className="text-[#888] text-sm leading-relaxed mb-6">
               Our finance desk is available at Nagarbhavi, Mon–Sun, 10 AM – 7 PM. Walk in or reach us on WhatsApp or phone.
             </p>
@@ -198,7 +198,7 @@ export default function FinancePage() {
               </a>
               <a
                 href="tel:+919606955530"
-                className="flex items-center gap-3 border border-[#C8FF00] text-[#C8FF00] font-bold uppercase tracking-widest px-5 py-3 text-xs hover:bg-[#C8FF00] hover:text-black transition-all"
+                className="flex items-center gap-3 border border-white text-[#FF3B3B] font-bold uppercase tracking-widest px-5 py-3 text-xs hover:bg-white/10 transition-all"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -211,10 +211,10 @@ export default function FinancePage() {
       </section>
 
       {/* CTA Banner */}
-      <section className="py-20 px-4 md:px-8 border-t border-[#C8FF00]/20">
+      <section className="py-20 px-4 md:px-8 border-t border-[#E8231A]/20">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="font-display text-4xl md:text-6xl font-extrabold uppercase text-white mb-5">
-            READY TO OWN AN<br /><span className="text-[#C8FF00]">ULTRAVIOLETTE?</span>
+            READY TO OWN AN<br /><span className="text-[#FF3B3B]">ULTRAVIOLETTE?</span>
           </h2>
           <p className="text-[#888] text-base mb-8 max-w-lg mx-auto">
             Book a test ride first — fall in love with the machine — then talk to our finance team about making it yours.
@@ -222,13 +222,13 @@ export default function FinancePage() {
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
               href="/test-ride"
-              className="bg-[#C8FF00] text-black font-bold uppercase tracking-widest px-8 py-4 text-sm hover:bg-[#d4ff33] transition-colors"
+              className="bg-[#E8231A] text-white font-bold uppercase tracking-widest px-8 py-4 text-sm hover:bg-[#C41C14] transition-colors"
             >
               BOOK A TEST RIDE
             </Link>
             <Link
               href="/contact"
-              className="border border-[#C8FF00] text-[#C8FF00] font-bold uppercase tracking-widest px-8 py-4 text-sm hover:bg-[#C8FF00] hover:text-black transition-all"
+              className="border border-white text-[#FF3B3B] font-bold uppercase tracking-widest px-8 py-4 text-sm hover:bg-white/10 transition-all"
             >
               TALK TO US
             </Link>

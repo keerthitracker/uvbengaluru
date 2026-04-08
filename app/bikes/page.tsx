@@ -131,10 +131,10 @@ export default function BikesPage() {
       {/* Hero */}
       <section className="hero-gradient pt-32 pb-20 px-4 md:px-8 border-b border-[#1a1a1a]">
         <div className="max-w-7xl mx-auto">
-          <p className="text-[#C8FF00] text-xs uppercase tracking-[0.3em] mb-4 font-semibold">UV Bengaluru</p>
+          <p className="text-[#FF3B3B] text-xs uppercase tracking-[0.3em] mb-4 font-semibold">UV Bengaluru</p>
           <h1 className="font-display text-5xl md:text-7xl font-extrabold uppercase leading-none tracking-tight text-white mb-5">
             THE ULTRAVIOLETTE<br />
-            <span className="text-[#C8FF00]">LINEUP</span>
+            <span className="text-[#FF3B3B]">LINEUP</span>
           </h1>
           <p className="text-[#888] text-lg max-w-2xl leading-relaxed">
             Every Ultraviolette motorcycle is engineered with aerospace precision and backed by 7 years of uncompromising R&amp;D. Choose your machine. Redefine your ride.
@@ -162,10 +162,10 @@ export default function BikesPage() {
 
               {/* Content */}
               <div className={idx % 2 === 1 ? 'lg:order-1' : ''}>
-                <span className="inline-block bg-[#C8FF00] text-black text-xs font-bold uppercase tracking-widest px-3 py-1 mb-4">
+                <span className="inline-block bg-[#E8231A] text-black text-xs font-bold uppercase tracking-widest px-3 py-1 mb-4">
                   {model.badge}
                 </span>
-                <p className="text-[#C8FF00] text-sm uppercase tracking-[0.2em] font-medium mb-2">{model.tagline}</p>
+                <p className="text-[#FF3B3B] text-sm uppercase tracking-[0.2em] font-medium mb-2">{model.tagline}</p>
                 <h2 className="font-display text-4xl md:text-5xl font-extrabold uppercase text-white mb-5 leading-tight">
                   {model.name}
                 </h2>
@@ -175,7 +175,7 @@ export default function BikesPage() {
                 <div className="grid grid-cols-3 gap-3 mb-8">
                   {model.highlights.map((h) => (
                     <div key={h.label} className="bg-[#161616] border border-[#222] p-3">
-                      <p className="font-display text-[#C8FF00] font-bold text-lg leading-tight">{h.value}</p>
+                      <p className="font-display text-[#FF3B3B] font-bold text-lg leading-tight">{h.value}</p>
                       <p className="text-[#666] text-xs uppercase tracking-wider mt-0.5">{h.label}</p>
                     </div>
                   ))}
@@ -185,7 +185,7 @@ export default function BikesPage() {
                 <ul className="space-y-2 mb-8">
                   {model.features.map((f) => (
                     <li key={f} className="flex items-start gap-3 text-sm text-[#888]">
-                      <svg className="w-4 h-4 text-[#C8FF00] mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4 text-[#FF3B3B] mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                       {f}
@@ -201,10 +201,10 @@ export default function BikesPage() {
                 </p>
 
                 <div className="flex flex-wrap gap-4">
-                  <Link href="/test-ride" className="bg-[#C8FF00] text-black font-bold uppercase tracking-widest px-6 py-3 text-sm hover:bg-[#d4ff33] transition-colors">
+                  <Link href="/test-ride" className="bg-[#E8231A] text-white font-bold uppercase tracking-widest px-6 py-3 text-sm hover:bg-[#C41C14] transition-colors">
                     BOOK TEST RIDE
                   </Link>
-                  <Link href="/contact" className="border border-[#C8FF00] text-[#C8FF00] font-bold uppercase tracking-widest px-6 py-3 text-sm hover:bg-[#C8FF00] hover:text-black transition-all">
+                  <Link href="/contact" className="border border-white text-[#FF3B3B] font-bold uppercase tracking-widest px-6 py-3 text-sm hover:bg-white/10 transition-all">
                     ENQUIRE NOW
                   </Link>
                 </div>
@@ -218,7 +218,7 @@ export default function BikesPage() {
       <section className="py-24 px-4 md:px-8 bg-[#0c0c0c] border-b border-[#1a1a1a]">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12">
-            <p className="text-[#C8FF00] text-xs uppercase tracking-[0.3em] mb-3 font-semibold">Bengaluru Ex-Showroom Pricing</p>
+            <p className="text-[#FF3B3B] text-xs uppercase tracking-[0.3em] mb-3 font-semibold">Bengaluru Ex-Showroom Pricing</p>
             <h2 className="font-display text-4xl md:text-5xl font-extrabold uppercase text-white">
               X-47 VARIANTS
             </h2>
@@ -236,14 +236,14 @@ export default function BikesPage() {
               </thead>
               <tbody>
                 {x47Variants.map((v, i) => (
-                  <tr key={v.name} className={`border-b border-[#1a1a1a] hover:bg-[#161616] transition-colors ${i === 4 ? 'border-[#C8FF00]/20' : ''}`}>
+                  <tr key={v.name} className={`border-b border-[#1a1a1a] hover:bg-[#161616] transition-colors ${i === 4 ? 'border-[#E8231A]/20' : ''}`}>
                     <td className="py-4 px-4">
                       <span className="text-white font-semibold text-sm">{v.name}</span>
                       {i === 4 && (
-                        <span className="ml-2 bg-[#C8FF00] text-black text-[10px] font-bold uppercase px-1.5 py-0.5">TOP</span>
+                        <span className="ml-2 bg-[#E8231A] text-black text-[10px] font-bold uppercase px-1.5 py-0.5">TOP</span>
                       )}
                     </td>
-                    <td className="py-4 px-4 text-[#C8FF00] font-bold text-sm">{v.price}</td>
+                    <td className="py-4 px-4 text-[#FF3B3B] font-bold text-sm">{v.price}</td>
                     <td className="py-4 px-4 text-[#888] text-sm">{v.power}</td>
                     <td className="py-4 px-4 text-[#888] text-sm">{v.torque}</td>
                     <td className="py-4 px-4 text-[#888] text-sm">{v.range}</td>
@@ -262,7 +262,7 @@ export default function BikesPage() {
       <section className="py-24 px-4 md:px-8 border-b border-[#1a1a1a]">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12">
-            <p className="text-[#C8FF00] text-xs uppercase tracking-[0.3em] mb-3 font-semibold">Coming Soon</p>
+            <p className="text-[#FF3B3B] text-xs uppercase tracking-[0.3em] mb-3 font-semibold">Coming Soon</p>
             <h2 className="font-display text-4xl md:text-5xl font-extrabold uppercase text-white">
               WHAT&apos;S NEXT
             </h2>
@@ -288,7 +288,7 @@ export default function BikesPage() {
                   <p className="text-[#888] text-sm leading-relaxed mb-6">{model.description}</p>
                   <Link
                     href="/contact"
-                    className="border border-[#444] text-[#888] font-bold uppercase tracking-widest px-5 py-2.5 text-xs hover:border-[#C8FF00] hover:text-[#C8FF00] transition-all"
+                    className="border border-[#444] text-[#888] font-bold uppercase tracking-widest px-5 py-2.5 text-xs hover:border-[#E8231A] hover:text-white transition-all"
                   >
                     NOTIFY ME
                   </Link>
@@ -303,7 +303,7 @@ export default function BikesPage() {
       <section className="py-24 px-4 md:px-8 bg-[#0c0c0c]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <p className="text-[#C8FF00] text-xs uppercase tracking-[0.3em] mb-3 font-semibold">The UV Promise</p>
+            <p className="text-[#FF3B3B] text-xs uppercase tracking-[0.3em] mb-3 font-semibold">The UV Promise</p>
             <h2 className="font-display text-4xl md:text-5xl font-extrabold uppercase text-white">
               EVERY ULTRAVIOLETTE INCLUDES
             </h2>
@@ -311,7 +311,7 @@ export default function BikesPage() {
           <div className="grid md:grid-cols-4 gap-6">
             {benefits.map((b) => (
               <div key={b.label} className="bg-[#111] border border-[#222] p-6 text-center">
-                <p className="font-display text-[#C8FF00] text-3xl font-extrabold leading-none mb-1">{b.label}</p>
+                <p className="font-display text-[#FF3B3B] text-3xl font-extrabold leading-none mb-1">{b.label}</p>
                 <p className="text-white text-xs uppercase tracking-widest mb-3">{b.sublabel}</p>
                 <p className="text-[#888] text-sm leading-relaxed">{b.desc}</p>
               </div>
@@ -321,19 +321,19 @@ export default function BikesPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-4 md:px-8 border-t border-[#C8FF00]/20">
+      <section className="py-20 px-4 md:px-8 border-t border-[#E8231A]/20">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="font-display text-4xl md:text-6xl font-extrabold uppercase text-white mb-5">
-            FIND YOUR<br /><span className="text-[#C8FF00]">ULTRAVIOLETTE</span>
+            FIND YOUR<br /><span className="text-[#FF3B3B]">ULTRAVIOLETTE</span>
           </h2>
           <p className="text-[#888] text-base mb-8 max-w-lg mx-auto">
             Visit our Nagarbhavi showroom to see the full lineup in person, or book a test ride today.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/test-ride" className="bg-[#C8FF00] text-black font-bold uppercase tracking-widest px-8 py-4 text-sm hover:bg-[#d4ff33] transition-colors">
+            <Link href="/test-ride" className="bg-[#E8231A] text-white font-bold uppercase tracking-widest px-8 py-4 text-sm hover:bg-[#C41C14] transition-colors">
               BOOK TEST RIDE
             </Link>
-            <Link href="/showroom" className="border border-[#C8FF00] text-[#C8FF00] font-bold uppercase tracking-widest px-8 py-4 text-sm hover:bg-[#C8FF00] hover:text-black transition-all">
+            <Link href="/showroom" className="border border-white text-[#FF3B3B] font-bold uppercase tracking-widest px-8 py-4 text-sm hover:bg-white/10 transition-all">
               VISIT SHOWROOM
             </Link>
           </div>

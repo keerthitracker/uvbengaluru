@@ -1,0 +1,8 @@
+<svg width="220" height="40" viewBox="0 0 220 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Inverted triangle monogram -->
+  <polygon points="15,4 29,4 22,24" fill="#FFFFFF"/>
+  <!-- Thin separator -->
+  <line x1="38" y1="8" x2="38" y2="32" stroke="#FFFFFF" stroke-opacity="0.3" stroke-width="1"/>
+  <!-- Wordmark -->
+  <text x="46" y="26" font-family="'Rajdhani', 'Barlow', 'Inter', sans-serif" font-size="14" font-weight="700" letter-spacing="3" fill="#FFFFFF" text-anchor="start">UV BENGALURU</text>
+</svg>

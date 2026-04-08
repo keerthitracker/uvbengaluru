@@ -34,13 +34,13 @@ export default function ShowroomPage() {
       {/* Hero */}
       <section className="hero-gradient pt-32 pb-20 px-4 md:px-8 border-b border-[#1a1a1a]">
         <div className="max-w-7xl mx-auto">
-          <p className="text-[#C8FF00] text-xs uppercase tracking-[0.3em] mb-4 font-semibold">Nagarbhavi, Bengaluru</p>
+          <p className="text-[#FF3B3B] text-xs uppercase tracking-[0.3em] mb-4 font-semibold">Nagarbhavi, Bengaluru</p>
           <h1
             className="font-display text-5xl md:text-7xl font-extrabold uppercase leading-none text-white mb-5"
            
           >
             VISIT OUR<br />
-            <span className="text-[#C8FF00]">SHOWROOM</span>
+            <span className="text-[#FF3B3B]">SHOWROOM</span>
           </h1>
           <p className="text-[#888] text-lg max-w-xl leading-relaxed">
             Experience the full Ultraviolette lineup in person. Our Nagarbhavi showroom is open 7 days a week — walk in or book an appointment.
@@ -66,7 +66,7 @@ export default function ShowroomPage() {
                 href="https://maps.google.com/?q=SJA+Arcade+904+10th+Cross+Rd+ITI+Layout+Papareddipalya+Naagarabhaavi+Bengaluru+Karnataka+560072"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 mt-4 text-[#C8FF00] text-xs font-bold uppercase tracking-widest hover:text-white transition-colors"
+                className="inline-flex items-center gap-2 mt-4 text-[#FF3B3B] text-xs font-bold uppercase tracking-widest hover:text-white transition-colors"
               >
                 Get Directions
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -80,7 +80,7 @@ export default function ShowroomPage() {
                 <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-[#888] mb-4">HOURS</h3>
                 <p className="text-white text-sm leading-loose">
                   Monday – Sunday<br />
-                  <span className="text-[#C8FF00]">10:00 AM – 7:00 PM</span>
+                  <span className="text-[#FF3B3B]">10:00 AM – 7:00 PM</span>
                 </p>
               </div>
               <div className="bg-[#111] border border-[#222] p-6">
@@ -88,15 +88,15 @@ export default function ShowroomPage() {
                 <div className="space-y-3">
                   <div>
                     <p className="text-[#666] text-xs uppercase tracking-wider">Phone</p>
-                    <a href="tel:+919606955530" className="text-white text-sm hover:text-[#C8FF00] transition-colors">96069 55530</a>
+                    <a href="tel:+919606955530" className="text-white text-sm hover:text-white transition-colors">96069 55530</a>
                   </div>
                   <div>
                     <p className="text-[#666] text-xs uppercase tracking-wider">WhatsApp</p>
-                    <a href="https://wa.me/919606955529" target="_blank" rel="noopener noreferrer" className="text-white text-sm hover:text-[#C8FF00] transition-colors">96069 55529</a>
+                    <a href="https://wa.me/919606955529" target="_blank" rel="noopener noreferrer" className="text-white text-sm hover:text-white transition-colors">96069 55529</a>
                   </div>
                   <div>
                     <p className="text-[#666] text-xs uppercase tracking-wider">Email</p>
-                    <a href="mailto:hello@uvbengaluru.com" className="text-white text-sm hover:text-[#C8FF00] transition-colors break-all">hello@uvbengaluru.com</a>
+                    <a href="mailto:hello@uvbengaluru.com" className="text-white text-sm hover:text-white transition-colors break-all">hello@uvbengaluru.com</a>
                   </div>
                 </div>
               </div>
@@ -105,13 +105,13 @@ export default function ShowroomPage() {
             <div className="flex flex-wrap gap-4 pt-2">
               <Link
                 href="/test-ride"
-                className="bg-[#C8FF00] text-black font-bold uppercase tracking-widest px-6 py-3 text-sm hover:bg-[#d4ff33] transition-colors"
+                className="bg-[#E8231A] text-white font-bold uppercase tracking-widest px-6 py-3 text-sm hover:bg-[#C41C14] transition-colors"
               >
                 BOOK TEST RIDE
               </Link>
               <Link
                 href="/bikes"
-                className="border border-[#C8FF00] text-[#C8FF00] font-bold uppercase tracking-widest px-6 py-3 text-sm hover:bg-[#C8FF00] hover:text-black transition-all"
+                className="border border-white text-[#FF3B3B] font-bold uppercase tracking-widest px-6 py-3 text-sm hover:bg-white/10 transition-all"
               >
                 VIEW BIKES
               </Link>
@@ -136,7 +136,7 @@ export default function ShowroomPage() {
               href="https://maps.google.com/?q=SJA+Arcade+904+10th+Cross+Rd+ITI+Layout+Papareddipalya+Naagarabhaavi+Bengaluru+Karnataka+560072"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 mt-3 text-[#C8FF00] text-xs font-bold uppercase tracking-widest hover:text-white transition-colors"
+              className="inline-flex items-center gap-2 mt-3 text-[#FF3B3B] text-xs font-bold uppercase tracking-widest hover:text-white transition-colors"
             >
               Get Directions
               <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -151,14 +151,14 @@ export default function ShowroomPage() {
       <section className="py-24 px-4 md:px-8 bg-[#0c0c0c] border-b border-[#1a1a1a]">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12">
-            <p className="text-[#C8FF00] text-xs uppercase tracking-[0.3em] mb-3 font-semibold">When You Visit</p>
+            <p className="text-[#FF3B3B] text-xs uppercase tracking-[0.3em] mb-3 font-semibold">When You Visit</p>
             <h2 className="font-display text-4xl md:text-5xl font-extrabold uppercase text-white">
               WHAT TO EXPECT
             </h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {showroomFeatures.map((f) => (
-              <div key={f.title} className="bg-[#111] border border-[#222] p-6 hover:border-[#C8FF00] transition-colors duration-300">
+              <div key={f.title} className="bg-[#111] border border-[#222] p-6 hover:border-[#E8231A] transition-colors duration-300">
                 <h3 className="font-display text-lg font-extrabold uppercase text-white mb-3">{f.title}</h3>
                 <p className="text-[#888] text-sm leading-relaxed">{f.desc}</p>
               </div>
@@ -171,7 +171,7 @@ export default function ShowroomPage() {
       <section className="py-24 px-4 md:px-8">
         <div className="max-w-3xl mx-auto">
           <div className="mb-12">
-            <p className="text-[#C8FF00] text-xs uppercase tracking-[0.3em] mb-3 font-semibold">Get in Touch</p>
+            <p className="text-[#FF3B3B] text-xs uppercase tracking-[0.3em] mb-3 font-semibold">Get in Touch</p>
             <h2 className="font-display text-4xl md:text-5xl font-extrabold uppercase text-white">
               REACH OUT TO US
             </h2>

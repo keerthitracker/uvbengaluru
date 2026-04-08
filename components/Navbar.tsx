@@ -5,15 +5,13 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
-const UV_LOGO = '/aadyaa-logo.svg'
-
 const navLinks = [
-  { label: 'BIKES', href: '/bikes' },
-  { label: 'SHOWROOM', href: '/showroom' },
-  { label: 'WORKSHOP', href: '/workshop' },
-  { label: 'FINANCE', href: '/finance' },
-  { label: 'ABOUT', href: '/about' },
-  { label: 'CONTACT', href: '/contact' },
+  { label: 'VEHICLES',  href: '/vehicles' },
+  { label: 'SERVICE',   href: '/service' },
+  { label: 'FINANCE',   href: '/finance' },
+  { label: 'TEST RIDE', href: '/test-ride' },
+  { label: 'ABOUT',     href: '/about' },
+  { label: 'CONTACT',   href: '/contact' },
 ]
 
 export default function Navbar() {
@@ -22,78 +20,102 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40)
+    const handleScroll = () => setScrolled(window.scrollY > 48)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  useEffect(() => {
-    setMenuOpen(false)
-  }, [pathname])
+  useEffect(() => { setMenuOpen(false) }, [pathname])
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
-    return () => {
-      document.body.style.overflow = ''
-    }
+    return () => { document.body.style.overflow = '' }
   }, [menuOpen])
 
   return (
     <>
+      {/* Announcement bar */}
+      <div className="fixed top-0 left-0 right-0 z-50 bg-black text-center py-2 px-4">
+        <p style={{ fontSize: '12px', letterSpacing: '0.12em', color: '#A0A0A0' }} className="uppercase">
+          Visit us at Nagarbhavi&nbsp;&nbsp;·&nbsp;&nbsp;10 AM–7 PM Daily&nbsp;&nbsp;·&nbsp;&nbsp;
+          <a href="tel:+919606955530" className="hover:text-white transition-colors">96069 55530</a>
+        </p>
+      </div>
+
+      {/* Navbar */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled || menuOpen
-            ? 'bg-[#080808]/95 backdrop-blur-sm border-b border-[#222]'
-            : 'bg-transparent'
-        }`}
+        className="fixed top-8 left-0 right-0 z-40 transition-all duration-300"
+        style={{
+          background: scrolled || menuOpen ? '#141414' : '#141414',
+          borderBottom: scrolled ? '1px solid #2A2A2A' : '1px solid transparent',
+          height: '64px',
+        }}
       >
-        {/* Announcement Bar */}
-        <div className="hidden sm:block bg-[#C8FF00] text-black text-center py-1.5 px-4">
-          <p className="font-display text-[10px] font-bold uppercase tracking-[0.2em]">
-            Visit us at Nagarbhavi · Mon–Sun 10 AM – 7 PM ·{' '}
-            <a href="tel:+919606955530" className="hover:underline">96069 55530</a>
-          </p>
-        </div>
-        <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 h-full flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex flex-col items-start gap-0.5 group">
+          <Link href="/" className="flex items-center">
             <Image
-              src={UV_LOGO}
-              alt="Aadyaa"
-              width={110}
-              height={22}
-              className="h-auto"
+              src="/images/uv-logo.svg"
+              alt="UV Bengaluru"
+              width={180}
+              height={32}
+              className="h-8 w-auto"
               priority
             />
-            <span className="font-display text-[10px] font-bold text-[#C8FF00] tracking-[0.35em] uppercase leading-none">
-              BENGALURU
-            </span>
           </Link>
 
-          {/* Desktop Nav */}
+          {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-xs font-semibold tracking-[0.15em] transition-colors ${
-                  pathname === link.href
-                    ? 'text-[#C8FF00]'
-                    : 'text-[#aaa] hover:text-white'
-                }`}
+                style={{
+                  fontSize: '13px',
+                  letterSpacing: '0.12em',
+                  color: pathname === link.href ? '#FFFFFF' : '#A0A0A0',
+                  fontWeight: 400,
+                }}
+                className="uppercase transition-colors hover:text-white"
               >
                 {link.label}
               </Link>
             ))}
+          </div>
+
+          {/* Desktop CTAs */}
+          <div className="hidden md:flex items-center gap-3">
             <Link
               href="/test-ride"
-              className={`text-xs font-bold tracking-[0.15em] px-5 py-2.5 transition-colors ${
-                pathname === '/test-ride'
-                  ? 'bg-[#d4ff33] text-black'
-                  : 'bg-[#C8FF00] text-black hover:bg-[#d4ff33]'
-              }`}
+              style={{
+                background: 'transparent',
+                color: '#FFFFFF',
+                border: '1px solid #FFFFFF',
+                borderRadius: '2px',
+                padding: '8px 16px',
+                fontSize: '13px',
+                letterSpacing: '0.12em',
+                fontWeight: 600,
+              }}
+              className="uppercase transition-all hover:bg-white/10"
             >
-              TEST RIDE
+              BOOK TEST RIDE
+            </Link>
+            <Link
+              href="/contact"
+              style={{
+                background: '#E8231A',
+                color: '#FFFFFF',
+                border: 'none',
+                borderRadius: '2px',
+                padding: '8px 16px',
+                fontSize: '13px',
+                letterSpacing: '0.12em',
+                fontWeight: 600,
+              }}
+              className="uppercase transition-all hover:bg-[#C41C14]"
+            >
+              VISIT SHOWROOM
             </Link>
           </div>
 
@@ -103,54 +125,49 @@ export default function Navbar() {
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
-            <span
-              className={`block w-6 h-0.5 bg-white transition-all duration-300 origin-center ${
-                menuOpen ? 'rotate-45 translate-y-2' : ''
-              }`}
-            />
-            <span
-              className={`block w-6 h-0.5 bg-white transition-all duration-300 ${
-                menuOpen ? 'opacity-0 scale-x-0' : ''
-              }`}
-            />
-            <span
-              className={`block w-6 h-0.5 bg-white transition-all duration-300 origin-center ${
-                menuOpen ? '-rotate-45 -translate-y-2' : ''
-              }`}
-            />
+            <span className={`block w-6 h-0.5 bg-white transition-all duration-300 origin-center ${menuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+            <span className={`block w-6 h-0.5 bg-white transition-all duration-300 ${menuOpen ? 'opacity-0 scale-x-0' : ''}`} />
+            <span className={`block w-6 h-0.5 bg-white transition-all duration-300 origin-center ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
           </button>
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile full-screen drawer */}
       <div
-        className={`fixed inset-0 z-40 bg-[#080808] flex flex-col justify-center items-center gap-10 transition-all duration-300 md:hidden ${
-          menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
+        className={`fixed inset-0 z-30 flex flex-col justify-center items-center gap-8 transition-all duration-300 md:hidden ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+        style={{ background: '#0D0D0D' }}
       >
         <div className="mb-4">
-          <Image
-            src={UV_LOGO}
-            alt="Aadyaa"
-            width={140}
-            height={28}
-            className="h-auto opacity-60"
-          />
+          <Image src="/images/uv-logo.svg" alt="UV Bengaluru" width={180} height={32} className="h-8 w-auto opacity-70" />
         </div>
         {navLinks.map((link) => (
           <Link
             key={link.href}
             href={link.href}
-            className={`font-display text-4xl font-bold uppercase tracking-[0.15em] transition-colors ${
-              pathname === link.href ? 'text-[#C8FF00]' : 'text-white hover:text-[#C8FF00]'
-            }`}
+            style={{
+              fontSize: '28px',
+              letterSpacing: '0.12em',
+              fontWeight: 700,
+              color: pathname === link.href ? '#FF3B3B' : '#FFFFFF',
+            }}
+            className="uppercase transition-colors hover:text-[#FF3B3B]"
           >
             {link.label}
           </Link>
         ))}
         <Link
           href="/test-ride"
-          className="mt-4 bg-[#C8FF00] text-black font-display text-2xl font-bold uppercase tracking-[0.15em] px-10 py-5 hover:bg-[#d4ff33] transition-colors"
+          style={{
+            marginTop: '16px',
+            background: '#E8231A',
+            color: '#FFFFFF',
+            borderRadius: '2px',
+            padding: '14px 36px',
+            fontSize: '16px',
+            letterSpacing: '0.12em',
+            fontWeight: 600,
+          }}
+          className="uppercase"
         >
           BOOK TEST RIDE
         </Link>

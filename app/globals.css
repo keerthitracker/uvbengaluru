@@ -1,21 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap');
+
 @import "tailwindcss";
 
 @theme {
-  --color-electric: #C8FF00;
-  --color-electric-hover: #d4ff33;
-  --color-dark: #080808;
-  --color-dark-surface: #111111;
-  --color-dark-card: #161616;
-  --color-dark-border: #222222;
-  --color-muted: #888888;
+  /* Backgrounds */
+  --color-bg-page:       #0D0D0D;
+  --color-bg-navbar:     #141414;
+  --color-bg-card:       #1A1A1A;
+  --color-bg-footer:     #111111;
+  --color-bg-ticker:     #000000;
+  --color-bg-hero-light: #F5F5F5;
 
-  --font-display: var(--font-barlow), "Barlow Condensed", sans-serif;
-  --font-sans: var(--font-inter), "Inter", sans-serif;
+  /* Accent */
+  --color-accent-red:      #E8231A;
+  --color-accent-red-dark: #C41C14;
+  --color-accent-red-text: #FF3B3B;
+  --color-accent-yellow:   #F5C518;
+  --color-accent-white:    #FFFFFF;
 
-  --animate-marquee: marquee 25s linear infinite;
+  /* Text */
+  --color-text-primary:   #FFFFFF;
+  --color-text-secondary: #A0A0A0;
+  --color-text-tertiary:  #666666;
+  --color-text-dark:      #1A1A1A;
+
+  /* Borders */
+  --color-border-card:    #2A2A2A;
+  --color-border-divider: #333333;
+
+  /* Typography */
+  --font-primary: 'Rajdhani', 'Barlow', 'Inter', sans-serif;
+
+  /* Letter spacing */
+  --tracking-nav:     0.12em;
+  --tracking-heading: 0.08em;
+  --tracking-tight:   -0.01em;
+
+  /* Border radius */
+  --radius-sharp: 2px;
+  --radius-card:  6px;
+
+  /* Marquee animation */
+  --animate-marquee: marquee 30s linear infinite;
 
   @keyframes marquee {
-    0% { transform: translateX(0); }
+    0%   { transform: translateX(0); }
     100% { transform: translateX(-50%); }
   }
 }
@@ -25,35 +54,50 @@ html {
 }
 
 body {
-  background-color: #080808;
-  color: #ffffff;
-  font-family: var(--font-inter), "Inter", sans-serif;
+  background-color: #0D0D0D;
+  color: #FFFFFF;
+  font-family: 'Rajdhani', 'Barlow', 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
 /* Custom scrollbar */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #080808; }
+::-webkit-scrollbar-track { background: #0D0D0D; }
 ::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #C8FF00; }
+::-webkit-scrollbar-thumb:hover { background: #E8231A; }
 
-/* Hero gradient */
-.hero-gradient {
-  background:
-    radial-gradient(ellipse 80% 80% at 70% 50%, rgba(200, 255, 0, 0.12) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 60% at 20% 80%, rgba(200, 255, 0, 0.07) 0%, transparent 50%),
-    #080808;
+/* Heading accent — red word pattern */
+.heading-accent {
+  color: #FF3B3B;
+}
+
+/* All-caps label */
+.all-caps-label {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Ticker text */
+.ticker-text {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  white-space: nowrap;
+  display: inline-flex;
 }
 
 /* Marquee */
 .animate-marquee {
-  animation: marquee 25s linear infinite;
+  animation: marquee 30s linear infinite;
   white-space: nowrap;
   display: inline-flex;
 }
 
 @keyframes marquee {
-  0% { transform: translateX(0); }
+  0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 
@@ -63,45 +107,96 @@ body {
 }
 .card-hover:hover {
   transform: translateY(-4px);
-  border-color: #C8FF00;
-  box-shadow: 0 8px 30px rgba(200, 255, 0, 0.1);
-}
-
-/* Glow effect */
-.glow-electric {
-  box-shadow: 0 0 30px rgba(200, 255, 0, 0.25);
+  border-color: #E8231A;
+  box-shadow: 0 8px 30px rgba(232, 35, 26, 0.15);
 }
 
 /* Form inputs */
 .form-input {
-  background: #161616;
-  border: 1px solid #222222;
+  background: #1A1A1A;
+  border: 1px solid #2A2A2A;
   color: #ffffff;
   padding: 12px 16px;
   width: 100%;
   transition: border-color 0.2s;
   outline: none;
-  font-family: inherit;
+  font-family: 'Rajdhani', 'Barlow', 'Inter', sans-serif;
+  font-size: 14px;
 }
-.form-input::placeholder { color: #555; }
-.form-input:focus { border-color: #C8FF00; }
+.form-input::placeholder { color: #666; }
+.form-input:focus { border-color: #E8231A; }
 
-/* Stat numbers */
+/* Buttons */
+.btn-primary {
+  background: #E8231A;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 2px;
+  padding: 10px 20px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: inline-block;
+  text-align: center;
+  font-family: 'Rajdhani', 'Barlow', 'Inter', sans-serif;
+}
+.btn-primary:hover { background: #C41C14; }
+
+.btn-ghost {
+  background: transparent;
+  color: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  border-radius: 2px;
+  padding: 10px 20px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: inline-block;
+  text-align: center;
+  font-family: 'Rajdhani', 'Barlow', 'Inter', sans-serif;
+}
+.btn-ghost:hover { background: rgba(255,255,255,0.08); }
+
+.btn-yellow {
+  background: #F5C518;
+  color: #111111;
+  border: none;
+  border-radius: 2px;
+  font-size: 11px;
+  padding: 4px 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  display: inline-block;
+  font-family: 'Rajdhani', 'Barlow', 'Inter', sans-serif;
+}
+
+/* Font utility — geometric industrial sans */
+.font-display {
+  font-family: 'Rajdhani', 'Barlow', 'Inter', sans-serif;
+}
+
+/* Hero gradient — dark base with subtle vignette */
+.hero-gradient {
+  background: #0D0D0D;
+}
+
+/* Stat numbers — large red numerals */
 .stat-number {
-  font-family: var(--font-barlow), "Barlow Condensed", sans-serif;
-  font-weight: 800;
-  color: #C8FF00;
+  font-family: 'Rajdhani', 'Barlow', 'Inter', sans-serif;
+  font-weight: 700;
+  color: #FF3B3B;
+  letter-spacing: -0.01em;
   line-height: 1;
 }
 
-/* Bike image glow */
+/* Bike image glow effect */
 .bike-image-glow {
-  filter: drop-shadow(0 0 40px rgba(200, 255, 0, 0.15));
-}
-
-/* Ensure font-display resolves to Barlow Condensed */
-@layer utilities {
-  .font-display {
-    font-family: var(--font-barlow), "Barlow Condensed", sans-serif;
-  }
+  filter: drop-shadow(0 0 30px rgba(232, 35, 26, 0.25));
 }
