@@ -11,6 +11,8 @@ const navLinks = [
   { label: 'BIKES', href: '/bikes' },
   { label: 'SHOWROOM', href: '/showroom' },
   { label: 'WORKSHOP', href: '/workshop' },
+  { label: 'FINANCE', href: '/finance' },
+  { label: 'ABOUT', href: '/about' },
   { label: 'CONTACT', href: '/contact' },
 ]
 
@@ -45,6 +47,13 @@ export default function Navbar() {
             : 'bg-transparent'
         }`}
       >
+        {/* Announcement Bar */}
+        <div className="hidden sm:block bg-[#C8FF00] text-black text-center py-1.5 px-4">
+          <p className="font-display text-[10px] font-bold uppercase tracking-[0.2em]">
+            Visit us at Nagarbhavi · Mon–Sun 10 AM – 7 PM ·{' '}
+            <a href="tel:+919606955530" className="hover:underline">96069 55530</a>
+          </p>
+        </div>
         <div className="max-w-7xl mx-auto px-4 md:px-8 h-16 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex flex-col items-start gap-0.5 group">

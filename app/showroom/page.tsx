@@ -57,12 +57,13 @@ export default function ShowroomPage() {
               <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-[#888] mb-4">ADDRESS</h3>
               <p className="text-white text-base leading-relaxed">
                 UV Bengaluru<br />
-                Nagarbhavi Cross<br />
-                Bengaluru – 560072<br />
-                Karnataka, India
+                SJA Arcade, 904, 10th Cross Rd<br />
+                ITI Layout, Papareddipalya<br />
+                Naagarabhaavi, Bengaluru<br />
+                Karnataka 560072
               </p>
               <a
-                href="https://maps.google.com/?q=Nagarbhavi+Cross+Bengaluru+560072"
+                href="https://maps.google.com/?q=SJA+Arcade+904+10th+Cross+Rd+ITI+Layout+Papareddipalya+Naagarabhaavi+Bengaluru+Karnataka+560072"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 mt-4 text-[#C8FF00] text-xs font-bold uppercase tracking-widest hover:text-white transition-colors"
@@ -78,12 +79,8 @@ export default function ShowroomPage() {
               <div className="bg-[#111] border border-[#222] p-6">
                 <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-[#888] mb-4">HOURS</h3>
                 <p className="text-white text-sm leading-loose">
-                  Mon – Sat<br />
-                  <span className="text-[#C8FF00]">9:30 AM – 7:00 PM</span>
-                </p>
-                <p className="text-white text-sm leading-loose mt-2">
-                  Sunday<br />
-                  <span className="text-[#C8FF00]">10:00 AM – 5:00 PM</span>
+                  Monday – Sunday<br />
+                  <span className="text-[#C8FF00]">10:00 AM – 7:00 PM</span>
                 </p>
               </div>
               <div className="bg-[#111] border border-[#222] p-6">
@@ -91,7 +88,11 @@ export default function ShowroomPage() {
                 <div className="space-y-3">
                   <div>
                     <p className="text-[#666] text-xs uppercase tracking-wider">Phone</p>
-                    <a href="tel:+918045678900" className="text-white text-sm hover:text-[#C8FF00] transition-colors">+91 80 4567 8900</a>
+                    <a href="tel:+919606955530" className="text-white text-sm hover:text-[#C8FF00] transition-colors">96069 55530</a>
+                  </div>
+                  <div>
+                    <p className="text-[#666] text-xs uppercase tracking-wider">WhatsApp</p>
+                    <a href="https://wa.me/919606955529" target="_blank" rel="noopener noreferrer" className="text-white text-sm hover:text-[#C8FF00] transition-colors">96069 55529</a>
                   </div>
                   <div>
                     <p className="text-[#666] text-xs uppercase tracking-wider">Email</p>
@@ -117,27 +118,30 @@ export default function ShowroomPage() {
             </div>
           </div>
 
-          {/* Map Placeholder */}
+          {/* Map Embed */}
           <div>
+            <div className="w-full h-80 bg-[#111] border border-[#222] overflow-hidden">
+              <iframe
+                src="https://www.google.com/maps?q=SJA+Arcade+904+10th+Cross+Rd+ITI+Layout+Papareddipalya+Naagarabhaavi+Bengaluru+Karnataka+560072&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="UV Bengaluru - Nagarbhavi Location"
+              />
+            </div>
             <a
-              href="https://maps.google.com/?q=Nagarbhavi+Cross+Bengaluru+560072"
+              href="https://maps.google.com/?q=SJA+Arcade+904+10th+Cross+Rd+ITI+Layout+Papareddipalya+Naagarabhaavi+Bengaluru+Karnataka+560072"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center justify-center w-full h-80 bg-[#111] border border-[#222] hover:border-[#C8FF00] transition-all duration-300 group"
+              className="inline-flex items-center gap-2 mt-3 text-[#C8FF00] text-xs font-bold uppercase tracking-widest hover:text-white transition-colors"
             >
-              <svg
-                className="w-12 h-12 text-[#333] group-hover:text-[#C8FF00] transition-colors mb-3"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              Get Directions
+              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
-              <p className="text-[#444] group-hover:text-[#C8FF00] text-xs uppercase tracking-widest transition-colors mb-1">
-                Nagarbhavi Cross, Bengaluru
-              </p>
-              <p className="text-[#333] group-hover:text-[#888] text-xs transition-colors">Click to open Google Maps</p>
             </a>
           </div>
         </div>
