@@ -58,7 +58,7 @@ export default function Navbar() {
   return (
     <>
       <div
-        className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-out ${
+        className={`fixed left-0 right-0 top-0 z-50 transition-transform duration-300 ease-out ${
           headerVisible || menuOpen ? "translate-y-0" : "-translate-y-full"
         }`}
       >
@@ -71,11 +71,11 @@ export default function Navbar() {
             }}
             className="uppercase"
           >
-            Visit us at Nagarbhavi&nbsp;&nbsp;Â·&nbsp;&nbsp;10 AMâ€“7 PM
-            Daily&nbsp;&nbsp;Â·&nbsp;&nbsp;
+            Visit us at Nagarbhavi&nbsp;&nbsp;&bull;&nbsp;&nbsp;10 AM-7 PM
+            Daily&nbsp;&nbsp;&bull;&nbsp;&nbsp;
             <a
               href="tel:+919606955530"
-              className="hover:text-white transition-colors"
+              className="transition-colors hover:text-white"
             >
               96069 55530
             </a>
@@ -92,7 +92,7 @@ export default function Navbar() {
             height: "64px",
           }}
         >
-          <div className="max-w-7xl mx-auto px-4 md:px-8 h-full flex items-center justify-between">
+          <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-4 md:px-8">
             <Link href="/" className="flex items-center">
               <Image
                 src="/images/uv-logo.svg"
@@ -104,7 +104,7 @@ export default function Navbar() {
               />
             </Link>
 
-            <div className="hidden md:flex items-center gap-8">
+            <div className="hidden items-center gap-8 md:flex">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -122,7 +122,7 @@ export default function Navbar() {
               ))}
             </div>
 
-            <div className="hidden md:flex items-center gap-3">
+            <div className="hidden items-center gap-3 md:flex">
               <Link
                 href="/test-ride"
                 style={{
@@ -158,18 +158,24 @@ export default function Navbar() {
             </div>
 
             <button
-              className="md:hidden flex flex-col gap-1.5 p-2 z-50"
+              className="z-50 flex flex-col gap-1.5 p-2 md:hidden"
               onClick={() => setMenuOpen(!menuOpen)}
               aria-label="Toggle menu"
             >
               <span
-                className={`block w-6 h-0.5 bg-white transition-all duration-300 origin-center ${menuOpen ? "rotate-45 translate-y-2" : ""}`}
+                className={`block h-0.5 w-6 origin-center bg-white transition-all duration-300 ${
+                  menuOpen ? "translate-y-2 rotate-45" : ""
+                }`}
               />
               <span
-                className={`block w-6 h-0.5 bg-white transition-all duration-300 ${menuOpen ? "opacity-0 scale-x-0" : ""}`}
+                className={`block h-0.5 w-6 bg-white transition-all duration-300 ${
+                  menuOpen ? "scale-x-0 opacity-0" : ""
+                }`}
               />
               <span
-                className={`block w-6 h-0.5 bg-white transition-all duration-300 origin-center ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`}
+                className={`block h-0.5 w-6 origin-center bg-white transition-all duration-300 ${
+                  menuOpen ? "-translate-y-2 -rotate-45" : ""
+                }`}
               />
             </button>
           </div>
@@ -177,7 +183,9 @@ export default function Navbar() {
       </div>
 
       <div
-        className={`fixed inset-0 z-30 flex flex-col justify-center items-center gap-8 transition-all duration-300 md:hidden ${menuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+        className={`fixed inset-0 z-30 flex flex-col items-center justify-center gap-8 transition-all duration-300 md:hidden ${
+          menuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+        }`}
         style={{ background: "#0D0D0D" }}
       >
         <div className="mb-4">

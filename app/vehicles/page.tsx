@@ -3,11 +3,22 @@ import Link from 'next/link'
 import VehicleImage from '@/components/VehicleImage'
 import { getVehicleImageFrameClass, getVehicleImageObjectClass } from '@/lib/vehicleImagePresentation'
 import { availableVehicles, preBookVehicles, showcaseVehicles, type Vehicle } from '@/lib/vehicles'
+import { absoluteUrl, siteConfig } from '@/lib/site'
 
 export const metadata: Metadata = {
   title: 'Vehicles | UV Bengaluru',
   description:
     'Explore the Ultraviolette lineup at UV Bengaluru: X-47, X-47 Desert Wing, F77 Mach 2, F77 SuperStreet, Tesseract, Shockwave, and racing/story showcases.',
+  alternates: {
+    canonical: '/vehicles',
+  },
+  openGraph: {
+    title: 'Ultraviolette Vehicles in Bengaluru | UV Bengaluru',
+    description:
+      'Explore current Ultraviolette motorcycles and electric scooters available, pre-bookable, or showcased at UV Bengaluru.',
+    url: absoluteUrl('/vehicles'),
+    images: [absoluteUrl(siteConfig.ogImage)],
+  },
 }
 
 function VehicleCard({ vehicle }: { vehicle: Vehicle }) {

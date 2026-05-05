@@ -1,16 +1,35 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import StructuredData from "@/components/StructuredData";
 import VehicleImage from "@/components/VehicleImage";
 import {
   getVehicleImageFrameClass,
   getVehicleImageObjectClass,
 } from "@/lib/vehicleImagePresentation";
 import { getVehicle, retailVehicles } from "@/lib/vehicles";
+import { absoluteUrl, showroomAddressText, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Bengaluru's Home for Ultraviolette | UV Bengaluru",
+  title: "Bengaluru's Home for Ultraviolette",
   description:
-    "UV Bengaluru is the official Ultraviolette electric mobility dealership in Nagarbhavi, Bengaluru. Explore X-47, F77 Mach 2, F77 SuperStreet, Tesseract, Shockwave, and more.",
+    "UV Bengaluru is the official Ultraviolette dealership in Nagarbhavi, Bengaluru. Explore X-47, F77 Mach 2, F77 SuperStreet, Tesseract, Shockwave, and more.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "UV Bengaluru | Official Ultraviolette Dealership in Bengaluru",
+    description:
+      "Explore the Ultraviolette lineup in Bengaluru, compare models, and book a test ride at UV Bengaluru in Nagarbhavi.",
+    url: absoluteUrl("/"),
+    images: [
+      {
+        url: absoluteUrl(siteConfig.ogImage),
+        width: 1200,
+        height: 630,
+        alt: "UV Bengaluru dealership landing page",
+      },
+    ],
+  },
 };
 
 const brandPillars = [
@@ -55,6 +74,29 @@ const ownershipActions = [
   },
 ];
 
+const landingFaqs = [
+  {
+    question: "Is UV Bengaluru an official Ultraviolette dealership?",
+    answer:
+      "Yes. UV Bengaluru is the official Ultraviolette dealership in Nagarbhavi, Bengaluru, operated by Aadya Inc.",
+  },
+  {
+    question: "Which Ultraviolette models can I explore at UV Bengaluru?",
+    answer:
+      "The lineup includes the X-47 range, F77 Mach 2, F77 SuperStreet, and selected pre-book platforms such as Tesseract and Shockwave, subject to current availability.",
+  },
+  {
+    question: "Can I book an Ultraviolette test ride in Bengaluru?",
+    answer:
+      "Yes. Test rides can be booked through the website or directly with the showroom team during business hours.",
+  },
+  {
+    question: "Where is the UV Bengaluru showroom located?",
+    answer:
+      "The showroom is located at SJA Arcade, 904, 10th Cross Road, ITI Layout, Papareddipalya, Naagarabhaavi, Bengaluru, Karnataka 560072.",
+  },
+];
+
 export default function HomePage() {
   const featured = getVehicle("x-47") ?? retailVehicles[0];
 
@@ -62,38 +104,86 @@ export default function HomePage() {
 
   const featuredStats = featured.heroStats.slice(0, 4);
   const featuredFeatureCards = featured.features.slice(0, 3);
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "AutoDealer",
+      name: siteConfig.name,
+      legalName: siteConfig.legalName,
+      description: siteConfig.description,
+      url: siteConfig.url,
+      image: absoluteUrl(siteConfig.ogImage),
+      telephone: siteConfig.phoneHref,
+      email: siteConfig.email,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: siteConfig.address.streetAddress,
+        addressLocality: siteConfig.address.city,
+        addressRegion: siteConfig.address.region,
+        postalCode: siteConfig.address.postalCode,
+        addressCountry: siteConfig.address.country,
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: siteConfig.geo.latitude,
+        longitude: siteConfig.geo.longitude,
+      },
+      openingHours: siteConfig.hours,
+      areaServed: ["Bengaluru", "Karnataka"],
+      sameAs: siteConfig.sameAs,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: landingFaqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })),
+    },
+  ];
 
   return (
     <>
+      <StructuredData data={structuredData} />
+
       <section
         style={{ background: "#F5F5F5", minHeight: "100vh" }}
         className="flex items-center"
       >
-        <div className="max-w-7xl mx-auto px-4 md:px-8 w-full py-20">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="mx-auto w-full max-w-7xl px-4 py-20 md:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#666] mb-6">
+              <p className="mb-6 text-xs font-semibold uppercase tracking-[0.12em] text-[#666]">
                 Official Ultraviolette Dealership - Nagarbhavi, Bengaluru
               </p>
-              <h1 className="font-display text-[clamp(36px,6vw,58px)] font-bold uppercase leading-none text-[#1A1A1A] mb-5">
+              <h1 className="mb-5 font-display text-[clamp(36px,6vw,58px)] font-bold uppercase leading-none text-[#1A1A1A]">
                 Electric Performance.
                 <br />
                 <span className="text-[#E8231A]">Refined.</span>
               </h1>
-              <p className="text-[15px] text-[#666] leading-relaxed mb-6 max-w-xl">
+              <p className="mb-6 max-w-xl text-[15px] leading-relaxed text-[#666]">
                 UV Bengaluru is your local gateway into Ultraviolette&apos;s
                 world of high-performance electric mobility, intelligent
                 technology, and design-led machines built for the next
                 generation of riders.
               </p>
-              <p className="text-[15px] text-[#666] leading-relaxed mb-2">
-                SJA Arcade, 904, 10th Cross Rd, ITI Layout, Naagarabhaavi,
-                Bengaluru
+              <p className="mb-2 text-[15px] leading-relaxed text-[#666]">
+                {showroomAddressText}
               </p>
-              <p className="text-sm text-[#888] mb-9">
+              <p className="mb-9 text-sm text-[#888]">
                 Open daily - 10:00 AM to 7:00 PM
               </p>
-              <div className="flex flex-wrap gap-3 mb-8">
+              <div className="mb-8 flex flex-wrap gap-3">
                 <Link
                   href="/vehicles"
                   className="border border-[#1A1A1A] px-6 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-[#1A1A1A] hover:bg-black/5"
@@ -111,7 +201,7 @@ export default function HomePage() {
 
             <div className="relative flex items-center justify-center">
               <div className="absolute inset-0 rounded-full bg-[rgba(232,35,26,0.08)] blur-[60px]" />
-              <div className="relative w-full aspect-[4/3] overflow-hidden">
+              <div className="relative aspect-[4/3] w-full overflow-hidden">
                 <VehicleImage
                   src={featured.heroImage}
                   alt={featured.name}
@@ -127,32 +217,32 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#0D0D0D] py-20 border-t border-[#1A1A1A]">
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 items-start">
+      <section className="border-t border-[#1A1A1A] bg-[#0D0D0D] py-20">
+        <div className="mx-auto max-w-7xl px-4 md:px-8">
+          <div className="grid items-start gap-12 lg:grid-cols-[1.1fr_0.9fr]">
             <div>
               <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[#FF3B3B]">
                 Why Ultraviolette
               </p>
-              <h2 className="font-display text-[clamp(28px,4vw,42px)] font-bold uppercase tracking-[0.08em] text-white mb-6">
+              <h2 className="mb-6 font-display text-[clamp(28px,4vw,42px)] font-bold uppercase tracking-[0.08em] text-white">
                 More Than An EV.
                 <br />A New Kind Of{" "}
                 <span className="text-[#FF3B3B]">Performance Machine.</span>
               </h2>
-              <p className="text-sm md:text-base leading-relaxed text-[#A0A0A0] mb-5">
+              <p className="mb-5 text-sm leading-relaxed text-[#A0A0A0] md:text-base">
                 Ultraviolette stands apart because the motorcycles are not
                 positioned as simple electric replacements for petrol bikes.
                 They are engineered as advanced performance machines with strong
                 battery platforms, aggressive power delivery, connected
                 intelligence, and a distinctly futuristic design language.
               </p>
-              <p className="text-sm md:text-base leading-relaxed text-[#A0A0A0] mb-5">
+              <p className="mb-5 text-sm leading-relaxed text-[#A0A0A0] md:text-base">
                 For new visitors, the difference is immediately visible in the
                 way the range, power, ride modes, radar-assisted safety, and
                 control systems are presented as part of one coherent riding
                 experience.
               </p>
-              <p className="text-sm md:text-base leading-relaxed text-[#A0A0A0]">
+              <p className="text-sm leading-relaxed text-[#A0A0A0] md:text-base">
                 UV Bengaluru brings that experience into a real local setting: a
                 place where you can understand the machines, compare the lineup,
                 book a test ride, and make an informed ownership decision.
@@ -165,7 +255,7 @@ export default function HomePage() {
                   key={pillar.title}
                   className="rounded-[6px] border border-[#2A2A2A] bg-[#151515] p-6"
                 >
-                  <h3 className="font-display text-xl font-bold uppercase tracking-[0.06em] text-white mb-3">
+                  <h3 className="mb-3 font-display text-xl font-bold uppercase tracking-[0.06em] text-white">
                     {pillar.title}
                   </h3>
                   <p className="text-sm leading-relaxed text-[#A0A0A0]">
@@ -178,8 +268,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#111] py-20 border-t border-[#1A1A1A]">
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
+      <section className="border-t border-[#1A1A1A] bg-[#111] py-20">
+        <div className="mx-auto max-w-7xl px-4 md:px-8">
           <div className="mb-10">
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[#FF3B3B]">
               Featured Model Story
@@ -190,7 +280,7 @@ export default function HomePage() {
             </h2>
           </div>
 
-          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 items-center mb-10">
+          <div className="mb-10 grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
             <div
               className={`relative aspect-[16/11] overflow-hidden rounded-[6px] border border-[#2A2A2A] ${getVehicleImageFrameClass(featured.heroImage, "light")}`}
             >
@@ -205,17 +295,17 @@ export default function HomePage() {
             </div>
 
             <div>
-              <p className="font-display text-3xl font-bold uppercase tracking-[0.06em] text-white mb-3">
+              <p className="mb-3 font-display text-3xl font-bold uppercase tracking-[0.06em] text-white">
                 {featured.tagline}
               </p>
-              <p className="text-sm md:text-base leading-relaxed text-[#A0A0A0] mb-4">
+              <p className="mb-4 text-sm leading-relaxed text-[#A0A0A0] md:text-base">
                 {featured.subheadline}
               </p>
-              <p className="text-sm md:text-base leading-relaxed text-[#A0A0A0] mb-8">
+              <p className="mb-8 text-sm leading-relaxed text-[#A0A0A0] md:text-base">
                 {featured.description}
               </p>
 
-              <div className="grid sm:grid-cols-2 gap-3 mb-8">
+              <div className="mb-8 grid gap-3 sm:grid-cols-2">
                 {featuredStats.map((stat) => (
                   <div
                     key={stat.label}
@@ -240,13 +330,13 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-4">
+          <div className="grid gap-4 md:grid-cols-3">
             {featuredFeatureCards.map((feature) => (
               <article
                 key={feature.title}
                 className="rounded-[6px] border border-[#2A2A2A] bg-[#1A1A1A] p-6"
               >
-                <h3 className="font-display text-lg font-bold uppercase tracking-[0.06em] text-white mb-3">
+                <h3 className="mb-3 font-display text-lg font-bold uppercase tracking-[0.06em] text-white">
                   {feature.title}
                 </h3>
                 <p className="text-sm leading-relaxed text-[#A0A0A0]">
@@ -258,8 +348,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#0D0D0D] py-20 border-t border-[#1A1A1A]">
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
+      <section className="border-t border-[#1A1A1A] bg-[#0D0D0D] py-20">
+        <div className="mx-auto max-w-7xl px-4 md:px-8">
           <div className="mb-12">
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[#FF3B3B]">
               Current Lineup
@@ -269,7 +359,7 @@ export default function HomePage() {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {retailVehicles.map((vehicle) => (
               <article
                 key={vehicle.slug}
@@ -290,7 +380,7 @@ export default function HomePage() {
                     className={`absolute left-3 top-3 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.1em] ${
                       vehicle.status === "pre-book"
                         ? "bg-[#F5C518] text-[#111]"
-                        : "bg-[#111] text-white border border-[#2A2A2A]"
+                        : "border border-[#2A2A2A] bg-[#111] text-white"
                     }`}
                   >
                     {vehicle.status === "pre-book" ? "Pre-book" : "Available"}
@@ -300,7 +390,7 @@ export default function HomePage() {
                   <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#777]">
                     {vehicle.category.replace(/-/g, " ")}
                   </p>
-                  <h3 className="font-display mb-2 text-xl font-bold uppercase tracking-[0.06em] text-white">
+                  <h3 className="mb-2 font-display text-xl font-bold uppercase tracking-[0.06em] text-white">
                     {vehicle.name}
                   </h3>
                   <p className="mb-4 text-sm leading-relaxed text-[#A0A0A0]">
@@ -349,8 +439,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#111] py-16 border-t border-[#1A1A1A]">
-        <div className="max-w-7xl mx-auto px-4 md:px-8">
+      <section className="border-t border-[#1A1A1A] bg-[#111] py-16">
+        <div className="mx-auto max-w-7xl px-4 md:px-8">
           <div className="mb-10">
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[#FF3B3B]">
               Showroom & Ownership
@@ -359,20 +449,20 @@ export default function HomePage() {
               Everything You Need
               <span className="text-[#FF3B3B]"> To Start Right</span>
             </h2>
-            <p className="mt-4 max-w-2xl text-sm md:text-base leading-relaxed text-[#A0A0A0]">
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-[#A0A0A0] md:text-base">
               From first walk-in to finance guidance and long-term support, UV
               Bengaluru is built to help you discover, evaluate, and own an
               Ultraviolette with confidence.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 mb-8">
+          <div className="mb-8 grid gap-6 md:grid-cols-3">
             {ownershipActions.map((action) => (
               <article
                 key={action.title}
                 className="rounded-[6px] border border-[#2A2A2A] bg-[#1A1A1A] p-8"
               >
-                <h3 className="font-display mb-3 text-xl font-bold uppercase tracking-[0.08em] text-white">
+                <h3 className="mb-3 font-display text-xl font-bold uppercase tracking-[0.08em] text-white">
                   {action.title}
                 </h3>
                 <p className="mb-6 text-sm leading-relaxed text-[#A0A0A0]">
@@ -385,18 +475,17 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="rounded-[6px] border border-[#2A2A2A] bg-[#151515] p-6 md:p-8 grid md:grid-cols-3 gap-6">
+          <div className="grid gap-6 rounded-[6px] border border-[#2A2A2A] bg-[#151515] p-6 md:grid-cols-3 md:p-8">
             <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#777] mb-2">
+              <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#777]">
                 Location
               </p>
               <p className="text-sm leading-relaxed text-white">
-                SJA Arcade, 904, 10th Cross Rd, ITI Layout, Naagarabhaavi,
-                Bengaluru
+                {showroomAddressText}
               </p>
             </div>
             <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#777] mb-2">
+              <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#777]">
                 Hours
               </p>
               <p className="text-sm leading-relaxed text-white">
@@ -404,13 +493,46 @@ export default function HomePage() {
               </p>
             </div>
             <div>
-              <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-[#777] mb-2">
+              <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#777]">
                 Support
               </p>
               <p className="text-sm leading-relaxed text-white">
                 Authorized sales, service, finance help, and ownership guidance
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-[#1A1A1A] bg-[#0D0D0D] py-20">
+        <div className="mx-auto max-w-7xl px-4 md:px-8">
+          <div className="mb-10 max-w-3xl">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[#FF3B3B]">
+              Quick Answers
+            </p>
+            <h2 className="mb-4 font-display text-[clamp(28px,4vw,40px)] font-bold uppercase tracking-[0.08em] text-white">
+              Questions Riders Ask Before Visiting
+            </h2>
+            <p className="text-sm leading-relaxed text-[#A0A0A0] md:text-base">
+              This section answers common dealership, pricing, and test-ride
+              queries.
+            </p>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            {landingFaqs.map((faq) => (
+              <article
+                key={faq.question}
+                className="rounded-[6px] border border-[#2A2A2A] bg-[#151515] p-6"
+              >
+                <h3 className="mb-3 font-display text-lg font-bold uppercase tracking-[0.06em] text-white">
+                  {faq.question}
+                </h3>
+                <p className="text-sm leading-relaxed text-[#A0A0A0]">
+                  {faq.answer}
+                </p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
