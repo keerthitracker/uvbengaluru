@@ -25,8 +25,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  useEffect(() => { setMenuOpen(false) }, [pathname])
-
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
@@ -144,6 +142,7 @@ export default function Navbar() {
           <Link
             key={link.href}
             href={link.href}
+            onClick={() => setMenuOpen(false)}
             style={{
               fontSize: '28px',
               letterSpacing: '0.12em',
@@ -157,6 +156,7 @@ export default function Navbar() {
         ))}
         <Link
           href="/test-ride"
+          onClick={() => setMenuOpen(false)}
           style={{
             marginTop: '16px',
             background: '#E8231A',

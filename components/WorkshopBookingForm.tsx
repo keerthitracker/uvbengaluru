@@ -14,6 +14,7 @@ const serviceTypes = [
 ]
 
 const bikeModels = [
+  'X-47',
   'X-47 Original',
   'X-47 Original+',
   'X-47 Recon',

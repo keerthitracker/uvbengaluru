@@ -3,6 +3,7 @@
 import { useState, FormEvent } from 'react'
 
 const models = [
+  'X-47',
   'X-47 Original',
   'X-47 Original+',
   'X-47 Recon',

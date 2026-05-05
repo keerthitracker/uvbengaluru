@@ -1,0 +1,82 @@
+'use client'
+
+import { useState } from 'react'
+import type { VehicleVariant } from '@/lib/vehicles'
+
+interface VehicleVariantExplorerProps {
+  variants: VehicleVariant[]
+}
+
+const variantSpecRows: Array<[string, keyof VehicleVariant]> = [
+  ['Battery', 'battery'],
+  ['Range', 'range'],
+  ['Power', 'power'],
+  ['Torque', 'torque'],
+  ['0-60 km/h', 'acceleration'],
+  ['Top Speed', 'topSpeed'],
+]
+
+export default function VehicleVariantExplorer({ variants }: VehicleVariantExplorerProps) {
+  const [activeName, setActiveName] = useState(variants[0]?.name ?? '')
+  const activeVariant = variants.find((variant) => variant.name === activeName) ?? variants[0]
+
+  if (!activeVariant) return null
+
+  return (
+    <div className="grid gap-6 lg:grid-cols-[320px_minmax(0,1fr)]">
+      <div className="grid gap-2">
+        {variants.map((variant, index) => {
+          const isActive = variant.name === activeVariant.name
+
+          return (
+            <button
+              key={variant.name}
+              type="button"
+              onClick={() => setActiveName(variant.name)}
+              className={`rounded-[6px] border p-4 text-left transition ${
+                isActive ? 'border-[#FF3B3B] bg-[#241010]' : 'border-[#2A2A2A] bg-[#151515] hover:border-[#777]'
+              }`}
+            >
+              <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#777]">
+                Configuration {index + 1 < 10 ? `0${index + 1}` : index + 1}
+              </p>
+              <p className="font-display text-xl font-bold uppercase tracking-[0.06em] text-white">{variant.name}</p>
+              {variant.priceLabel && <p className="mt-1 text-sm font-bold text-[#FF3B3B]">{variant.priceLabel}</p>}
+            </button>
+          )
+        })}
+      </div>
+
+      <div className="relative overflow-hidden rounded-[6px] border border-[#2A2A2A] bg-[#111] p-6 md:p-8">
+        <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[#E8231A]/15 blur-[80px]" />
+        <div className="relative">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#FF3B3B]">Selected Configuration</p>
+          <h3 className="font-display mb-2 text-4xl font-extrabold uppercase tracking-[0.06em] text-white">
+            {activeVariant.name}
+          </h3>
+          {activeVariant.priceLabel && <p className="mb-8 text-2xl font-bold text-white">{activeVariant.priceLabel}</p>}
+
+          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+            {variantSpecRows.map(([label, key]) => {
+              const value = activeVariant[key]
+              if (!value) return null
+
+              return (
+                <div key={label} className="border border-[#2A2A2A] bg-[#171717] p-4">
+                  <p className="font-display text-xl font-bold text-white">{value}</p>
+                  <p className="mt-1 text-[10px] uppercase tracking-[0.12em] text-[#777]">{label}</p>
+                </div>
+              )
+            })}
+          </div>
+
+          {activeVariant.notes && (
+            <p className="mt-6 border-l-2 border-[#FF3B3B] pl-4 text-sm leading-relaxed text-[#A0A0A0]">
+              {activeVariant.notes}
+            </p>
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}

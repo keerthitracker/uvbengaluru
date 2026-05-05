@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const showroomFeatures = [
   {
     title: 'LIVE BIKE DISPLAYS',
-    desc: 'The full Ultraviolette lineup on display — X-47 series, F77 Mach 2, F77 SuperStreet. Sit on them, explore every detail, ask every question.',
+    desc: 'Explore the Ultraviolette lineup: X-47 series, F77 Mach 2, F77 SuperStreet, plus pre-book interest for Tesseract and Shockwave. Sit on them where available, explore every detail, ask every question.',
   },
   {
     title: 'CERTIFIED EXPERTS',
@@ -110,10 +110,10 @@ export default function ShowroomPage() {
                 BOOK TEST RIDE
               </Link>
               <Link
-                href="/bikes"
+                href="/vehicles"
                 className="border border-white text-[#FF3B3B] font-bold uppercase tracking-widest px-6 py-3 text-sm hover:bg-white/10 transition-all"
               >
-                VIEW BIKES
+                VIEW VEHICLES
               </Link>
             </div>
           </div>

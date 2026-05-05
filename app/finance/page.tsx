@@ -38,16 +38,17 @@ const financeOptions = [
 ]
 
 const emiExamples = [
-  { model: 'X-47 Original', price: '₹2.49 Lakh', emi: '₹7,200/month (approx.)' },
-  { model: 'X-47 Recon', price: '₹3.49 Lakh', emi: '₹10,100/month (approx.)' },
-  { model: 'F77 Mach 2', price: '₹3.99 Lakh', emi: '₹11,500/month (approx.)' },
+  { model: 'X-47', price: 'INR 2.49 lakh', emi: 'INR 7,200/month (approx.)' },
+  { model: 'X-47 Recon', price: 'INR 3.59 lakh', emi: 'INR 10,400/month (approx.)' },
+  { model: 'F77 SuperStreet', price: 'INR 3,09,000*', emi: 'INR 9,000/month (approx.)' },
+  { model: 'F77 Mach 2', price: 'INR 3.99 lakh', emi: 'INR 11,500/month (approx.)' },
 ]
 
 const steps = [
   {
     step: '01',
     title: 'CHOOSE YOUR MODEL',
-    desc: 'Pick the Ultraviolette that fits you. Our showroom team will walk you through variant and pricing options — from the X-47 Original to the F77 Mach 2.',
+    desc: 'Pick the Ultraviolette that fits you. Our showroom team will walk you through variant and pricing options, from the X-47 family to the F77 Mach 2.',
   },
   {
     step: '02',

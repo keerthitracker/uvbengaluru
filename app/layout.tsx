@@ -9,7 +9,7 @@ export const metadata: Metadata = {
     template: '%s | UV Bengaluru',
   },
   description:
-    'UV Bengaluru is the official Ultraviolette electric motorcycle dealership in Nagarbhavi, Bengaluru. Test ride the X-47, F77 Mach 2, F77 Superstreet and more. Visit us at SJA Arcade, Naagarabhaavi.',
+    'UV Bengaluru is the official Ultraviolette electric mobility dealership in Nagarbhavi, Bengaluru. Test ride the X-47, F77 Mach 2, F77 SuperStreet and more. Visit us at SJA Arcade, Naagarabhaavi.',
   keywords: [
     'Ultraviolette',
     'UV Bengaluru',
