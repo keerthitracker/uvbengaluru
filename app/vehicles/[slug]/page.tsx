@@ -54,6 +54,161 @@ function statusLabel(status: string) {
   return "Story / Archive";
 }
 
+function buildVehicleFaqs(vehicle: NonNullable<ReturnType<typeof getVehicle>>) {
+  const priceAnswer =
+    vehicle.status === "available"
+      ? `${vehicle.name} is currently positioned at ${vehicle.price}. UV Bengaluru can confirm the latest Bengaluru ex-showroom and on-road pricing before purchase.`
+      : vehicle.status === "pre-book"
+        ? `${vehicle.name} is currently in ${statusLabel(vehicle.status).toLowerCase()} mode. Contact UV Bengaluru for the latest price context, expected availability, and booking guidance.`
+        : `${vehicle.name} is not positioned as regular in-stock showroom inventory. Contact UV Bengaluru for current enquiry guidance and availability context.`;
+
+  const rideAnswer =
+    vehicle.status === "available"
+      ? `Yes. ${vehicle.name} is an available model, so it is the strongest candidate to ask about for a test ride at UV Bengaluru. Confirm the exact slot and model availability before visiting.`
+      : `Test-ride availability for ${vehicle.name} depends on its current status and showroom planning. Contact UV Bengaluru to confirm whether a ride or viewing slot is available.`;
+
+  const whoAnswer =
+    vehicle.category === "electric-scooter"
+      ? `${vehicle.name} suits riders looking for an Ultraviolette experience with everyday convenience, technology-led features, and urban usability.`
+      : vehicle.category === "fun-bike"
+        ? `${vehicle.name} suits riders who want a lighter, more playful, more unconventional electric performance machine rather than a typical commuter format.`
+        : `${vehicle.name} suits riders who want ${vehicle.subheadline.toLowerCase()}`;
+
+  return [
+    {
+      question: `What is the ${vehicle.name} price in Bengaluru?`,
+      answer: priceAnswer,
+    },
+    {
+      question: `Can I book or test ride the ${vehicle.name} at UV Bengaluru?`,
+      answer: rideAnswer,
+    },
+    {
+      question: `Who is the ${vehicle.name} best suited for?`,
+      answer: whoAnswer,
+    },
+  ];
+}
+
+function buildWhyBuyPoints(
+  vehicle: NonNullable<ReturnType<typeof getVehicle>>,
+) {
+  if (vehicle.slug === "f77-mach-2") {
+    return [
+      "The F77 Mach 2 is one of the strongest fits for Bengaluru riders who want outright performance, highway confidence, and a sharper sport-bike stance.",
+      "UV Bengaluru can help you compare variants, understand charger choices, and verify how the 323 km IDC range claim translates into your use case.",
+      "Because it is an available showroom model, you can usually move faster from enquiry to test ride, pricing discussion, and booking.",
+    ];
+  }
+
+  if (vehicle.slug === "f77-superstreet") {
+    return [
+      "The F77 SuperStreet makes sense for Bengaluru riders who want F77 performance with a more everyday-friendly riding posture for city use.",
+      "It is easier to position for mixed commuting, weekend rides, and regular ownership conversations than a pure story-led performance page.",
+      "UV Bengaluru can help you compare it directly against the F77 Mach 2 before you decide which F77 is the better match.",
+    ];
+  }
+
+  if (vehicle.slug === "x-47" || vehicle.slug === "x-47-desert-wing") {
+    return [
+      `${vehicle.name} is built for riders who want a more versatile Ultraviolette format for Bengaluru roads, outskirts, and occasional longer rides.`,
+      "The combination of crossover ergonomics, strong range claims, and advanced rider-assist tech makes it easier to justify as more than a city-only machine.",
+      "At UV Bengaluru, you can validate pricing, touring suitability, and current variant availability before committing.",
+    ];
+  }
+
+  if (vehicle.category === "electric-scooter") {
+    return [
+      `${vehicle.name} is relevant for Bengaluru buyers looking for Ultraviolette technology in a more everyday urban format.`,
+      "The practical ownership conversation is likely to focus on convenience, charging, storage, and launch timing rather than immediate in-stock purchase.",
+      "UV Bengaluru can help you confirm launch sequence, pre-booking process, and which configuration is likely to suit your use case.",
+    ];
+  }
+
+  return [
+    `${vehicle.name} stands out because it offers a distinct Ultraviolette proposition rather than blending into generic EV messaging.`,
+    "The Bengaluru dealership context matters because local pricing, availability, and delivery timing can differ from national headline messaging.",
+    "A direct conversation with UV Bengaluru is the best way to verify whether this model is the right fit for your riding pattern and purchase timeline.",
+  ];
+}
+
+function buildBookingChecklist(
+  vehicle: NonNullable<ReturnType<typeof getVehicle>>,
+) {
+  const baseChecklist = [
+    "Confirm the current Bengaluru ex-showroom and estimated on-road price.",
+    "Check the exact variant, battery configuration, and charger option you want.",
+    "Verify the current test-ride or display availability before visiting.",
+  ];
+
+  const verificationItems =
+    vehicle.dealerVerificationRequired?.map((item) => `Confirm ${item}.`) ?? [];
+
+  if (vehicle.status === "pre-book") {
+    verificationItems.unshift(
+      "Ask what the current pre-booking flow means for delivery priority and expected launch timing.",
+    );
+  }
+
+  if (vehicle.slug === "f77-mach-2" || vehicle.slug === "f77-superstreet") {
+    verificationItems.push(
+      "Compare the F77 Mach 2 and F77 SuperStreet back-to-back if you are undecided between sportier and more street-focused ergonomics.",
+    );
+  }
+
+  return [...baseChecklist, ...verificationItems];
+}
+
+function buildRelatedGuides(
+  vehicle: NonNullable<ReturnType<typeof getVehicle>>,
+) {
+  const links = [
+    {
+      href: "/ultraviolette-test-ride-bengaluru",
+      label: "Ultraviolette Test Ride Bengaluru",
+      description:
+        "Understand how to plan a showroom visit and test-ride discussion at UV Bengaluru.",
+    },
+  ];
+
+  if (vehicle.slug === "f77-mach-2" || vehicle.slug === "f77-superstreet") {
+    links.unshift(
+      {
+        href: "/f77-price-bengaluru",
+        label: "F77 Price in Bengaluru",
+        description:
+          "Use this guide to understand current F77 pricing context before booking.",
+      },
+      {
+        href: "/f77-mach-2-vs-f77-superstreet",
+        label: "F77 Mach 2 vs F77 SuperStreet",
+        description:
+          "Compare the two key F77 directions before you choose your model.",
+      },
+    );
+  }
+
+  if (vehicle.slug === "x-47" || vehicle.slug === "x-47-desert-wing") {
+    links.push({
+      href: "/ultraviolette-showroom-bengaluru",
+      label: "Ultraviolette Showroom Bengaluru",
+      description:
+        "Plan a showroom visit to compare the X-47 lineup, variants, and availability.",
+    });
+  }
+
+  if (vehicle.category === "electric-scooter") {
+    links.push({
+      href: "/electric-bike-finance-bengaluru",
+      label: "Electric Bike Finance Bengaluru",
+      description:
+        "Understand financing conversations and ownership planning before launch or pre-booking.",
+    });
+  }
+
+  return links;
+}
+
 export default async function VehicleDetailPage({ params }: Props) {
   const { slug } = await params;
   const vehicle = getVehicle(slug);
@@ -66,6 +221,10 @@ export default async function VehicleDetailPage({ params }: Props) {
   const leadStats = vehicle.heroStats.slice(0, 4);
   const galleryLead = vehicle.gallery[0];
   const galleryRest = vehicle.gallery.slice(1);
+  const vehicleFaqs = buildVehicleFaqs(vehicle);
+  const whyBuyPoints = buildWhyBuyPoints(vehicle);
+  const bookingChecklist = buildBookingChecklist(vehicle);
+  const relatedGuides = buildRelatedGuides(vehicle);
   const productStructuredData = [
     {
       "@context": "https://schema.org",
@@ -121,6 +280,18 @@ export default async function VehicleDetailPage({ params }: Props) {
         },
       ],
     },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: vehicleFaqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })),
+    },
   ];
 
   return (
@@ -140,7 +311,9 @@ export default async function VehicleDetailPage({ params }: Props) {
           <div className="grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
             <div className="relative">
               <div className="absolute inset-x-0 top-0 z-10 flex items-center justify-between p-4">
-                <span className="btn-yellow">{statusLabel(vehicle.status)}</span>
+                <span className="btn-yellow">
+                  {statusLabel(vehicle.status)}
+                </span>
                 <span className="rounded-[3px] border border-white/10 bg-black/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white backdrop-blur">
                   {vehicle.category.replace(/-/g, " ")}
                 </span>
@@ -511,6 +684,107 @@ export default async function VehicleDetailPage({ params }: Props) {
             </div>
           </section>
         )}
+
+      <section className="border-t border-[#2A2A2A] bg-[#0f0f0f] px-4 py-20 md:px-8">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-2">
+          <article className="rounded-[6px] border border-[#2A2A2A] bg-[#151515] p-6 md:p-8">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#FF3B3B]">
+              Bengaluru Fit
+            </p>
+            <h2 className="mb-5 font-display text-3xl font-bold uppercase tracking-[0.06em] text-white">
+              Why Buy {vehicle.name} In Bengaluru
+            </h2>
+            <div className="space-y-4">
+              {whyBuyPoints.map((point) => (
+                <p
+                  key={point}
+                  className="text-sm leading-relaxed text-[#A0A0A0]"
+                >
+                  {point}
+                </p>
+              ))}
+            </div>
+          </article>
+
+          <article className="rounded-[6px] border border-[#2A2A2A] bg-[#151515] p-6 md:p-8">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#F5C518]">
+              Before You Book
+            </p>
+            <h2 className="mb-5 font-display text-3xl font-bold uppercase tracking-[0.06em] text-white">
+              What To Confirm Before Booking
+            </h2>
+            <div className="space-y-3">
+              {bookingChecklist.map((item) => (
+                <div
+                  key={item}
+                  className="rounded-[4px] border border-[#303030] bg-[#111] px-4 py-3"
+                >
+                  <p className="text-sm leading-relaxed text-[#A0A0A0]">
+                    {item}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section className="border-t border-[#2A2A2A] bg-[#0D0D0D] px-4 py-20 md:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-10">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#FF3B3B]">
+              Buyer Questions
+            </p>
+            <h2 className="font-display text-4xl font-bold uppercase tracking-[0.06em] text-white">
+              Quick Answers About {vehicle.name}
+            </h2>
+          </div>
+          <div className="grid gap-4">
+            {vehicleFaqs.map((faq) => (
+              <article
+                key={faq.question}
+                className="rounded-[6px] border border-[#2A2A2A] bg-[#111] p-6"
+              >
+                <h3 className="mb-3 font-display text-lg font-bold uppercase text-white">
+                  {faq.question}
+                </h3>
+                <p className="text-sm leading-relaxed text-[#A0A0A0]">
+                  {faq.answer}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-[#2A2A2A] bg-[#111] px-4 py-16 md:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-8">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#FF3B3B]">
+              Related Guides
+            </p>
+            <h2 className="font-display text-4xl font-bold uppercase tracking-[0.06em] text-white">
+              Continue Your Research
+            </h2>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {relatedGuides.map((guide) => (
+              <Link
+                key={guide.href}
+                href={guide.href}
+                className="rounded-[6px] border border-[#2A2A2A] bg-[#161616] p-6 transition-colors hover:border-[#E8231A]"
+              >
+                <h3 className="mb-3 font-display text-lg font-bold uppercase text-white">
+                  {guide.label}
+                </h3>
+                <p className="text-sm leading-relaxed text-[#A0A0A0]">
+                  {guide.description}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="bg-[#0D0D0D] px-4 py-16 text-center md:px-8">
         <h2 className="mb-4 font-display text-4xl font-bold uppercase text-white">

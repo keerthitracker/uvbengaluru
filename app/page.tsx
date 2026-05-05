@@ -74,6 +74,45 @@ const ownershipActions = [
   },
 ];
 
+const researchGuides = [
+  {
+    title: "Ultraviolette Showroom Bengaluru",
+    description:
+      "Use this page when you want the dealership address, visit context, and what to confirm before you come in.",
+    href: "/ultraviolette-showroom-bengaluru",
+  },
+  {
+    title: "Ultraviolette Test Ride Bengaluru",
+    description:
+      "Best starting point if your main intent is to book or plan a test ride in Bengaluru.",
+    href: "/ultraviolette-test-ride-bengaluru",
+  },
+  {
+    title: "F77 Price in Bengaluru",
+    description:
+      "Useful for riders comparing F77 pricing context, ownership questions, and local purchase planning.",
+    href: "/f77-price-bengaluru",
+  },
+  {
+    title: "F77 Mach 2 vs F77 SuperStreet",
+    description:
+      "Helps buyers decide which F77 direction fits their riding style before they visit the showroom.",
+    href: "/f77-mach-2-vs-f77-superstreet",
+  },
+  {
+    title: "Ultraviolette Service Centre Bengaluru",
+    description:
+      "Find the workshop touchpoint, service visit process, and support context for owners in Bengaluru.",
+    href: "/ultraviolette-service-centre-bengaluru",
+  },
+  {
+    title: "Electric Bike Finance Bengaluru",
+    description:
+      "Use this guide when your next question is EMI, on-road cost, and finance planning.",
+    href: "/electric-bike-finance-bengaluru",
+  },
+];
+
 const landingFaqs = [
   {
     question: "Is UV Bengaluru an official Ultraviolette dealership?",
@@ -96,6 +135,11 @@ const landingFaqs = [
       "The showroom is located at SJA Arcade, 904, 10th Cross Road, ITI Layout, Papareddipalya, Naagarabhaavi, Bengaluru, Karnataka 560072.",
   },
 ];
+
+const deferredSectionStyle = {
+  contentVisibility: "auto" as const,
+  containIntrinsicSize: "900px",
+};
 
 export default function HomePage() {
   const featured = getVehicle("x-47") ?? retailVehicles[0];
@@ -217,7 +261,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-t border-[#1A1A1A] bg-[#0D0D0D] py-20">
+      <section
+        className="border-t border-[#1A1A1A] bg-[#0D0D0D] py-20"
+        style={deferredSectionStyle}
+      >
         <div className="mx-auto max-w-7xl px-4 md:px-8">
           <div className="grid items-start gap-12 lg:grid-cols-[1.1fr_0.9fr]">
             <div>
@@ -268,7 +315,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-t border-[#1A1A1A] bg-[#111] py-20">
+      <section
+        className="border-t border-[#1A1A1A] bg-[#111] py-20"
+        style={deferredSectionStyle}
+      >
         <div className="mx-auto max-w-7xl px-4 md:px-8">
           <div className="mb-10">
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[#FF3B3B]">
@@ -348,7 +398,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-t border-[#1A1A1A] bg-[#0D0D0D] py-20">
+      <section
+        className="border-t border-[#1A1A1A] bg-[#0D0D0D] py-20"
+        style={deferredSectionStyle}
+      >
         <div className="mx-auto max-w-7xl px-4 md:px-8">
           <div className="mb-12">
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[#FF3B3B]">
@@ -439,7 +492,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-t border-[#1A1A1A] bg-[#111] py-16">
+      <section
+        className="border-t border-[#1A1A1A] bg-[#111] py-16"
+        style={deferredSectionStyle}
+      >
         <div className="mx-auto max-w-7xl px-4 md:px-8">
           <div className="mb-10">
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[#FF3B3B]">
@@ -504,7 +560,49 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-t border-[#1A1A1A] bg-[#0D0D0D] py-20">
+      <section
+        className="border-t border-[#1A1A1A] bg-[#151515] py-16"
+        style={deferredSectionStyle}
+      >
+        <div className="mx-auto max-w-7xl px-4 md:px-8">
+          <div className="mb-10 max-w-3xl">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[#FF3B3B]">
+              Buyer Guides
+            </p>
+            <h2 className="mb-4 font-display text-[clamp(28px,4vw,40px)] font-bold uppercase tracking-[0.08em] text-white">
+              Start With The Right
+              <span className="text-[#FF3B3B]"> Question</span>
+            </h2>
+            <p className="text-sm leading-relaxed text-[#A0A0A0] md:text-base">
+              These pages cover the commercial-intent queries riders usually
+              search before they visit the showroom, compare models, or plan a
+              booking conversation.
+            </p>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {researchGuides.map((guide) => (
+              <Link
+                key={guide.href}
+                href={guide.href}
+                className="rounded-[6px] border border-[#2A2A2A] bg-[#111] p-6 transition-colors hover:border-[#E8231A]"
+              >
+                <h3 className="mb-3 font-display text-lg font-bold uppercase tracking-[0.06em] text-white">
+                  {guide.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-[#A0A0A0]">
+                  {guide.description}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section
+        className="border-t border-[#1A1A1A] bg-[#0D0D0D] py-20"
+        style={deferredSectionStyle}
+      >
         <div className="mx-auto max-w-7xl px-4 md:px-8">
           <div className="mb-10 max-w-3xl">
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.24em] text-[#FF3B3B]">

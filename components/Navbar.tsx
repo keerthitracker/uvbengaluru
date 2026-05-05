@@ -22,8 +22,9 @@ export default function Navbar() {
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
+    let ticking = false;
 
-    const handleScroll = () => {
+    const updateHeaderState = () => {
       const currentScrollY = window.scrollY;
       setScrolled(currentScrollY > 48);
 
@@ -42,9 +43,16 @@ export default function Navbar() {
       }
 
       lastScrollY = currentScrollY;
+      ticking = false;
     };
 
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(updateHeaderState);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [menuOpen]);
 
@@ -140,7 +148,7 @@ export default function Navbar() {
                 BOOK TEST RIDE
               </Link>
               <Link
-                href="/contact"
+                href="/showroom"
                 style={{
                   background: "#E8231A",
                   color: "#FFFFFF",
@@ -184,7 +192,9 @@ export default function Navbar() {
 
       <div
         className={`fixed inset-0 z-30 flex flex-col items-center justify-center gap-8 transition-all duration-300 md:hidden ${
-          menuOpen ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+          menuOpen
+            ? "pointer-events-auto opacity-100"
+            : "pointer-events-none opacity-0"
         }`}
         style={{ background: "#0D0D0D" }}
       >

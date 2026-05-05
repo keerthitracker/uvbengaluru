@@ -39,6 +39,25 @@ const showroomFeatures = [
   },
 ];
 
+const visitProof = [
+  {
+    title: "EASY TO FIND",
+    desc: "The showroom is in Nagarbhavi at SJA Arcade, making it a practical visit point for riders coming from West Bengaluru and nearby neighborhoods.",
+  },
+  {
+    title: "MAP AND CALL READY",
+    desc: "You can call ahead, open directions instantly, and confirm model or test-ride availability before you leave.",
+  },
+  {
+    title: "ONE-STOP VISIT",
+    desc: "Use the same visit to discuss models, price context, finance options, and test rides instead of splitting the process across multiple touchpoints.",
+  },
+  {
+    title: "SERVICE AREA CONTEXT",
+    desc: "UV Bengaluru primarily serves Bengaluru riders while also handling enquiries from customers across Karnataka who want an official dealership touchpoint.",
+  },
+];
+
 export default function ShowroomPage() {
   const showroomStructuredData = [
     {
@@ -278,6 +297,60 @@ export default function ShowroomPage() {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-[#1a1a1a] bg-[#111] px-4 py-24 md:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-12">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-[#FF3B3B]">
+              Visit Planning
+            </p>
+            <h2 className="font-display text-4xl font-extrabold uppercase text-white md:text-5xl">
+              SHOWROOM VISIT PROOF
+            </h2>
+          </div>
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+            <div className="border border-[#222] bg-[#0d0d0d] p-6 md:p-8">
+              <h3 className="mb-4 font-display text-2xl font-extrabold uppercase text-white">
+                Before You Visit
+              </h3>
+              <div className="space-y-3">
+                {[
+                  `Address: ${showroomAddressText}`,
+                  "Hours: Monday to Sunday, 10:00 AM to 7:00 PM",
+                  `Phone: ${siteConfig.phoneDisplay}`,
+                  `WhatsApp: ${siteConfig.whatsappDisplay}`,
+                  "Best practice: call ahead if you want a specific model, variant, or test-ride slot confirmed.",
+                ].map((item) => (
+                  <div
+                    key={item}
+                    className="rounded-[4px] border border-[#2A2A2A] bg-[#111] px-4 py-3"
+                  >
+                    <p className="text-sm leading-relaxed text-[#A0A0A0]">
+                      {item}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              {visitProof.map((item) => (
+                <article
+                  key={item.title}
+                  className="border border-[#222] bg-[#0d0d0d] p-6"
+                >
+                  <h3 className="mb-3 font-display text-lg font-extrabold uppercase text-white">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-[#888]">
+                    {item.desc}
+                  </p>
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </section>
