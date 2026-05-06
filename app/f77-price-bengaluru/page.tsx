@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
 import { getVehicle } from "@/lib/vehicles";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "F77 Price in Bengaluru",
+  title: "F77 Price in Bengaluru 2026 — Mach 2 and SuperStreet Costs",
   description:
-    "Looking for F77 price in Bengaluru? Compare F77 Mach 2 and F77 SuperStreet positioning, pricing context, and what to confirm with UV Bengaluru before buying.",
+    "Current F77 Mach 2 price from ₹3.99L and F77 SuperStreet from ₹3.09L in Bengaluru. Compare variants, pricing context, and next steps with UV Bengaluru.",
   alternates: {
     canonical: "/f77-price-bengaluru",
   },
@@ -81,16 +82,20 @@ export default function F77PriceBengaluruPage() {
 
       <section className="hero-gradient border-b border-[#1a1a1a] px-4 pb-20 pt-32 md:px-8">
         <div className="mx-auto max-w-5xl">
+          <SeoH1>F77 Price in Bengaluru — Mach 2 and SuperStreet</SeoH1>
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#FF3B3B]">
             Search Guide
           </p>
-          <h1 className="mb-5 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl">
+          <div
+            aria-hidden="true"
+            className="mb-5 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl"
+          >
             F77 PRICE
             <br />
             IN
             <br />
             <span className="text-[#FF3B3B]">BENGALURU</span>
-          </h1>
+          </div>
           <p className="max-w-3xl text-lg leading-relaxed text-[#888]">
             People searching for F77 price in Bengaluru usually want one of two
             things: a realistic starting number and clarity on which F77 version

@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
 import { siteConfig, absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Electric Bike Finance Bengaluru",
+  title: "Electric Bike Finance in Bengaluru — Ultraviolette EMI Options",
   description:
     "Looking for electric bike finance in Bengaluru? UV Bengaluru helps buyers understand EMI, on-road cost context, and ownership planning for Ultraviolette models.",
   alternates: { canonical: "/electric-bike-finance-bengaluru" },
@@ -90,16 +91,22 @@ export default function ElectricBikeFinanceBengaluruPage() {
       <StructuredData data={structuredData} />
       <section className="hero-gradient border-b border-[#1a1a1a] px-4 pb-20 pt-32 md:px-8">
         <div className="mx-auto max-w-5xl">
+          <SeoH1>
+            Electric Bike Finance in Bengaluru — Ultraviolette EMI Options
+          </SeoH1>
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#FF3B3B]">
             Search Guide
           </p>
-          <h1 className="mb-5 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl">
+          <div
+            aria-hidden="true"
+            className="mb-5 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl"
+          >
             ELECTRIC BIKE
             <br />
             FINANCE
             <br />
             <span className="text-[#FF3B3B]">BENGALURU</span>
-          </h1>
+          </div>
           <p className="max-w-3xl text-lg leading-relaxed text-[#888]">
             Buyers searching for electric bike finance in Bengaluru usually want
             practical clarity: EMI, down-payment reality, and what to confirm

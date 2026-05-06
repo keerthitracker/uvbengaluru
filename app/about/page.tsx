@@ -1,11 +1,23 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { showroomAddressText, siteConfig } from "@/lib/site";
+import SeoH1 from "@/components/SeoH1";
+import StructuredData from "@/components/StructuredData";
+import { absoluteUrl, showroomAddressText, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "About UV Bengaluru | Authorized Ultraviolette Dealership",
+  title: "About UV Bengaluru — Official Ultraviolette Dealer, Nagarbhavi",
   description:
-    "UV Bengaluru, operated by Aadya Inc., is the official Ultraviolette dealership in Nagarbhavi, Bengaluru with test rides, finance support, and factory-certified service.",
+    "UV Bengaluru, operated by Aadya Inc., is the official authorized Ultraviolette dealership in Nagarbhavi, Bengaluru. Test rides, finance support, service, and ownership guidance are available under one roof.",
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    title: "About UV Bengaluru | Official Ultraviolette Dealer",
+    description:
+      "Learn about UV Bengaluru, the official Ultraviolette dealership in Nagarbhavi, Bengaluru, operated by Aadya Inc.",
+    url: absoluteUrl("/about"),
+    images: [absoluteUrl(siteConfig.ogImage)],
+  },
 };
 
 const services = [
@@ -58,20 +70,75 @@ const differentiators = [
 ];
 
 export default function AboutPage() {
+  const aboutStructuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": ["Organization", "LocalBusiness"],
+      name: siteConfig.name,
+      legalName: siteConfig.legalName,
+      url: absoluteUrl("/about"),
+      image: absoluteUrl(siteConfig.ogImage),
+      telephone: siteConfig.phoneHref,
+      email: siteConfig.email,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: siteConfig.address.streetAddress,
+        addressLocality: siteConfig.address.city,
+        addressRegion: siteConfig.address.region,
+        postalCode: siteConfig.address.postalCode,
+        addressCountry: siteConfig.address.country,
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: siteConfig.geo.latitude,
+        longitude: siteConfig.geo.longitude,
+      },
+      openingHours: siteConfig.hours,
+      sameAs: siteConfig.sameAs,
+      areaServed: ["Bengaluru", "Karnataka"],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: absoluteUrl("/"),
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "About",
+          item: absoluteUrl("/about"),
+        },
+      ],
+    },
+  ];
+
   return (
     <>
+      <StructuredData data={aboutStructuredData} />
       <section className="hero-gradient border-b border-[#1a1a1a] px-4 pb-20 pt-32 md:px-8">
         <div className="mx-auto max-w-7xl">
+          <SeoH1>
+            About UV Bengaluru — Official Ultraviolette Dealership in
+            Nagarbhavi, Bengaluru
+          </SeoH1>
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#FF3B3B]">
             About UV Bengaluru
           </p>
-          <h1 className="mb-5 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl">
+          <div
+            aria-hidden="true"
+            className="mb-5 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl"
+          >
             BENGALURU&apos;S
             <br />
             <span className="text-[#FF3B3B]">ELECTRIC</span>
             <br />
             FUTURE
-          </h1>
+          </div>
           <p className="max-w-2xl text-lg leading-relaxed text-[#888]">
             UV Bengaluru is the official Ultraviolette dealership in Nagarbhavi,
             operated by Aadya Inc. We bring performance-led electric mobility,

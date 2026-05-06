@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import SeoH1 from "@/components/SeoH1";
+import StructuredData from "@/components/StructuredData";
 import VehicleImage from "@/components/VehicleImage";
 import {
   getVehicleImageFrameClass,
@@ -14,14 +16,14 @@ import {
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Vehicles | UV Bengaluru",
+  title: "Ultraviolette Motorcycles in Bengaluru",
   description:
-    "Explore the Ultraviolette lineup at UV Bengaluru: X-47, X-47 Desert Wing, F77 Mach 2, F77 SuperStreet, Tesseract, Shockwave, and racing/story showcases.",
+    "Browse the full Ultraviolette lineup at UV Bengaluru. X-47 from ₹2.49L, F77 SuperStreet from ₹3.09L, and F77 Mach 2 from ₹3.99L. Book a test ride at our Nagarbhavi showroom.",
   alternates: {
     canonical: "/vehicles",
   },
   openGraph: {
-    title: "Ultraviolette Vehicles in Bengaluru | UV Bengaluru",
+    title: "Ultraviolette Lineup in Bengaluru | UV Bengaluru Official Dealer",
     description:
       "Explore current Ultraviolette motorcycles and electric scooters available, pre-bookable, or showcased at UV Bengaluru.",
     url: absoluteUrl("/vehicles"),
@@ -90,20 +92,47 @@ function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
 }
 
 export default function VehiclesPage() {
+  const listingSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Ultraviolette lineup at UV Bengaluru",
+    itemListElement: [
+      ...availableVehicles,
+      ...preBookVehicles,
+      ...showcaseVehicles,
+    ].map((vehicle, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: absoluteUrl(`/vehicles/${vehicle.slug}`),
+      name: vehicle.name,
+    })),
+  };
+
   return (
     <>
+      <StructuredData data={listingSchema} />
+
       <section className="bg-[#0D0D0D] px-4 py-20 md:px-8">
         <div className="max-w-7xl mx-auto">
+          <SeoH1>
+            Ultraviolette Motorcycles in Bengaluru — Full Lineup at UV
+            Bengaluru
+          </SeoH1>
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#A0A0A0]">
             UV Bengaluru - Nagarbhavi
           </p>
-          <h1 className="font-display mb-4 text-[clamp(36px,5vw,56px)] font-bold uppercase tracking-[0.08em] text-white">
+          <div
+            aria-hidden="true"
+            className="font-display mb-4 text-[clamp(36px,5vw,56px)] font-bold uppercase tracking-[0.08em] text-white"
+          >
             The <span className="text-[#FF3B3B]">Lineup</span>
-          </h1>
+          </div>
           <p className="max-w-2xl text-base leading-relaxed text-[#A0A0A0]">
-            Current retail models, pre-book platforms, and Ultraviolette
-            racing/story showcases. Prices and delivery timelines are
-            dealership-verification sensitive.
+            UV Bengaluru is the official place to explore Ultraviolette
+            motorcycles in Bengaluru, including current retail models,
+            pre-book platforms, and showcase machines. Use this lineup page to
+            compare categories, starting prices, and next steps before you book
+            a test ride or contact the showroom.
           </p>
         </div>
       </section>

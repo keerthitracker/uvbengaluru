@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import ContactForm from "@/components/ContactForm";
+import SeoH1 from "@/components/SeoH1";
+import StructuredData from "@/components/StructuredData";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Contact Us",
+  title: "Contact UV Bengaluru in Bengaluru",
   description:
     "Get in touch with UV Bengaluru, the official Ultraviolette dealership in Nagarbhavi, Bengaluru. Call, email, or visit us for enquiries, test rides, and service.",
   alternates: {
@@ -129,18 +131,68 @@ const subjectOptions = [
 ];
 
 export default function ContactPage() {
+  const contactStructuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      name: "Contact UV Bengaluru",
+      url: absoluteUrl("/contact"),
+      description:
+        "Contact UV Bengaluru in Nagarbhavi for test rides, sales enquiries, service coordination, and finance support.",
+      mainEntity: {
+        "@type": "LocalBusiness",
+        name: siteConfig.name,
+        telephone: siteConfig.phoneHref,
+        email: siteConfig.email,
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: siteConfig.address.streetAddress,
+          addressLocality: siteConfig.address.city,
+          addressRegion: siteConfig.address.region,
+          postalCode: siteConfig.address.postalCode,
+          addressCountry: siteConfig.address.country,
+        },
+        openingHours: siteConfig.hours,
+        sameAs: siteConfig.sameAs,
+      },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: absoluteUrl("/"),
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Contact",
+          item: absoluteUrl("/contact"),
+        },
+      ],
+    },
+  ];
+
   return (
     <>
+      <StructuredData data={contactStructuredData} />
       <section className="hero-gradient border-b border-[#1a1a1a] px-4 pb-20 pt-32 md:px-8">
         <div className="mx-auto max-w-7xl">
+          <SeoH1>Contact UV Bengaluru in Bengaluru</SeoH1>
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#FF3B3B]">
             UV Bengaluru
           </p>
-          <h1 className="mb-5 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl">
+          <div
+            aria-hidden="true"
+            className="mb-5 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl"
+          >
             GET IN
             <br />
             <span className="text-[#FF3B3B]">TOUCH</span>
-          </h1>
+          </div>
           <p className="max-w-xl text-lg leading-relaxed text-[#888]">
             Questions about a model? Want to book a test ride? Planning a
             service visit? We&apos;re here to help, reach us any way you prefer.

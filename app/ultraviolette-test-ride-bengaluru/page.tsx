@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
 import { absoluteUrl, showroomAddressText, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Ultraviolette Test Ride Bengaluru",
+  title: "Ultraviolette Test Ride in Bengaluru",
   description:
     "Book an Ultraviolette test ride in Bengaluru at UV Bengaluru, the official dealership in Nagarbhavi. Explore available models, process, timings, and what to expect.",
   alternates: {
@@ -78,16 +79,20 @@ export default function UltravioletteTestRideBengaluruPage() {
 
       <section className="hero-gradient border-b border-[#1a1a1a] px-4 pb-20 pt-32 md:px-8">
         <div className="mx-auto max-w-5xl">
+          <SeoH1>Ultraviolette Test Ride in Bengaluru</SeoH1>
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#FF3B3B]">
             Search Guide
           </p>
-          <h1 className="mb-5 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl">
+          <div
+            aria-hidden="true"
+            className="mb-5 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl"
+          >
             ULTRAVIOLETTE
             <br />
             TEST RIDE
             <br />
             <span className="text-[#FF3B3B]">BENGALURU</span>
-          </h1>
+          </div>
           <p className="max-w-3xl text-lg leading-relaxed text-[#888]">
             If you are searching for an Ultraviolette test ride in Bengaluru,
             the most direct path is UV Bengaluru in Nagarbhavi. This page

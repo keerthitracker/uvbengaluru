@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
 import { getVehicle } from "@/lib/vehicles";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "F77 Mach 2 vs F77 SuperStreet",
+  title: "F77 Mach 2 vs F77 SuperStreet — Which Ultraviolette to Buy?",
   description:
-    "Compare F77 Mach 2 vs F77 SuperStreet with positioning, rider fit, and buying guidance from UV Bengaluru.",
+    "Compare F77 Mach 2 and F77 SuperStreet with rider-fit, price context, and buying guidance from UV Bengaluru in Bengaluru.",
   alternates: {
     canonical: "/f77-mach-2-vs-f77-superstreet",
   },
@@ -82,16 +83,22 @@ export default function F77ComparisonPage() {
 
       <section className="hero-gradient border-b border-[#1a1a1a] px-4 pb-20 pt-32 md:px-8">
         <div className="mx-auto max-w-5xl">
+          <SeoH1>
+            F77 Mach 2 vs F77 SuperStreet — Which Ultraviolette Should You Buy?
+          </SeoH1>
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#FF3B3B]">
             Comparison Guide
           </p>
-          <h1 className="mb-5 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl">
+          <div
+            aria-hidden="true"
+            className="mb-5 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl"
+          >
             F77 MACH 2
             <br />
             VS
             <br />
             <span className="text-[#FF3B3B]">F77 SUPERSTREET</span>
-          </h1>
+          </div>
           <p className="max-w-3xl text-lg leading-relaxed text-[#888]">
             If you are deciding between F77 Mach 2 and F77 SuperStreet, the
             smartest approach is to compare rider intent first. The bikes live
