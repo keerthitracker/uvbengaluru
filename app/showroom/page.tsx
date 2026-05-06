@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
+import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
 import { absoluteUrl, showroomAddressText, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Showroom",
+  title: "Ultraviolette Showroom in Bengaluru",
   description:
     "Visit UV Bengaluru's Nagarbhavi showroom, Bengaluru's official Ultraviolette dealership. Explore the lineup, compare variants, and get current pricing.",
   alternates: {
@@ -62,7 +63,7 @@ export default function ShowroomPage() {
   const showroomStructuredData = [
     {
       "@context": "https://schema.org",
-      "@type": "AutoDealer",
+      "@type": ["MotorcycleDealer", "LocalBusiness"],
       name: siteConfig.name,
       legalName: siteConfig.legalName,
       url: absoluteUrl("/showroom"),
@@ -84,6 +85,10 @@ export default function ShowroomPage() {
       },
       openingHours: siteConfig.hours,
       areaServed: ["Bengaluru", "Karnataka"],
+      brand: {
+        "@type": "Brand",
+        name: "Ultraviolette Automotive",
+      },
       hasMap:
         "https://maps.google.com/?q=SJA+Arcade+904+10th+Cross+Rd+ITI+Layout+Papareddipalya+Naagarabhaavi+Bengaluru+Karnataka+560072",
     },
@@ -113,14 +118,20 @@ export default function ShowroomPage() {
 
       <section className="hero-gradient border-b border-[#1a1a1a] px-4 pb-20 pt-32 md:px-8">
         <div className="mx-auto max-w-7xl">
+          <SeoH1>
+            Ultraviolette Showroom in Bengaluru — UV Bengaluru, Nagarbhavi
+          </SeoH1>
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#FF3B3B]">
             Nagarbhavi, Bengaluru
           </p>
-          <h1 className="mb-5 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl">
+          <div
+            aria-hidden="true"
+            className="mb-5 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl"
+          >
             VISIT OUR
             <br />
             <span className="text-[#FF3B3B]">SHOWROOM</span>
-          </h1>
+          </div>
           <p className="max-w-xl text-lg leading-relaxed text-[#888]">
             Experience the full Ultraviolette lineup in person. Our Nagarbhavi
             showroom is open 7 days a week, so you can walk in or book an

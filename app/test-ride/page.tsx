@@ -1,10 +1,22 @@
 import type { Metadata } from "next";
+import SeoH1 from "@/components/SeoH1";
 import TestRideForm from "@/components/TestRideForm";
+import { absoluteUrl, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Book a Test Ride",
+  title: "Book Ultraviolette Test Ride in Bengaluru",
   description:
-    "Book a test ride at UV Bengaluru in Nagarbhavi. Experience the X-47, F77 Mach 2, and F77 SuperStreet before you buy.",
+    "Book a free Ultraviolette test ride in Bengaluru at UV Bengaluru, Nagarbhavi. Experience the X-47 and F77 range seven days a week, 10 AM–7 PM.",
+  alternates: {
+    canonical: "/test-ride",
+  },
+  openGraph: {
+    title: "Book Ultraviolette Test Ride in Bengaluru | UV Bengaluru",
+    description:
+      "Reserve an Ultraviolette test ride in Bengaluru with UV Bengaluru in Nagarbhavi and confirm the right model before you visit.",
+    url: absoluteUrl("/test-ride"),
+    images: [absoluteUrl(siteConfig.ogImage)],
+  },
 };
 
 const steps = [
@@ -30,10 +42,14 @@ export default function TestRidePage() {
     <>
       <section className="hero-gradient border-b border-[#1a1a1a] px-4 pb-20 pt-32 md:px-8">
         <div className="mx-auto max-w-7xl text-center">
+          <SeoH1>Book an Ultraviolette Test Ride in Bengaluru</SeoH1>
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#FF3B3B]">
             UV Bengaluru · Nagarbhavi
           </p>
-          <h1 className="mb-6 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl">
+          <div
+            aria-hidden="true"
+            className="mb-6 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl"
+          >
             FEEL THE
             <br />
             <span className="text-[#FF3B3B]">DIFFERENCE.</span>
@@ -41,10 +57,12 @@ export default function TestRidePage() {
             BOOK YOUR
             <br />
             TEST RIDE.
-          </h1>
+          </div>
           <p className="mx-auto max-w-xl text-lg leading-relaxed text-[#888]">
-            Experience Ultraviolette performance first-hand. Available 7 days a
-            week at our Nagarbhavi facility.
+            UV Bengaluru in Nagarbhavi is the official place to book an
+            Ultraviolette test ride in Bengaluru. Use this page to request the
+            model you want, choose a preferred slot, and confirm your visit
+            before you arrive at the showroom.
           </p>
         </div>
       </section>

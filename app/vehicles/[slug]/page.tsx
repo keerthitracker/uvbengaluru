@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
 import VehicleColorSelector from "@/components/VehicleColorSelector";
 import VehicleImage from "@/components/VehicleImage";
@@ -28,8 +29,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return {
-    title: vehicle.name,
-    description: `${vehicle.subheadline} ${vehicle.price}. Visit UV Bengaluru, Nagarbhavi for current pricing and availability.`,
+    title: `${vehicle.name} Price in Bengaluru`,
+    description: `${vehicle.subheadline} ${vehicle.price}. Visit UV Bengaluru, Nagarbhavi for current pricing, availability, and booking guidance.`,
     alternates: {
       canonical: `/vehicles/${vehicle.slug}`,
     },
@@ -44,7 +45,26 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         },
       ],
     },
+    twitter: {
+      card: "summary_large_image",
+      title: `${vehicle.name} in Bengaluru | UV Bengaluru`,
+      description: `${vehicle.subheadline} ${vehicle.price}.`,
+      images: [absoluteUrl(vehicle.heroImage)],
+    },
   };
+}
+
+function extractOfferPrice(value: string) {
+  const numeric = value.replace(/[^0-9.]/g, "");
+  if (!numeric) return undefined;
+
+  if (/lakh/i.test(value)) {
+    const amount = Number.parseFloat(numeric);
+    return Number.isFinite(amount) ? Math.round(amount * 100000) : undefined;
+  }
+
+  const amount = Number.parseInt(numeric, 10);
+  return Number.isFinite(amount) ? amount : undefined;
 }
 
 function statusLabel(status: string) {
@@ -225,6 +245,9 @@ export default async function VehicleDetailPage({ params }: Props) {
   const whyBuyPoints = buildWhyBuyPoints(vehicle);
   const bookingChecklist = buildBookingChecklist(vehicle);
   const relatedGuides = buildRelatedGuides(vehicle);
+  const offerPrice = extractOfferPrice(
+    vehicle.variants?.[0]?.priceLabel ?? vehicle.price,
+  );
   const productStructuredData = [
     {
       "@context": "https://schema.org",
@@ -244,6 +267,12 @@ export default async function VehicleDetailPage({ params }: Props) {
       },
       offers: {
         "@type": "Offer",
+        ...(offerPrice
+          ? {
+              priceCurrency: "INR",
+              price: offerPrice,
+            }
+          : {}),
         availability: isAvailable
           ? "https://schema.org/InStock"
           : isPreBook
@@ -348,12 +377,18 @@ export default async function VehicleDetailPage({ params }: Props) {
             </div>
 
             <div>
+              <SeoH1>
+                {vehicle.name} price in Bengaluru at UV Bengaluru
+              </SeoH1>
               <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#FF3B3B]">
                 Ultraviolette / {vehicle.name}
               </p>
-              <h1 className="mb-4 font-display text-[clamp(40px,6vw,68px)] font-extrabold uppercase leading-none tracking-[0.04em] text-white">
+              <div
+                aria-hidden="true"
+                className="mb-4 font-display text-[clamp(40px,6vw,68px)] font-extrabold uppercase leading-none tracking-[0.04em] text-white"
+              >
                 {vehicle.name}
-              </h1>
+              </div>
               <p className="mb-4 text-xl text-white md:text-2xl">
                 {vehicle.tagline}
               </p>

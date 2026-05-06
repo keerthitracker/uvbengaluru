@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
 import { showroomAddressText, siteConfig, absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Ultraviolette Service Centre Bengaluru",
+  title: "Ultraviolette Service Centre in Bengaluru",
   description:
     "Looking for an Ultraviolette service centre in Bengaluru? UV Bengaluru in Nagarbhavi handles service coordination, diagnostics, OTA support, and genuine-parts workshop help.",
   alternates: { canonical: "/ultraviolette-service-centre-bengaluru" },
@@ -104,16 +105,20 @@ export default function UltravioletteServiceCentreBengaluruPage() {
       <StructuredData data={structuredData} />
       <section className="hero-gradient border-b border-[#1a1a1a] px-4 pb-20 pt-32 md:px-8">
         <div className="mx-auto max-w-5xl">
+          <SeoH1>Ultraviolette Service Centre in Bengaluru</SeoH1>
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#FF3B3B]">
             Search Guide
           </p>
-          <h1 className="mb-5 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl">
+          <div
+            aria-hidden="true"
+            className="mb-5 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl"
+          >
             ULTRAVIOLETTE
             <br />
             SERVICE CENTRE
             <br />
             <span className="text-[#FF3B3B]">BENGALURU</span>
-          </h1>
+          </div>
           <p className="max-w-3xl text-lg leading-relaxed text-[#888]">
             If you are searching for an Ultraviolette service centre in
             Bengaluru, UV Bengaluru in Nagarbhavi is the right local touchpoint

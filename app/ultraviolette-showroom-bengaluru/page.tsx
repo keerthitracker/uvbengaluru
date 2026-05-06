@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
 import { showroomAddressText, siteConfig, absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Ultraviolette Showroom Bengaluru",
+  title: "Ultraviolette Showroom in Bengaluru — Visit UV Bengaluru",
   description:
     "Looking for an Ultraviolette showroom in Bengaluru? UV Bengaluru in Nagarbhavi is the official dealership for model discovery, test rides, and ownership support.",
   alternates: { canonical: "/ultraviolette-showroom-bengaluru" },
@@ -46,7 +47,7 @@ export default function UltravioletteShowroomBengaluruPage() {
   const structuredData = [
     {
       "@context": "https://schema.org",
-      "@type": "AutoDealer",
+      "@type": ["MotorcycleDealer", "LocalBusiness"],
       name: siteConfig.name,
       legalName: siteConfig.legalName,
       url: absoluteUrl("/ultraviolette-showroom-bengaluru"),
@@ -68,6 +69,10 @@ export default function UltravioletteShowroomBengaluruPage() {
       },
       openingHours: siteConfig.hours,
       areaServed: ["Bengaluru", "Karnataka"],
+      brand: {
+        "@type": "Brand",
+        name: "Ultraviolette Automotive",
+      },
       sameAs: siteConfig.sameAs,
       hasMap:
         "https://maps.google.com/?q=SJA+Arcade+904+10th+Cross+Rd+ITI+Layout+Papareddipalya+Naagarabhaavi+Bengaluru+Karnataka+560072",
@@ -106,16 +111,20 @@ export default function UltravioletteShowroomBengaluruPage() {
       <StructuredData data={structuredData} />
       <section className="hero-gradient border-b border-[#1a1a1a] px-4 pb-20 pt-32 md:px-8">
         <div className="mx-auto max-w-5xl">
+          <SeoH1>Ultraviolette Showroom in Bengaluru — Visit UV Bengaluru</SeoH1>
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#FF3B3B]">
             Search Guide
           </p>
-          <h1 className="mb-5 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl">
+          <div
+            aria-hidden="true"
+            className="mb-5 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl"
+          >
             ULTRAVIOLETTE
             <br />
             SHOWROOM
             <br />
             <span className="text-[#FF3B3B]">BENGALURU</span>
-          </h1>
+          </div>
           <p className="max-w-3xl text-lg leading-relaxed text-[#888]">
             UV Bengaluru in Nagarbhavi is the official dealership destination
             for riders who want to explore the lineup, understand pricing, and

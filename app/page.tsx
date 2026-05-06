@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
 import VehicleImage from "@/components/VehicleImage";
 import {
@@ -10,16 +11,16 @@ import { getVehicle, retailVehicles } from "@/lib/vehicles";
 import { absoluteUrl, showroomAddressText, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Bengaluru's Home for Ultraviolette",
+  title: "Official Ultraviolette Dealership in Bengaluru",
   description:
-    "UV Bengaluru is the official Ultraviolette dealership in Nagarbhavi, Bengaluru. Explore X-47, F77 Mach 2, F77 SuperStreet, Tesseract, Shockwave, and more.",
+    "UV Bengaluru is the official Ultraviolette dealership in Nagarbhavi, Bengaluru. Explore X-47, F77 Mach 2, F77 SuperStreet, book a test ride, or get finance support. Open daily 10 AM–7 PM.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "UV Bengaluru | Official Ultraviolette Dealership in Bengaluru",
+    title: "UV Bengaluru | Official Ultraviolette Dealership, Nagarbhavi",
     description:
-      "Explore the Ultraviolette lineup in Bengaluru, compare models, and book a test ride at UV Bengaluru in Nagarbhavi.",
+      "Explore Ultraviolette's X-47, F77 Mach 2, and F77 SuperStreet in Bengaluru. Book a test ride at our Nagarbhavi showroom. Performance electric motorcycles for the next generation.",
     url: absoluteUrl("/"),
     images: [
       {
@@ -151,7 +152,7 @@ export default function HomePage() {
   const structuredData = [
     {
       "@context": "https://schema.org",
-      "@type": "AutoDealer",
+      "@type": ["MotorcycleDealer", "LocalBusiness"],
       name: siteConfig.name,
       legalName: siteConfig.legalName,
       description: siteConfig.description,
@@ -174,6 +175,10 @@ export default function HomePage() {
       },
       openingHours: siteConfig.hours,
       areaServed: ["Bengaluru", "Karnataka"],
+      brand: {
+        "@type": "Brand",
+        name: "Ultraviolette Automotive",
+      },
       sameAs: siteConfig.sameAs,
     },
     {
@@ -207,19 +212,29 @@ export default function HomePage() {
         <div className="mx-auto w-full max-w-7xl px-4 py-20 md:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div>
+              <SeoH1>
+                Official Ultraviolette Dealership in Bengaluru — UV Bengaluru,
+                Nagarbhavi
+              </SeoH1>
               <p className="mb-6 text-xs font-semibold uppercase tracking-[0.12em] text-[#666]">
                 Official Ultraviolette Dealership - Nagarbhavi, Bengaluru
               </p>
-              <h1 className="mb-5 font-display text-[clamp(36px,6vw,58px)] font-bold uppercase leading-none text-[#1A1A1A]">
+              <div
+                aria-hidden="true"
+                className="mb-5 font-display text-[clamp(36px,6vw,58px)] font-bold uppercase leading-none text-[#1A1A1A]"
+              >
                 Electric Performance.
                 <br />
                 <span className="text-[#E8231A]">Refined.</span>
-              </h1>
+              </div>
               <p className="mb-6 max-w-xl text-[15px] leading-relaxed text-[#666]">
-                UV Bengaluru is your local gateway into Ultraviolette&apos;s
-                world of high-performance electric mobility, intelligent
-                technology, and design-led machines built for the next
-                generation of riders.
+                UV Bengaluru in Nagarbhavi is the official Ultraviolette
+                dealership in Bengaluru, where riders can explore the X-47, F77
+                Mach 2, and F77 SuperStreet, compare variants, and book a test
+                ride with showroom guidance. The experience stays design-led and
+                performance-first, but the first step is practical: get the
+                right model, pricing context, and ownership support in one
+                place.
               </p>
               <p className="mb-2 text-[15px] leading-relaxed text-[#666]">
                 {showroomAddressText}

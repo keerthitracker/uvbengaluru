@@ -1,10 +1,23 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import SeoH1 from "@/components/SeoH1";
+import StructuredData from "@/components/StructuredData";
+import { absoluteUrl, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Finance Your Ultraviolette | UV Bengaluru",
+  title: "Electric Bike Finance in Bengaluru — EMI for Ultraviolette",
   description:
-    "Flexible EMI and finance options for Ultraviolette motorcycles at UV Bengaluru, Nagarbhavi. Compare indicative EMIs, ownership support, and buying guidance.",
+    "Finance your Ultraviolette in Bengaluru with flexible EMI options. X-47 from approximately INR 7,200 per month. Section 80EEB tax benefits and ownership guidance available at UV Bengaluru.",
+  alternates: {
+    canonical: "/finance",
+  },
+  openGraph: {
+    title: "Electric Bike Finance in Bengaluru | UV Bengaluru",
+    description:
+      "Explore EMI plans, ownership support, and finance guidance for Ultraviolette motorcycles at UV Bengaluru in Nagarbhavi.",
+    url: absoluteUrl("/finance"),
+    images: [absoluteUrl(siteConfig.ogImage)],
+  },
 };
 
 const financeOptions = [
@@ -78,22 +91,104 @@ const taxBenefits = [
   },
 ];
 
+const financeFaqs = [
+  {
+    question: "Can I finance an Ultraviolette in Bengaluru?",
+    answer:
+      "Yes. UV Bengaluru helps buyers in Bengaluru understand lender options, down payment scenarios, indicative EMI planning, and ownership-cost context before they proceed.",
+  },
+  {
+    question: "What affects my Ultraviolette EMI?",
+    answer:
+      "Your EMI depends on the bike model, final on-road cost, down payment, loan tenure, lender approval terms, and any bundled insurance or add-on structure.",
+  },
+  {
+    question: "Should I ask only for EMI or full ownership cost?",
+    answer:
+      "Ask for both. EMI alone is incomplete without the final on-road number, insurance, tax context, and any time-sensitive pricing or offer conditions.",
+  },
+];
+
 export default function FinancePage() {
+  const financeStructuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "FinancialService",
+      name: `${siteConfig.name} Finance Guidance`,
+      url: absoluteUrl("/finance"),
+      areaServed: ["Bengaluru", "Karnataka"],
+      provider: {
+        "@type": "LocalBusiness",
+        name: siteConfig.name,
+        telephone: siteConfig.phoneHref,
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: siteConfig.address.streetAddress,
+          addressLocality: siteConfig.address.city,
+          addressRegion: siteConfig.address.region,
+          postalCode: siteConfig.address.postalCode,
+          addressCountry: siteConfig.address.country,
+        },
+      },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: financeFaqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: absoluteUrl("/"),
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Finance",
+          item: absoluteUrl("/finance"),
+        },
+      ],
+    },
+  ];
+
   return (
     <>
+      <StructuredData data={financeStructuredData} />
       <section className="hero-gradient border-b border-[#1a1a1a] px-4 pb-20 pt-32 md:px-8">
         <div className="mx-auto max-w-7xl">
+          <SeoH1>
+            Ultraviolette Finance in Bengaluru — EMI Plans and Ownership
+            Support
+          </SeoH1>
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#FF3B3B]">
             Finance &amp; Ownership
           </p>
-          <h1 className="mb-5 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl">
+          <div
+            aria-hidden="true"
+            className="mb-5 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl"
+          >
             MAKE YOUR <span className="text-[#FF3B3B]">UV</span>
             <br />
             YOURS TODAY
-          </h1>
+          </div>
           <p className="max-w-xl text-lg leading-relaxed text-[#888]">
-            Flexible EMI options and finance assistance to make Ultraviolette
-            ownership more accessible for Bengaluru buyers.
+            UV Bengaluru helps Bengaluru buyers understand Ultraviolette EMI
+            options, down payment scenarios, tax-benefit context, and the
+            difference between headline bike price and final ownership cost.
+            This page is the starting point if you want practical finance
+            clarity before you commit to a model.
           </p>
         </div>
       </section>
@@ -281,6 +376,34 @@ export default function FinancePage() {
             >
               TALK TO US
             </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-[#1a1a1a] bg-[#0c0c0c] px-4 py-20 md:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-10">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-[#FF3B3B]">
+              Finance FAQs
+            </p>
+            <h2 className="font-display text-4xl font-extrabold uppercase text-white md:text-5xl">
+              OWNERSHIP QUESTIONS
+            </h2>
+          </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            {financeFaqs.map((faq) => (
+              <article
+                key={faq.question}
+                className="border border-[#222] bg-[#111] p-6"
+              >
+                <h3 className="mb-3 font-display text-lg font-extrabold uppercase text-white">
+                  {faq.question}
+                </h3>
+                <p className="text-sm leading-relaxed text-[#888]">
+                  {faq.answer}
+                </p>
+              </article>
+            ))}
           </div>
         </div>
       </section>

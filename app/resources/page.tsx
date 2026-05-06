@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
@@ -68,31 +69,68 @@ const guideGroups = [
 ];
 
 export default function ResourcesPage() {
+  const guideItems = guideGroups.flatMap((group) => group.items);
+
   return (
     <>
       <StructuredData
-        data={{
-          "@context": "https://schema.org",
-          "@type": "CollectionPage",
-          name: "UV Bengaluru Resources & Buying Guides",
-          url: absoluteUrl("/resources"),
-          description:
-            "Grouped buying guides and research resources for Ultraviolette discovery in Bengaluru.",
-        }}
+        data={[
+          {
+            "@context": "https://schema.org",
+            "@type": "CollectionPage",
+            name: "UV Bengaluru Resources & Buying Guides",
+            url: absoluteUrl("/resources"),
+            description:
+              "Grouped buying guides and research resources for Ultraviolette discovery in Bengaluru.",
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: "Home",
+                item: absoluteUrl("/"),
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Resources",
+                item: absoluteUrl("/resources"),
+              },
+            ],
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            name: "UV Bengaluru buying guides",
+            itemListElement: guideItems.map((item, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              name: item.title,
+              url: absoluteUrl(item.href),
+            })),
+          },
+        ]}
       />
 
       <section className="hero-gradient border-b border-[#1a1a1a] px-4 pb-20 pt-32 md:px-8">
         <div className="mx-auto max-w-6xl">
+          <SeoH1>Ultraviolette Buying Guides in Bengaluru</SeoH1>
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#FF3B3B]">
             Knowledge Hub
           </p>
-          <h1 className="mb-5 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl">
+          <div
+            aria-hidden="true"
+            className="mb-5 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl"
+          >
             RESOURCES
             <br />
             & BUYING
             <br />
             <span className="text-[#FF3B3B]">GUIDES</span>
-          </h1>
+          </div>
           <p className="max-w-3xl text-lg leading-relaxed text-[#888]">
             This hub groups the most useful research pages for buyers comparing
             Ultraviolette models, pricing, finance, service, and showroom

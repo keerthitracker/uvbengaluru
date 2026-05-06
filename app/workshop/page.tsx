@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
+import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
 import WorkshopBookingForm from "@/components/WorkshopBookingForm";
 import { absoluteUrl, showroomAddressText, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Workshop & Service | UV Bengaluru",
+  title: "Book Ultraviolette Workshop Service in Bengaluru",
   description:
-    "Book Ultraviolette workshop support at UV Bengaluru in Nagarbhavi for scheduled maintenance, diagnostics, software support, and genuine-parts service.",
+    "Book Ultraviolette workshop service in Bengaluru with UV Bengaluru in Nagarbhavi. Use this page for workshop appointments, diagnostics, software support, and genuine-parts service planning.",
   alternates: {
     canonical: "/workshop",
   },
@@ -51,6 +52,24 @@ const visitSignals = [
   "Open Monday to Sunday, 10:00 AM to 7:00 PM",
   "Call or WhatsApp before arriving for smoother workshop planning",
   "Use the booking form for a structured service request",
+];
+
+const workshopFaqs = [
+  {
+    question: "Where can I book Ultraviolette workshop service in Bengaluru?",
+    answer:
+      "Use UV Bengaluru in Nagarbhavi to request workshop appointments for service coordination, diagnostics, software support, and genuine-parts work.",
+  },
+  {
+    question: "What should I use the workshop page for?",
+    answer:
+      "This page is the booking route for workshop appointments. It is best used when you already know you need service scheduling rather than general service discovery.",
+  },
+  {
+    question: "Should I contact the team before visiting the workshop?",
+    answer:
+      "Yes. Calling or submitting the workshop form in advance helps the team understand your issue, plan technician load, and suggest the right visit timing.",
+  },
 ];
 
 export default function WorkshopPage() {
@@ -99,6 +118,18 @@ export default function WorkshopPage() {
         },
       ],
     },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: workshopFaqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })),
+    },
   ];
 
   return (
@@ -107,18 +138,25 @@ export default function WorkshopPage() {
 
       <section className="hero-gradient border-b border-[#1a1a1a] px-4 pb-20 pt-32 md:px-8">
         <div className="mx-auto max-w-7xl">
+          <SeoH1>
+            Book Ultraviolette Workshop Service in Bengaluru
+          </SeoH1>
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#FF3B3B]">
             Nagarbhavi, Bengaluru
           </p>
-          <h1 className="mb-5 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl">
+          <div
+            aria-hidden="true"
+            className="mb-5 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl"
+          >
             WORKSHOP
             <br />
             <span className="text-[#FF3B3B]">BOOKING</span>
-          </h1>
+          </div>
           <p className="max-w-3xl text-lg leading-relaxed text-[#888]">
-            Use this page to request an Ultraviolette workshop appointment with
-            UV Bengaluru. It is the right route for service coordination,
-            diagnostics, and genuine-parts workshop support.
+            Use this page to book an Ultraviolette workshop appointment in
+            Bengaluru with UV Bengaluru in Nagarbhavi. This route is for
+            service scheduling, diagnostics, software support, and genuine-parts
+            workshop planning once you are ready to request a visit.
           </p>
         </div>
       </section>
@@ -210,6 +248,34 @@ export default function WorkshopPage() {
             </p>
           </div>
           <WorkshopBookingForm />
+        </div>
+      </section>
+
+      <section className="border-t border-[#1a1a1a] bg-[#0c0c0c] px-4 py-20 md:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-10">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-[#FF3B3B]">
+              Workshop FAQs
+            </p>
+            <h2 className="font-display text-4xl font-extrabold uppercase text-white md:text-5xl">
+              BEFORE YOU BOOK
+            </h2>
+          </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            {workshopFaqs.map((faq) => (
+              <article
+                key={faq.question}
+                className="border border-[#222] bg-[#111] p-6"
+              >
+                <h3 className="mb-3 font-display text-lg font-extrabold uppercase text-white">
+                  {faq.question}
+                </h3>
+                <p className="text-sm leading-relaxed text-[#888]">
+                  {faq.answer}
+                </p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
     </>

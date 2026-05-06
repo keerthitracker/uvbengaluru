@@ -1,23 +1,43 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
 import { absoluteUrl, showroomAddressText, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Service & Workshop | UV Bengaluru",
+  title: "Ultraviolette Service Centre in Bengaluru",
   description:
-    "Factory-certified Ultraviolette service and workshop support at UV Bengaluru in Nagarbhavi. Get diagnostics, software support, genuine parts, and service booking help.",
+    "Official Ultraviolette service and workshop in Nagarbhavi, Bengaluru. Battery diagnostics, OTA updates, scheduled maintenance, and genuine parts support. Book your service slot today.",
   alternates: {
     canonical: "/service",
   },
   openGraph: {
-    title: "Ultraviolette Service & Workshop | UV Bengaluru",
+    title:
+      "Ultraviolette Service in Bengaluru | Official Workshop | UV Bengaluru",
     description:
       "Plan your service visit with UV Bengaluru for diagnostics, scheduled maintenance, and genuine-parts support.",
     url: absoluteUrl("/service"),
     images: [absoluteUrl(siteConfig.ogImage)],
   },
 };
+
+const serviceFaqs = [
+  {
+    question: "Where can I service my Ultraviolette in Bengaluru?",
+    answer:
+      "UV Bengaluru in Nagarbhavi is the official local touchpoint for Ultraviolette service coordination, workshop planning, diagnostics, and support.",
+  },
+  {
+    question: "What does the UV Bengaluru service team help with?",
+    answer:
+      "The team helps with scheduled maintenance, battery diagnostics, OTA and software support, workshop coordination, and genuine-parts service guidance.",
+  },
+  {
+    question: "Should I book my service visit before coming in?",
+    answer:
+      "Yes. Calling or messaging in advance helps the team plan workshop load, understand your issue, and confirm the best visit window.",
+  },
+];
 
 const services = [
   {
@@ -115,6 +135,18 @@ export default function ServicePage() {
         },
       ],
     },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: serviceFaqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })),
+    },
   ];
 
   return (
@@ -123,19 +155,27 @@ export default function ServicePage() {
 
       <section className="hero-gradient border-b border-[#1a1a1a] px-4 pb-20 pt-32 md:px-8">
         <div className="mx-auto max-w-6xl">
+          <SeoH1>
+            Ultraviolette Service Centre Bengaluru — UV Bengaluru Workshop,
+            Nagarbhavi
+          </SeoH1>
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#FF3B3B]">
             Service Support
           </p>
-          <h1 className="mb-5 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl">
+          <div
+            aria-hidden="true"
+            className="mb-5 font-display text-5xl font-extrabold uppercase leading-none text-white md:text-7xl"
+          >
             ULTRAVIOLETTE
             <br />
             <span className="text-[#FF3B3B]">SERVICE</span>
-          </h1>
+          </div>
           <p className="max-w-3xl text-lg leading-relaxed text-[#888]">
-            UV Bengaluru is the official local touchpoint for Ultraviolette
-            service coordination in Nagarbhavi, Bengaluru. Use this page to plan
-            a visit, confirm support scope, and contact the team before you come
-            in.
+            UV Bengaluru in Nagarbhavi is the official Ultraviolette service
+            touchpoint in Bengaluru for scheduled maintenance, battery
+            diagnostics, OTA support, and genuine-parts workshop coordination.
+            Use this page to plan your visit, confirm support scope, and book
+            ahead before you travel.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a href={`tel:${siteConfig.phoneHref}`} className="btn-primary">
@@ -196,6 +236,12 @@ export default function ServicePage() {
               <Link href="/workshop" className="btn-primary">
                 Book Workshop Service
               </Link>
+              <Link
+                href="/ultraviolette-service-centre-bengaluru"
+                className="btn-ghost"
+              >
+                Service Centre Guide
+              </Link>
               <a
                 href="https://maps.google.com/?q=SJA+Arcade+904+10th+Cross+Rd+ITI+Layout+Papareddipalya+Naagarabhaavi+Bengaluru+Karnataka+560072"
                 target="_blank"
@@ -221,6 +267,34 @@ export default function ServicePage() {
                 </h3>
                 <p className="text-sm leading-relaxed text-[#A0A0A0]">
                   {step.desc}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-b border-[#1a1a1a] bg-[#111] px-4 py-20 md:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-10">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#FF3B3B]">
+              Service FAQs
+            </p>
+            <h2 className="font-display text-3xl font-bold uppercase tracking-[0.06em] text-white md:text-4xl">
+              Quick Answers Before You Visit
+            </h2>
+          </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            {serviceFaqs.map((faq) => (
+              <article
+                key={faq.question}
+                className="rounded-[6px] border border-[#2A2A2A] bg-[#151515] p-6"
+              >
+                <h3 className="mb-3 font-display text-lg font-bold uppercase text-white">
+                  {faq.question}
+                </h3>
+                <p className="text-sm leading-relaxed text-[#A0A0A0]">
+                  {faq.answer}
                 </p>
               </article>
             ))}
