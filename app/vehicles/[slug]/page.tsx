@@ -537,6 +537,23 @@ export default async function VehicleDetailPage({ params }: Props) {
                         ),
                     )}
                   </div>
+                  {variant.highlights && variant.highlights.length > 0 && (
+                    <div className="mt-5">
+                      <p className="mb-3 text-[10px] uppercase tracking-[0.14em] text-[#777]">
+                        Configuration Highlights
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {variant.highlights.map((highlight) => (
+                          <span
+                            key={highlight}
+                            className="rounded-full border border-[#2A2A2A] bg-[#141414] px-3 py-1 text-[11px] font-medium text-[#D6D6D6]"
+                          >
+                            {highlight}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                   {variant.notes && (
                     <p className="mt-4 text-xs leading-relaxed text-[#777]">
                       {variant.notes}

@@ -70,6 +70,24 @@ export default function VehicleVariantExplorer({ variants }: VehicleVariantExplo
             })}
           </div>
 
+          {activeVariant.highlights && activeVariant.highlights.length > 0 && (
+            <div className="mt-6">
+              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#777]">
+                Configuration Highlights
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {activeVariant.highlights.map((highlight) => (
+                  <span
+                    key={highlight}
+                    className="rounded-full border border-[#2A2A2A] bg-[#171717] px-3 py-1 text-[11px] font-medium text-[#D6D6D6]"
+                  >
+                    {highlight}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
           {activeVariant.notes && (
             <p className="mt-6 border-l-2 border-[#FF3B3B] pl-4 text-sm leading-relaxed text-[#A0A0A0]">
               {activeVariant.notes}

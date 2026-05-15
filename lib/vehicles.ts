@@ -35,6 +35,7 @@ export interface VehicleVariant {
   torque?: string
   topSpeed?: string
   acceleration?: string
+  highlights?: string[]
   notes?: string
 }
 
@@ -161,6 +162,15 @@ export const vehicles: Vehicle[] = [
         torque: '550 Nm',
         acceleration: '2.8 sec',
         topSpeed: '145 km/h',
+        highlights: [
+          'Standard charger',
+          '3 years / 60,000 km battery warranty',
+          '3-level dynamic regen',
+          'Traction control on/off',
+          'Standard connectivity (WiFi + BT)',
+          'UV Supernova and Supernova+ network access',
+        ],
+        notes: 'Base X-47 configuration. The official spec sheet excludes UV Hypersense radar on this variant.',
       },
       {
         name: 'X-47 Original',
@@ -171,6 +181,14 @@ export const vehicles: Vehicle[] = [
         torque: '550 Nm',
         acceleration: '2.8 sec',
         topSpeed: '145 km/h',
+        highlights: [
+          'UV Hypersense radar tech',
+          'Standard charger',
+          '3 years / 60,000 km battery warranty',
+          '3-level dynamic regen',
+          'Traction control on/off',
+          'Standard connectivity (WiFi + BT)',
+        ],
       },
       {
         name: 'X-47 Original+',
@@ -181,6 +199,15 @@ export const vehicles: Vehicle[] = [
         torque: '550 Nm',
         acceleration: '2.8 sec',
         topSpeed: '145 km/h',
+        highlights: [
+          'UV Hypersense radar tech',
+          'On-board charger',
+          '5 years / 1,00,000 km battery warranty',
+          '10-level dynamic regen',
+          '4-level traction control',
+          'Premium connectivity (LTE + BT)',
+          'Find My X-47',
+        ],
       },
       {
         name: 'X-47 Recon',
@@ -191,6 +218,16 @@ export const vehicles: Vehicle[] = [
         torque: '610 Nm',
         acceleration: '2.7 sec',
         topSpeed: '145 km/h',
+        highlights: [
+          'UV Hypersense radar tech',
+          'Standard charger',
+          '5 years / 1,00,000 km battery warranty',
+          '10-level dynamic regen',
+          '4-level traction control',
+          'Premium connectivity (LTE + BT)',
+          'Find My X-47',
+          'Crash protection: knuckle guard + bullbar',
+        ],
       },
       {
         name: 'X-47 Recon+',
@@ -201,6 +238,18 @@ export const vehicles: Vehicle[] = [
         torque: '610 Nm',
         acceleration: '2.7 sec',
         topSpeed: '145 km/h',
+        highlights: [
+          'UV Hypersense radar tech',
+          'On-board charger',
+          '5 years / 1,00,000 km battery warranty',
+          '10-level dynamic regen',
+          '4-level traction control',
+          'Premium connectivity (LTE + BT)',
+          'Find My X-47',
+          'Crash protection: knuckle guard + bullbar',
+          'Violette A.I. included',
+          'TPMS',
+        ],
       },
       {
         name: 'X-47 Desert Wing',
@@ -211,7 +260,18 @@ export const vehicles: Vehicle[] = [
         torque: '610 Nm',
         acceleration: '2.7 sec',
         topSpeed: '145 km/h',
-        notes: 'Special edition based on the Recon+ specification.',
+        highlights: [
+          'Exclusive Sandstorm finish',
+          'On-board charger',
+          'Integrated dashcam module',
+          'Soft case pannier kit',
+          'Crash protection: knuckle guard + bullbar',
+          'Advanced ride control pack',
+          '8 years / 8,00,000 km battery warranty',
+          'Violette A.I. included',
+          'TPMS',
+        ],
+        notes: 'Special edition based on the Recon+ specification, with additional touring equipment and an upgraded battery warranty.',
       },
     ],
     specGroups: [
@@ -339,6 +399,18 @@ export const vehicles: Vehicle[] = [
         torque: '610 Nm',
         acceleration: '2.7 sec',
         topSpeed: '145 km/h',
+        highlights: [
+          'Exclusive Sandstorm finish',
+          'UV Hypersense radar tech',
+          'Integrated dashcam module',
+          'Soft case pannier kit',
+          'Crash protection: knuckle guard + bullbar',
+          'Advanced ride control pack',
+          '8 years / 8,00,000 km battery warranty',
+          'Premium connectivity (LTE + BT)',
+          'Find My X-47',
+          'TPMS',
+        ],
         notes: 'Other specs remain identical to X-47 Recon+ according to the official spec sheet.',
       },
     ],
