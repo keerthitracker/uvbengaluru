@@ -8,18 +8,77 @@ import type { VehicleColor } from '@/lib/vehicles'
 interface VehicleColorSelectorProps {
   colors: VehicleColor[]
   modelName: string
-  layout?: 'default' | 'hero'
+  layout?: 'default' | 'hero' | 'compact'
+  activeName?: string
+  onChange?: (name: string) => void
 }
 
 export default function VehicleColorSelector({
   colors,
   modelName,
   layout = 'default',
+  activeName: controlledActiveName,
+  onChange,
 }: VehicleColorSelectorProps) {
-  const [activeName, setActiveName] = useState(colors[0]?.name ?? '')
+  const [internalActiveName, setInternalActiveName] = useState(colors[0]?.name ?? '')
+  const activeName = controlledActiveName ?? internalActiveName
   const activeColor = colors.find((color) => color.name === activeName) ?? colors[0]
 
+  const handleSelect = (name: string) => {
+    if (controlledActiveName === undefined) {
+      setInternalActiveName(name)
+    }
+
+    onChange?.(name)
+  }
+
   if (!activeColor) return null
+
+  if (layout === 'compact') {
+    return (
+      <div className="rounded-[28px] border border-white/10 bg-black/28 p-4 backdrop-blur-2xl md:p-5">
+        <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/45">Available Colours</p>
+            <h3 className="font-display mt-2 text-xl font-bold uppercase tracking-[0.08em] text-white md:text-2xl">
+              {activeColor.name}
+            </h3>
+          </div>
+          {(activeColor.personality || activeColor.tagline) && (
+            <p className="max-w-[220px] text-sm leading-relaxed text-white/58 md:text-right">
+              {activeColor.personality || activeColor.tagline}
+            </p>
+          )}
+        </div>
+
+        <div className="flex flex-wrap gap-2.5">
+          {colors.map((color) => {
+            const isActive = color.name === activeColor.name
+
+            return (
+              <button
+                key={color.name}
+                type="button"
+                onClick={() => handleSelect(color.name)}
+                className={`flex items-center gap-2 rounded-full border px-3.5 py-2 transition ${
+                  isActive
+                    ? 'border-white/45 bg-white text-black'
+                    : 'border-white/10 bg-white/[0.04] text-white hover:border-white/25'
+                }`}
+              >
+                <span
+                  aria-hidden="true"
+                  className="block h-4 w-4 rounded-full border border-black/10"
+                  style={{ background: color.hex }}
+                />
+                <span className="text-[10px] font-bold uppercase tracking-[0.14em] md:text-[11px]">{color.name}</span>
+              </button>
+            )
+          })}
+        </div>
+      </div>
+    )
+  }
 
   if (layout === 'hero') {
     return (
@@ -49,7 +108,7 @@ export default function VehicleColorSelector({
               <button
                 key={color.name}
                 type="button"
-                onClick={() => setActiveName(color.name)}
+                onClick={() => handleSelect(color.name)}
                 className="flex items-center gap-2 rounded-[4px] border px-3 py-2 text-left transition-colors"
                 style={{
                   borderColor: color.name === activeColor.name ? '#FF3B3B' : '#2A2A2A',
@@ -93,7 +152,7 @@ export default function VehicleColorSelector({
             <button
               key={color.name}
               type="button"
-              onClick={() => setActiveName(color.name)}
+              onClick={() => handleSelect(color.name)}
               className="flex items-center gap-3 rounded-[4px] border px-3 py-2 text-left transition-colors"
               style={{
                 borderColor: color.name === activeColor.name ? '#FF3B3B' : '#2A2A2A',
