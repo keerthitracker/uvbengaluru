@@ -1,9 +1,77 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useCallback, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import FormFeedbackToast from "@/components/FormFeedbackToast";
+import { submitContactRequest } from "@/lib/formSubmissionHandlers";
+import type { ContactSubmissionPayload } from "@/lib/formSubmissionTypes";
 
 interface ContactFormProps {
   subjects?: string[];
+}
+
+const phoneRegex = /^[0-9+\-\s()]{7,20}$/;
+
+const validationSchema = Yup.object({
+  full_name: Yup.string().trim().min(2).required("Full name is required."),
+  phone: Yup.string()
+    .trim()
+    .matches(phoneRegex, "Enter a valid phone number.")
+    .required("Phone number is required."),
+  email: Yup.string()
+    .trim()
+    .email("Enter a valid email address.")
+    .required("Email address is required."),
+  subject: Yup.string().trim().required("Subject is required."),
+  message: Yup.string()
+    .trim()
+    .min(3, "Message must be at least 3 characters.")
+    .required("Message is required."),
+  source_page: Yup.string().trim().required(),
+});
+
+function FieldError({ message }: { message?: string }) {
+  if (!message) {
+    return null;
+  }
+
+  return <p className="mt-2 text-sm text-red-400">{message}</p>;
+}
+
+function LoadingLabel({ text }: { text: string }) {
+  return (
+    <span className="inline-flex items-center justify-center gap-2">
+      <svg
+        className="h-4 w-4 animate-spin"
+        viewBox="0 0 24 24"
+        fill="none"
+        aria-hidden="true"
+      >
+        <circle
+          className="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          strokeWidth="3"
+        />
+        <path
+          className="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8v3a5 5 0 00-5 5H4z"
+        />
+      </svg>
+      {text}
+    </span>
+  );
+}
+
+interface ToastState {
+  type: "success" | "error";
+  title: string;
+  message: string;
 }
 
 export default function ContactForm({
@@ -15,148 +83,149 @@ export default function ContactForm({
     "Career",
   ],
 }: ContactFormProps) {
-  const [form, setForm] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    subject: subjects[0],
-    message: "",
-  });
-  const [status, setStatus] = useState<
-    "idle" | "loading" | "success" | "error"
-  >("idle");
-  const [errorMsg, setErrorMsg] = useState("");
+  const pathname = usePathname();
+  const [toast, setToast] = useState<ToastState | null>(null);
+  const closeToast = useCallback(() => setToast(null), []);
 
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >,
-  ) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+  const formik = useFormik<ContactSubmissionPayload>({
+    initialValues: {
+      full_name: "",
+      phone: "",
+      email: "",
+      subject: subjects[0],
+      message: "",
+      source_page: pathname || "/contact",
+    },
+    validationSchema,
+    enableReinitialize: true,
+    onSubmit: async (values, { resetForm, setStatus }) => {
+      setToast(null);
+      setStatus(undefined);
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    setStatus("loading");
-    setErrorMsg("");
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      const data = await res.json();
-      if (res.ok && data.success) {
-        setStatus("success");
-        setForm({
-          name: "",
-          phone: "",
-          email: "",
-          subject: subjects[0],
-          message: "",
+      const response = await submitContactRequest(values);
+
+      if (response.success) {
+        setToast({
+          type: "success",
+          title: "Message Sent",
+          message: response.message,
         });
-      } else {
-        setStatus("error");
-        setErrorMsg(data.message || "Something went wrong. Please try again.");
+        resetForm({
+          values: {
+            full_name: "",
+            phone: "",
+            email: "",
+            subject: subjects[0],
+            message: "",
+            source_page: pathname || "/contact",
+          },
+        });
+        return;
       }
-    } catch {
-      setStatus("error");
-      setErrorMsg("Network error. Please check your connection and try again.");
-    }
-  };
 
-  if (status === "success") {
-    return (
-      <div className="bg-[#161616] border border-[#C8FF00]/30 p-8 text-center">
-        <svg
-          className="w-12 h-12 text-[#C8FF00] mx-auto mb-4"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-        <h3
-          className="text-2xl font-bold uppercase text-white mb-2"
-          style={{
-            fontFamily: 'var(--font-barlow), "Barlow Condensed", sans-serif',
-          }}
-        >
-          MESSAGE SENT
-        </h3>
-        <p className="text-[#888] text-sm">
-          Thank you for reaching out. We&apos;ll get back to you within 24
-          hours.
-        </p>
-        <button
-          onClick={() => setStatus("idle")}
-          className="mt-6 text-[#C8FF00] text-xs uppercase tracking-widest font-semibold hover:text-white transition-colors"
-        >
-          Send Another Message
-        </button>
-      </div>
-    );
-  }
+      setToast({
+        type: "error",
+        title: "Submission Failed",
+        message: response.message,
+      });
+      setStatus({
+        message: response.message,
+        errors: response.errors,
+      });
+    },
+  });
+
+  const apiErrors = formik.status?.errors ?? {};
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <div className="grid md:grid-cols-2 gap-4">
+    <>
+      {toast && (
+        <FormFeedbackToast
+          type={toast.type}
+          title={toast.title}
+          message={toast.message}
+          onClose={closeToast}
+        />
+      )}
+      <form onSubmit={formik.handleSubmit} className="space-y-4">
+      <div className="grid gap-4 md:grid-cols-2">
         <div>
-          <label className="block text-[#888] text-xs uppercase tracking-widest mb-2">
+          <label className="mb-2 block text-xs uppercase tracking-widest text-[#888]">
             Full Name *
           </label>
           <input
             className="form-input"
-            name="name"
-            value={form.name}
-            onChange={handleChange}
+            name="full_name"
+            value={formik.values.full_name}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             required
+            disabled={formik.isSubmitting}
             placeholder="Your full name"
+          />
+          <FieldError
+            message={
+              (formik.touched.full_name && formik.errors.full_name) ||
+              apiErrors.full_name?.[0]
+            }
           />
         </div>
         <div>
-          <label className="block text-[#888] text-xs uppercase tracking-widest mb-2">
+          <label className="mb-2 block text-xs uppercase tracking-widest text-[#888]">
             Phone Number *
           </label>
           <input
             className="form-input"
             name="phone"
-            value={form.phone}
-            onChange={handleChange}
+            value={formik.values.phone}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             required
+            disabled={formik.isSubmitting}
             type="tel"
             placeholder="+91 98765 43210"
           />
+          <FieldError
+            message={
+              (formik.touched.phone && formik.errors.phone) || apiErrors.phone?.[0]
+            }
+          />
         </div>
       </div>
-      <div className="grid md:grid-cols-2 gap-4">
+      <div className="grid gap-4 md:grid-cols-2">
         <div>
-          <label className="block text-[#888] text-xs uppercase tracking-widest mb-2">
-            Email Address
+          <label className="mb-2 block text-xs uppercase tracking-widest text-[#888]">
+            Email Address *
           </label>
           <input
             className="form-input"
             name="email"
-            value={form.email}
-            onChange={handleChange}
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            required
+            disabled={formik.isSubmitting}
             type="email"
             placeholder="you@example.com"
           />
+          <FieldError
+            message={
+              (formik.touched.email && formik.errors.email) || apiErrors.email?.[0]
+            }
+          />
         </div>
         <div>
-          <label className="block text-[#888] text-xs uppercase tracking-widest mb-2">
-            Subject
+          <label className="mb-2 block text-xs uppercase tracking-widest text-[#888]">
+            Subject *
           </label>
           <select
             className="form-input"
             name="subject"
-            value={form.subject}
-            onChange={handleChange}
+            value={formik.values.subject}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            required
+            disabled={formik.isSubmitting}
           >
             {subjects.map((s) => (
               <option key={s} value={s}>
@@ -164,29 +233,47 @@ export default function ContactForm({
               </option>
             ))}
           </select>
+          <FieldError
+            message={
+              (formik.touched.subject && formik.errors.subject) ||
+              apiErrors.subject?.[0]
+            }
+          />
         </div>
       </div>
       <div>
-        <label className="block text-[#888] text-xs uppercase tracking-widest mb-2">
+        <label className="mb-2 block text-xs uppercase tracking-widest text-[#888]">
           Message *
         </label>
         <textarea
           className="form-input min-h-[120px] resize-y"
           name="message"
-          value={form.message}
-          onChange={handleChange}
+          value={formik.values.message}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           required
+          disabled={formik.isSubmitting}
           placeholder="Tell us how we can help..."
         />
+        <FieldError
+          message={
+            (formik.touched.message && formik.errors.message) ||
+            apiErrors.message?.[0]
+          }
+        />
       </div>
-      {status === "error" && <p className="text-red-400 text-sm">{errorMsg}</p>}
       <button
         type="submit"
-        disabled={status === "loading"}
-        className="w-full bg-[#E8231A] text-white font-bold uppercase tracking-widest py-4 text-sm hover:bg-[#C41C14] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        disabled={formik.isSubmitting}
+        className="w-full bg-[#E8231A] py-4 text-sm font-bold uppercase tracking-widest text-white transition-colors hover:bg-[#C41C14] disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {status === "loading" ? "SENDING..." : "SEND MESSAGE"}
+        {formik.isSubmitting ? (
+          <LoadingLabel text="SENDING..." />
+        ) : (
+          "SEND MESSAGE"
+        )}
       </button>
-    </form>
+      </form>
+    </>
   );
 }
