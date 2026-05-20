@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import ImmersiveHero from "@/components/ImmersiveHero";
 import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
-import VehicleColorSelector from "@/components/VehicleColorSelector";
 import VehicleImage from "@/components/VehicleImage";
+import VehicleVariantExplorer from "@/components/VehicleVariantExplorer";
 import {
   getVehicleImageFrameClass,
   getVehicleImageObjectClass,
@@ -238,7 +239,6 @@ export default async function VehicleDetailPage({ params }: Props) {
   const isAvailable = vehicle.status === "available";
   const isPreBook = vehicle.status === "pre-book";
   const primaryHref = isAvailable ? "/test-ride" : "/contact";
-  const leadStats = vehicle.heroStats.slice(0, 4);
   const galleryLead = vehicle.gallery[0];
   const galleryRest = vehicle.gallery.slice(1);
   const vehicleFaqs = buildVehicleFaqs(vehicle);
@@ -327,153 +327,40 @@ export default async function VehicleDetailPage({ params }: Props) {
     <>
       <StructuredData data={productStructuredData} />
 
-      <section className="bg-[#0D0D0D] px-4 py-14 md:px-8 md:py-18">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-8 flex items-center gap-2 text-xs uppercase tracking-[0.08em]">
-            <Link href="/vehicles" className="text-[#666] hover:text-white">
-              Vehicles
-            </Link>
-            <span className="text-[#444]">/</span>
-            <span className="text-[#A0A0A0]">{vehicle.name}</span>
-          </div>
+      <ImmersiveHero
+        vehicle={vehicle}
+        primaryHref={primaryHref}
+        isAvailable={isAvailable}
+        isPreBook={isPreBook}
+      />
 
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
-            <div className="relative">
-              <div className="absolute inset-x-0 top-0 z-10 flex items-center justify-between p-4">
-                <span className="btn-yellow">
-                  {statusLabel(vehicle.status)}
-                </span>
-                <span className="rounded-[3px] border border-white/10 bg-black/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white backdrop-blur">
-                  {vehicle.category.replace(/-/g, " ")}
-                </span>
-              </div>
-
-              {vehicle.colors.length > 0 ? (
-                <VehicleColorSelector
-                  colors={vehicle.colors}
-                  modelName={vehicle.name}
-                  layout="hero"
-                />
-              ) : (
-                <div
-                  className={`relative overflow-hidden rounded-[6px] border border-[#2A2A2A] ${getVehicleImageFrameClass(vehicle.heroImage)}`}
-                >
-                  <div className="relative aspect-[4/3]">
-                    <VehicleImage
-                      src={vehicle.heroImage}
-                      alt={vehicle.name}
-                      label={vehicle.name}
-                      fill
-                      priority
-                      className={getVehicleImageObjectClass(
-                        vehicle.heroImage,
-                        "product",
-                      )}
-                      sizes="(max-width: 1024px) 100vw, 56vw"
-                    />
-                  </div>
-                </div>
-              )}
-            </div>
-
-            <div>
-              <SeoH1>
-                {vehicle.name} price in Bengaluru at UV Bengaluru
-              </SeoH1>
-              <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#FF3B3B]">
-                Ultraviolette / {vehicle.name}
-              </p>
-              <div
-                aria-hidden="true"
-                className="mb-4 font-display text-[clamp(40px,6vw,68px)] font-extrabold uppercase leading-none tracking-[0.04em] text-white"
-              >
-                {vehicle.name}
-              </div>
-              <p className="mb-4 text-xl text-white md:text-2xl">
-                {vehicle.tagline}
-              </p>
-              <p className="mb-8 max-w-xl text-base leading-relaxed text-[#A0A0A0]">
-                {vehicle.subheadline}
-              </p>
-
-              <div className="mb-8 grid grid-cols-2 gap-3">
-                {leadStats.map((stat) => (
-                  <div
-                    key={stat.label}
-                    className="border border-[#2A2A2A] bg-[#161616] p-4"
-                  >
-                    <p className="font-display text-2xl font-bold text-white">
-                      {stat.value}
-                    </p>
-                    <p className="mt-1 text-[10px] uppercase tracking-[0.12em] text-[#777]">
-                      {stat.label}
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mb-6">
-                <p className="font-display text-3xl font-bold text-white">
-                  {vehicle.price}
-                </p>
-                {vehicle.availableFrom && (
-                  <p className="mt-2 text-sm font-semibold text-[#F5C518]">
-                    Expected availability: {vehicle.availableFrom}
-                  </p>
-                )}
-                {vehicle.priceNote && (
-                  <p className="mt-3 max-w-xl text-xs leading-relaxed text-[#777]">
-                    {vehicle.priceNote}
-                  </p>
-                )}
-              </div>
-
-              <div className="flex flex-wrap gap-3">
-                <Link href={primaryHref} className="btn-primary">
-                  {isPreBook
-                    ? vehicle.primaryCta
-                    : isAvailable
-                      ? "Book Test Ride"
-                      : vehicle.primaryCta}
-                </Link>
-                <a
-                  href={`https://wa.me/919606955529?text=Hi%2C%20I%27m%20interested%20in%20the%20Ultraviolette%20${encodeURIComponent(vehicle.name)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-ghost"
-                >
-                  WhatsApp Us
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="border-y border-[#2A2A2A] bg-[#111] px-4 py-16 md:px-8">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
-          <div>
+      <section className="border-t border-white/8 bg-[linear-gradient(180deg,#0b0b0b_0%,#121212_100%)] px-4 py-20 md:px-8 md:py-24">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:gap-14">
+          <div className="rounded-[32px] border border-white/8 bg-white/[0.03] p-7 md:p-9">
+            <SeoH1>
+              {vehicle.name} price in Bengaluru at UV Bengaluru
+            </SeoH1>
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#FF3B3B]">
               Positioning
             </p>
-            <h2 className="mb-4 font-display text-3xl font-bold uppercase tracking-[0.06em] text-white md:text-4xl">
+            <h2 className="mb-5 font-display text-3xl font-bold uppercase tracking-[0.06em] text-white md:text-4xl">
               About {vehicle.name}
             </h2>
-            <p className="text-base leading-relaxed text-[#A0A0A0]">
+            <p className="text-base leading-8 text-[#A0A0A0] md:text-lg">
               {vehicle.description}
             </p>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2">
             {vehicle.specs.map((spec) => (
               <div
                 key={spec.label}
-                className="border border-[#2A2A2A] bg-[#181818] p-4"
+                className="rounded-[28px] border border-white/8 bg-white/[0.03] p-5 md:p-6"
               >
                 <p className="text-[10px] uppercase tracking-[0.12em] text-[#777]">
                   {spec.label}
                 </p>
-                <p className="mt-2 font-display text-2xl font-bold text-white">
+                <p className="mt-3 font-display text-2xl font-bold text-white md:text-[30px]">
                   {spec.value}
                 </p>
               </div>
@@ -483,7 +370,7 @@ export default async function VehicleDetailPage({ params }: Props) {
       </section>
 
       {vehicle.variants && vehicle.variants.length > 0 && (
-        <section className="bg-[#111] px-4 py-20 md:px-8">
+        <section className="bg-[#111] px-4 py-20 md:px-8 md:py-24">
           <div className="mx-auto max-w-7xl">
             <div className="mb-10">
               <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#FF3B3B]">
@@ -493,64 +380,13 @@ export default async function VehicleDetailPage({ params }: Props) {
                 Choose Your Configuration
               </h2>
             </div>
-            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-              {vehicle.variants.map((variant, index) => (
-                <div
-                  key={variant.name}
-                  className={`rounded-[6px] border p-6 ${
-                    index === 0
-                      ? "border-[#FF3B3B] bg-[#1A1515]"
-                      : "border-[#2A2A2A] bg-[#1A1A1A]"
-                  }`}
-                >
-                  <p className="mb-2 text-[10px] uppercase tracking-[0.14em] text-[#777]">
-                    Configuration {index + 1 < 10 ? `0${index + 1}` : index + 1}
-                  </p>
-                  <h3 className="mb-2 font-display text-2xl font-bold uppercase text-white">
-                    {variant.name}
-                  </h3>
-                  {variant.priceLabel && (
-                    <p className="mb-5 text-lg font-bold text-[#FF3B3B]">
-                      {variant.priceLabel}
-                    </p>
-                  )}
-                  <div className="space-y-3">
-                    {[
-                      ["Battery", variant.battery],
-                      ["Range", variant.range],
-                      ["Power", variant.power],
-                      ["Torque", variant.torque],
-                      ["0-60 km/h", variant.acceleration],
-                      ["Top Speed", variant.topSpeed],
-                    ].map(
-                      ([label, value]) =>
-                        value && (
-                          <div
-                            key={label}
-                            className="flex justify-between gap-4 border-b border-[#2A2A2A] pb-2 text-sm"
-                          >
-                            <span className="text-[#777]">{label}</span>
-                            <span className="text-right font-semibold text-white">
-                              {value}
-                            </span>
-                          </div>
-                        ),
-                    )}
-                  </div>
-                  {variant.notes && (
-                    <p className="mt-4 text-xs leading-relaxed text-[#777]">
-                      {variant.notes}
-                    </p>
-                  )}
-                </div>
-              ))}
-            </div>
+            <VehicleVariantExplorer variants={vehicle.variants} />
           </div>
         </section>
       )}
 
       {vehicle.features.length > 0 && (
-        <section className="bg-[#0D0D0D] px-4 py-20 md:px-8">
+        <section className="bg-[#0D0D0D] px-4 py-20 md:px-8 md:py-24">
           <div className="mx-auto max-w-7xl">
             <div className="mb-10">
               <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#FF3B3B]">
@@ -564,7 +400,7 @@ export default async function VehicleDetailPage({ params }: Props) {
               {vehicle.features.map((feature, index) => (
                 <article
                   key={feature.title}
-                  className={`overflow-hidden rounded-[6px] border border-[#2A2A2A] bg-[#1A1A1A] ${
+                  className={`overflow-hidden rounded-[30px] border border-white/8 bg-white/[0.03] ${
                     index === 0 && feature.image ? "lg:col-span-2" : ""
                   }`}
                 >
@@ -588,7 +424,7 @@ export default async function VehicleDetailPage({ params }: Props) {
                       />
                     </div>
                   )}
-                  <div className="p-6">
+                  <div className="p-6 md:p-7">
                     <h3 className="mb-3 font-display text-xl font-bold uppercase text-white md:text-2xl">
                       {feature.title}
                     </h3>
@@ -617,7 +453,7 @@ export default async function VehicleDetailPage({ params }: Props) {
             {vehicle.specGroups.map((group) => (
               <div
                 key={group.title}
-                className="rounded-[6px] border border-[#2A2A2A] bg-[#1A1A1A] p-6"
+                className="rounded-[30px] border border-white/8 bg-white/[0.03] p-6 md:p-7"
               >
                 <h3 className="mb-5 font-display text-2xl font-bold uppercase text-white">
                   {group.title}
@@ -650,7 +486,7 @@ export default async function VehicleDetailPage({ params }: Props) {
       </section>
 
       {vehicle.gallery.length > 0 && (
-        <section className="bg-[#0D0D0D] px-4 py-20 md:px-8">
+        <section className="bg-[#0D0D0D] px-4 py-20 md:px-8 md:py-24">
           <div className="mx-auto max-w-7xl">
             <div className="mb-10">
               <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#FF3B3B]">
@@ -664,7 +500,7 @@ export default async function VehicleDetailPage({ params }: Props) {
             {galleryLead && (
               <div className="grid gap-5 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)]">
                 <div
-                  className={`relative aspect-[16/10] overflow-hidden rounded-[6px] border border-[#2A2A2A] ${getVehicleImageFrameClass(galleryLead.src)}`}
+                  className={`relative aspect-[16/10] overflow-hidden rounded-[30px] border border-white/8 ${getVehicleImageFrameClass(galleryLead.src)}`}
                 >
                   <VehicleImage
                     src={galleryLead.src}
@@ -680,7 +516,7 @@ export default async function VehicleDetailPage({ params }: Props) {
                   {galleryRest.map((item) => (
                     <div
                       key={`${item.type}-${item.src}`}
-                      className={`relative aspect-video overflow-hidden rounded-[6px] border border-[#2A2A2A] ${getVehicleImageFrameClass(item.src)}`}
+                      className={`relative aspect-video overflow-hidden rounded-[28px] border border-white/8 ${getVehicleImageFrameClass(item.src)}`}
                     >
                       <VehicleImage
                         src={item.src}
@@ -710,7 +546,7 @@ export default async function VehicleDetailPage({ params }: Props) {
                 {vehicle.dealerVerificationRequired.map((item) => (
                   <span
                     key={item}
-                    className="rounded-[4px] border border-[#3A3A3A] bg-[#181818] px-3 py-2 text-xs text-[#A0A0A0]"
+                    className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2.5 text-xs text-[#A0A0A0]"
                   >
                     {item}
                   </span>
@@ -722,7 +558,7 @@ export default async function VehicleDetailPage({ params }: Props) {
 
       <section className="border-t border-[#2A2A2A] bg-[#0f0f0f] px-4 py-20 md:px-8">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-2">
-          <article className="rounded-[6px] border border-[#2A2A2A] bg-[#151515] p-6 md:p-8">
+          <article className="rounded-[30px] border border-white/8 bg-white/[0.03] p-6 md:p-8">
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#FF3B3B]">
               Bengaluru Fit
             </p>
@@ -741,7 +577,7 @@ export default async function VehicleDetailPage({ params }: Props) {
             </div>
           </article>
 
-          <article className="rounded-[6px] border border-[#2A2A2A] bg-[#151515] p-6 md:p-8">
+          <article className="rounded-[30px] border border-white/8 bg-white/[0.03] p-6 md:p-8">
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#F5C518]">
               Before You Book
             </p>
@@ -752,7 +588,7 @@ export default async function VehicleDetailPage({ params }: Props) {
               {bookingChecklist.map((item) => (
                 <div
                   key={item}
-                  className="rounded-[4px] border border-[#303030] bg-[#111] px-4 py-3"
+                  className="rounded-[22px] border border-white/8 bg-black/20 px-4 py-3"
                 >
                   <p className="text-sm leading-relaxed text-[#A0A0A0]">
                     {item}
@@ -778,7 +614,7 @@ export default async function VehicleDetailPage({ params }: Props) {
             {vehicleFaqs.map((faq) => (
               <article
                 key={faq.question}
-                className="rounded-[6px] border border-[#2A2A2A] bg-[#111] p-6"
+                className="rounded-[28px] border border-white/8 bg-white/[0.03] p-6"
               >
                 <h3 className="mb-3 font-display text-lg font-bold uppercase text-white">
                   {faq.question}
@@ -807,7 +643,7 @@ export default async function VehicleDetailPage({ params }: Props) {
               <Link
                 key={guide.href}
                 href={guide.href}
-                className="rounded-[6px] border border-[#2A2A2A] bg-[#161616] p-6 transition-colors hover:border-[#E8231A]"
+                className="rounded-[28px] border border-white/8 bg-white/[0.03] p-6 transition-colors hover:border-[#E8231A]"
               >
                 <h3 className="mb-3 font-display text-lg font-bold uppercase text-white">
                   {guide.label}

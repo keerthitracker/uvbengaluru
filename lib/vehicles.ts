@@ -17,6 +17,9 @@ export interface VehicleColor {
   name: string
   hex: string
   image: string
+  heroImage?: string
+  backdropImage?: string
+  heroImageMode?: 'product' | 'lifestyle'
   personality?: string
   tagline?: string
 }
@@ -35,6 +38,10 @@ export interface VehicleVariant {
   torque?: string
   topSpeed?: string
   acceleration?: string
+  transparentImage?: string
+  backdropImage?: string
+  colorNames?: string[]
+  highlights?: string[]
   notes?: string
 }
 
@@ -70,6 +77,9 @@ export interface Vehicle {
   tagline: string
   subheadline: string
   status: VehicleStatus
+  theme?: 'dark' | 'light'
+  bRollVideo?: string
+  heroBackdropImage?: string
   pagePriority: 'high' | 'medium' | 'low'
   availableFrom?: string
   price: string
@@ -105,6 +115,8 @@ export const vehicles: Vehicle[] = [
     subheadline:
       'A high-performance electric street crossover built with radar intelligence, long range, and multi-terrain capability.',
     status: 'available',
+    theme: 'dark',
+    heroBackdropImage: asset('vehicles/x47/immersive/backdrop.png'),
     pagePriority: 'high',
     price: 'From INR 2.49 lakh',
     priceNote:
@@ -120,18 +132,33 @@ export const vehicles: Vehicle[] = [
         name: 'Turbo Red',
         hex: '#E8231A',
         image: asset('vehicles/x47/hero.png'),
+        heroImage: asset('vehicles/x47/hero.png'),
+        backdropImage: asset('vehicles/x47/colors/turbo-red-backdrop.png'),
       },
       {
         personality: 'Shadow',
         name: 'Cosmic Black',
         hex: '#111111',
         image: asset('vehicles/x47/colors/cosmic-black.jpg'),
+        heroImage: asset('vehicles/x47/colors/cosmic-black.jpg'),
+        backdropImage: asset('vehicles/x47/immersive/backdrop.png'),
       },
       {
         personality: 'Airstrike',
         name: 'Stellar White',
         hex: '#F2F2F0',
-        image: asset('vehicles/x47/colors/stellar-white.png'),
+        image: asset('vehicles/x47/colors/stellar-white-hero.png'),
+        heroImage: asset('vehicles/x47/colors/stellar-white-hero.png'),
+        backdropImage: asset('vehicles/x47/colors/stellar-white-hero.png'),
+        heroImageMode: 'lifestyle',
+      },
+      {
+        personality: 'Desert Wing',
+        name: 'Sand Finish',
+        hex: '#B99A6E',
+        image: asset('vehicles/x47-desert-wing/hero.png'),
+        heroImage: asset('vehicles/x47-desert-wing/hero.png'),
+        backdropImage: asset('vehicles/x47-desert-wing/immersive/backdrop.png'),
       },
     ],
     heroStats: [
@@ -161,6 +188,18 @@ export const vehicles: Vehicle[] = [
         torque: '550 Nm',
         acceleration: '2.8 sec',
         topSpeed: '145 km/h',
+        transparentImage: asset('vehicles/x47/hero.png'),
+        backdropImage: asset('vehicles/x47/immersive/backdrop.png'),
+        colorNames: ['Turbo Red', 'Cosmic Black', 'Stellar White'],
+        highlights: [
+          'Standard charger',
+          '3 years / 60,000 km battery warranty',
+          '3-level dynamic regen',
+          'Traction control on/off',
+          'Standard connectivity (WiFi + BT)',
+          'UV Supernova and Supernova+ network access',
+        ],
+        notes: 'Base X-47 configuration. The official spec sheet excludes UV Hypersense radar on this variant.',
       },
       {
         name: 'X-47 Original',
@@ -171,6 +210,17 @@ export const vehicles: Vehicle[] = [
         torque: '550 Nm',
         acceleration: '2.8 sec',
         topSpeed: '145 km/h',
+        transparentImage: asset('vehicles/x47/hero.png'),
+        backdropImage: asset('vehicles/x47/immersive/backdrop.png'),
+        colorNames: ['Turbo Red', 'Cosmic Black', 'Stellar White'],
+        highlights: [
+          'UV Hypersense radar tech',
+          'Standard charger',
+          '3 years / 60,000 km battery warranty',
+          '3-level dynamic regen',
+          'Traction control on/off',
+          'Standard connectivity (WiFi + BT)',
+        ],
       },
       {
         name: 'X-47 Original+',
@@ -181,6 +231,18 @@ export const vehicles: Vehicle[] = [
         torque: '550 Nm',
         acceleration: '2.8 sec',
         topSpeed: '145 km/h',
+        transparentImage: asset('vehicles/x47/hero.png'),
+        backdropImage: asset('vehicles/x47/immersive/backdrop.png'),
+        colorNames: ['Turbo Red', 'Cosmic Black', 'Stellar White'],
+        highlights: [
+          'UV Hypersense radar tech',
+          'On-board charger',
+          '5 years / 1,00,000 km battery warranty',
+          '10-level dynamic regen',
+          '4-level traction control',
+          'Premium connectivity (LTE + BT)',
+          'Find My X-47',
+        ],
       },
       {
         name: 'X-47 Recon',
@@ -191,6 +253,19 @@ export const vehicles: Vehicle[] = [
         torque: '610 Nm',
         acceleration: '2.7 sec',
         topSpeed: '145 km/h',
+        transparentImage: asset('vehicles/x47/hero.png'),
+        backdropImage: asset('vehicles/x47/immersive/backdrop.png'),
+        colorNames: ['Turbo Red', 'Cosmic Black', 'Stellar White'],
+        highlights: [
+          'UV Hypersense radar tech',
+          'Standard charger',
+          '5 years / 1,00,000 km battery warranty',
+          '10-level dynamic regen',
+          '4-level traction control',
+          'Premium connectivity (LTE + BT)',
+          'Find My X-47',
+          'Crash protection: knuckle guard + bullbar',
+        ],
       },
       {
         name: 'X-47 Recon+',
@@ -201,6 +276,21 @@ export const vehicles: Vehicle[] = [
         torque: '610 Nm',
         acceleration: '2.7 sec',
         topSpeed: '145 km/h',
+        transparentImage: asset('vehicles/x47/hero.png'),
+        backdropImage: asset('vehicles/x47/immersive/backdrop.png'),
+        colorNames: ['Turbo Red', 'Cosmic Black', 'Stellar White'],
+        highlights: [
+          'UV Hypersense radar tech',
+          'On-board charger',
+          '5 years / 1,00,000 km battery warranty',
+          '10-level dynamic regen',
+          '4-level traction control',
+          'Premium connectivity (LTE + BT)',
+          'Find My X-47',
+          'Crash protection: knuckle guard + bullbar',
+          'Violette A.I. included',
+          'TPMS',
+        ],
       },
       {
         name: 'X-47 Desert Wing',
@@ -211,7 +301,21 @@ export const vehicles: Vehicle[] = [
         torque: '610 Nm',
         acceleration: '2.7 sec',
         topSpeed: '145 km/h',
-        notes: 'Special edition based on the Recon+ specification.',
+        transparentImage: asset('vehicles/x47-desert-wing/hero.png'),
+        backdropImage: asset('vehicles/x47-desert-wing/immersive/backdrop.png'),
+        colorNames: ['Sand Finish'],
+        highlights: [
+          'Exclusive Sandstorm finish',
+          'On-board charger',
+          'Integrated dashcam module',
+          'Soft case pannier kit',
+          'Crash protection: knuckle guard + bullbar',
+          'Advanced ride control pack',
+          '8 years / 8,00,000 km battery warranty',
+          'Violette A.I. included',
+          'TPMS',
+        ],
+        notes: 'Special edition based on the Recon+ specification, with additional touring equipment and an upgraded battery warranty.',
       },
     ],
     specGroups: [
@@ -296,6 +400,8 @@ export const vehicles: Vehicle[] = [
     subheadline:
       'A special-edition X-47 with exclusive sand finish, UV Hypersense radar, integrated dashcam, pannier kit, and touring protection accessories.',
     status: 'available',
+    theme: 'dark',
+    heroBackdropImage: asset('vehicles/x47-desert-wing/immersive/backdrop.png'),
     pagePriority: 'high',
     price: 'From INR 4.59 lakh',
     priceNote: 'Verify current Bengaluru ex-showroom and on-road pricing with the dealership before publishing final offers.',
@@ -310,6 +416,8 @@ export const vehicles: Vehicle[] = [
         name: 'Sand Finish',
         hex: '#B99A6E',
         image: asset('vehicles/x47-desert-wing/hero.png'),
+        heroImage: asset('vehicles/x47-desert-wing/hero.png'),
+        backdropImage: asset('vehicles/x47-desert-wing/immersive/backdrop.png'),
       },
     ],
     heroStats: [
@@ -339,6 +447,20 @@ export const vehicles: Vehicle[] = [
         torque: '610 Nm',
         acceleration: '2.7 sec',
         topSpeed: '145 km/h',
+        transparentImage: asset('vehicles/x47-desert-wing/hero.png'),
+        backdropImage: asset('vehicles/x47-desert-wing/immersive/backdrop.png'),
+        highlights: [
+          'Exclusive Sandstorm finish',
+          'UV Hypersense radar tech',
+          'Integrated dashcam module',
+          'Soft case pannier kit',
+          'Crash protection: knuckle guard + bullbar',
+          'Advanced ride control pack',
+          '8 years / 8,00,000 km battery warranty',
+          'Premium connectivity (LTE + BT)',
+          'Find My X-47',
+          'TPMS',
+        ],
         notes: 'Other specs remain identical to X-47 Recon+ according to the official spec sheet.',
       },
     ],

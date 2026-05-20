@@ -45,13 +45,18 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-6 gap-10">
           <div>
-            <Image
-              src="/images/uv-logo-footer.svg"
-              alt="UV Bengaluru"
-              width={180}
-              height={32}
-              className="h-8 w-auto mb-4"
-            />
+            <div className="mb-4 flex items-center gap-3">
+              <Image
+                src="/images/ultraviolette-logo-official.svg"
+                alt="Ultraviolette logo"
+                width={32}
+                height={32}
+                className="h-8 w-8 invert"
+              />
+              <span className="text-sm font-bold uppercase tracking-[0.28em] text-white">
+                UV BENGALURU
+              </span>
+            </div>
             <p className="text-sm leading-relaxed text-[#666]">
               Official Ultraviolette dealership in Nagarbhavi, Bengaluru.
             </p>

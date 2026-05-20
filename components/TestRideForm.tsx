@@ -1,6 +1,12 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useCallback, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import FormFeedbackToast from "@/components/FormFeedbackToast";
+import { submitTestRideRequest } from "@/lib/formSubmissionHandlers";
+import type { TestRideSubmissionPayload } from "@/lib/formSubmissionTypes";
 
 const models = [
   "X-47",
@@ -14,211 +20,327 @@ const models = [
 ];
 
 const timeSlots = [
-  "Morning — 10:00 AM to 12:00 PM",
-  "Afternoon — 12:00 PM to 3:00 PM",
-  "Evening — 3:00 PM to 6:00 PM",
+  "Morning - 10:00 AM to 12:00 PM",
+  "Afternoon - 12:00 PM to 3:00 PM",
+  "Evening - 3:00 PM to 6:00 PM",
 ];
 
-export default function TestRideForm() {
-  const [form, setForm] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    model: models[2],
-    date: "",
-    slot: timeSlots[0],
-    notes: "",
-  });
-  const [status, setStatus] = useState<
-    "idle" | "loading" | "success" | "error"
-  >("idle");
-  const [errorMsg, setErrorMsg] = useState("");
+const today = new Date().toISOString().split("T")[0];
 
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >,
-  ) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+const validationSchema = Yup.object({
+  full_name: Yup.string().trim().min(2).required("Full name is required."),
+  phone: Yup.string()
+    .trim()
+    .matches(/^[0-9+\-\s()]{7,20}$/, "Enter a valid phone number.")
+    .required("Phone number is required."),
+  email: Yup.string()
+    .trim()
+    .email("Enter a valid email address.")
+    .required("Email address is required."),
+  model: Yup.string().trim().required("Please select a model."),
+  preferred_date: Yup.string()
+    .required("Preferred date is required.")
+    .test(
+      "not-in-past",
+      "Preferred date cannot be in the past.",
+      (value) => !value || value >= today,
+    ),
+  preferred_slot: Yup.string().trim().required("Please select a time slot."),
+  notes: Yup.string().trim(),
+  source_page: Yup.string().trim().required(),
+});
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    setStatus("loading");
-    setErrorMsg("");
-    try {
-      const res = await fetch("/api/test-ride", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      const data = await res.json();
-      if (res.ok && data.success) {
-        setStatus("success");
-      } else {
-        setStatus("error");
-        setErrorMsg(data.message || "Something went wrong. Please try again.");
-      }
-    } catch {
-      setStatus("error");
-      setErrorMsg("Network error. Please check your connection and try again.");
-    }
-  };
-
-  if (status === "success") {
-    return (
-      <div className="bg-[#161616] border border-[#C8FF00]/30 p-10 text-center">
-        <svg
-          className="w-14 h-14 text-[#C8FF00] mx-auto mb-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={1.5}
-            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-        <h3
-          className="text-3xl font-bold uppercase text-white mb-3"
-          style={{
-            fontFamily: 'var(--font-barlow), "Barlow Condensed", sans-serif',
-          }}
-        >
-          TEST RIDE REQUESTED!
-        </h3>
-        <p className="text-[#888] text-sm leading-relaxed max-w-sm mx-auto">
-          We&apos;ve received your booking request. Our team will confirm your
-          slot via phone within 24 hours.
-        </p>
-        <p className="mt-4 text-[#C8FF00] text-sm font-semibold">
-          Get ready to go ballistic.
-        </p>
-      </div>
-    );
+function FieldError({ message }: { message?: string }) {
+  if (!message) {
+    return null;
   }
 
+  return <p className="mt-2 text-sm text-red-400">{message}</p>;
+}
+
+function LoadingLabel({ text }: { text: string }) {
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
-      <div className="grid md:grid-cols-2 gap-5">
-        <div>
-          <label className="block text-[#888] text-xs uppercase tracking-widest mb-2">
-            Full Name *
-          </label>
-          <input
-            className="form-input"
-            name="name"
-            value={form.name}
-            onChange={handleChange}
-            required
-            placeholder="Your full name"
-          />
-        </div>
-        <div>
-          <label className="block text-[#888] text-xs uppercase tracking-widest mb-2">
-            Phone Number *
-          </label>
-          <input
-            className="form-input"
-            name="phone"
-            value={form.phone}
-            onChange={handleChange}
-            required
-            type="tel"
-            placeholder="+91 98765 43210"
-          />
-        </div>
-      </div>
-      <div>
-        <label className="block text-[#888] text-xs uppercase tracking-widest mb-2">
-          Email Address
-        </label>
-        <input
-          className="form-input"
-          name="email"
-          value={form.email}
-          onChange={handleChange}
-          type="email"
-          placeholder="you@example.com"
+    <span className="inline-flex items-center justify-center gap-2">
+      <svg
+        className="h-4 w-4 animate-spin"
+        viewBox="0 0 24 24"
+        fill="none"
+        aria-hidden="true"
+      >
+        <circle
+          className="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          strokeWidth="3"
         />
-      </div>
-      <div>
-        <label className="block text-[#888] text-xs uppercase tracking-widest mb-2">
-          Model of Interest *
-        </label>
-        <select
-          className="form-input"
-          name="model"
-          value={form.model}
-          onChange={handleChange}
-          required
-        >
-          {models.map((m) => (
-            <option key={m} value={m}>
-              {m}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className="grid md:grid-cols-2 gap-5">
+        <path
+          className="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8v3a5 5 0 00-5 5H4z"
+        />
+      </svg>
+      {text}
+    </span>
+  );
+}
+
+interface ToastState {
+  type: "success" | "error";
+  title: string;
+  message: string;
+}
+
+export default function TestRideForm() {
+  const pathname = usePathname();
+  const [toast, setToast] = useState<ToastState | null>(null);
+  const closeToast = useCallback(() => setToast(null), []);
+
+  const formik = useFormik<TestRideSubmissionPayload>({
+    initialValues: {
+      full_name: "",
+      phone: "",
+      email: "",
+      model: models[2],
+      preferred_date: "",
+      preferred_slot: timeSlots[0],
+      notes: "",
+      source_page: pathname || "/test-ride",
+    },
+    validationSchema,
+    onSubmit: async (values, { resetForm, setStatus }) => {
+      setToast(null);
+      setStatus(undefined);
+
+      const response = await submitTestRideRequest(values);
+
+      if (response.success) {
+        setToast({
+          type: "success",
+          title: "Test Ride Requested",
+          message: response.message,
+        });
+        resetForm({
+          values: {
+            full_name: "",
+            phone: "",
+            email: "",
+            model: models[2],
+            preferred_date: "",
+            preferred_slot: timeSlots[0],
+            notes: "",
+            source_page: pathname || "/test-ride",
+          },
+        });
+        return;
+      }
+
+      setToast({
+        type: "error",
+        title: "Submission Failed",
+        message: response.message,
+      });
+      setStatus({
+        message: response.message,
+        errors: response.errors,
+      });
+    },
+  });
+
+  const apiErrors = formik.status?.errors ?? {};
+
+  return (
+    <>
+      {toast && (
+        <FormFeedbackToast
+          type={toast.type}
+          title={toast.title}
+          message={toast.message}
+          onClose={closeToast}
+        />
+      )}
+      <form onSubmit={formik.handleSubmit} className="space-y-5">
+        <div className="grid gap-5 md:grid-cols-2">
+          <div>
+            <label className="mb-2 block text-xs uppercase tracking-widest text-[#888]">
+              Full Name *
+            </label>
+            <input
+              className="form-input"
+              name="full_name"
+              value={formik.values.full_name}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              required
+              disabled={formik.isSubmitting}
+              placeholder="Your full name"
+            />
+            <FieldError
+              message={
+                (formik.touched.full_name && formik.errors.full_name) ||
+                apiErrors.full_name?.[0]
+              }
+            />
+          </div>
+          <div>
+            <label className="mb-2 block text-xs uppercase tracking-widest text-[#888]">
+              Phone Number *
+            </label>
+            <input
+              className="form-input"
+              name="phone"
+              value={formik.values.phone}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              required
+              disabled={formik.isSubmitting}
+              type="tel"
+              placeholder="+91 98765 43210"
+            />
+            <FieldError
+              message={
+                (formik.touched.phone && formik.errors.phone) ||
+                apiErrors.phone?.[0]
+              }
+            />
+          </div>
+        </div>
         <div>
-          <label className="block text-[#888] text-xs uppercase tracking-widest mb-2">
-            Preferred Date *
+          <label className="mb-2 block text-xs uppercase tracking-widest text-[#888]">
+            Email Address *
           </label>
           <input
             className="form-input"
-            name="date"
-            value={form.date}
-            onChange={handleChange}
+            name="email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             required
-            type="date"
-            min={new Date().toISOString().split("T")[0]}
+            disabled={formik.isSubmitting}
+            type="email"
+            placeholder="you@example.com"
+          />
+          <FieldError
+            message={
+              (formik.touched.email && formik.errors.email) ||
+              apiErrors.email?.[0]
+            }
           />
         </div>
         <div>
-          <label className="block text-[#888] text-xs uppercase tracking-widest mb-2">
-            Preferred Time Slot *
+          <label className="mb-2 block text-xs uppercase tracking-widest text-[#888]">
+            Model of Interest *
           </label>
           <select
             className="form-input"
-            name="slot"
-            value={form.slot}
-            onChange={handleChange}
+            name="model"
+            value={formik.values.model}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             required
+            disabled={formik.isSubmitting}
           >
-            {timeSlots.map((s) => (
-              <option key={s} value={s}>
-                {s}
+            {models.map((m) => (
+              <option key={m} value={m}>
+                {m}
               </option>
             ))}
           </select>
+          <FieldError
+            message={
+              (formik.touched.model && formik.errors.model) ||
+              apiErrors.model?.[0]
+            }
+          />
         </div>
-      </div>
-      <div>
-        <label className="block text-[#888] text-xs uppercase tracking-widest mb-2">
-          Additional Notes
-        </label>
-        <textarea
-          className="form-input min-h-[100px] resize-y"
-          name="notes"
-          value={form.notes}
-          onChange={handleChange}
-          placeholder="Any specific questions or requirements?"
-        />
-      </div>
-      {status === "error" && <p className="text-red-400 text-sm">{errorMsg}</p>}
-      <button
-        type="submit"
-        disabled={status === "loading"}
-        className="w-full bg-[#E8231A] text-white font-bold uppercase tracking-widest py-5 text-sm hover:bg-[#C41C14] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
-      >
-        {status === "loading" ? "BOOKING..." : "BOOK MY TEST RIDE"}
-      </button>
-      <p className="text-[#555] text-xs text-center">
-        Our team will confirm your booking via phone within 24 hours.
-      </p>
-    </form>
+        <div className="grid gap-5 md:grid-cols-2">
+          <div>
+            <label className="mb-2 block text-xs uppercase tracking-widest text-[#888]">
+              Preferred Date *
+            </label>
+            <input
+              className="form-input"
+              name="preferred_date"
+              value={formik.values.preferred_date}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              required
+              disabled={formik.isSubmitting}
+              type="date"
+              min={today}
+            />
+            <FieldError
+              message={
+                (formik.touched.preferred_date &&
+                  formik.errors.preferred_date) ||
+                apiErrors.preferred_date?.[0]
+              }
+            />
+          </div>
+          <div>
+            <label className="mb-2 block text-xs uppercase tracking-widest text-[#888]">
+              Preferred Time Slot *
+            </label>
+            <select
+              className="form-input"
+              name="preferred_slot"
+              value={formik.values.preferred_slot}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              required
+              disabled={formik.isSubmitting}
+            >
+              {timeSlots.map((s) => (
+                <option key={s} value={s}>
+                  {s}
+                </option>
+              ))}
+            </select>
+            <FieldError
+              message={
+                (formik.touched.preferred_slot &&
+                  formik.errors.preferred_slot) ||
+                apiErrors.preferred_slot?.[0]
+              }
+            />
+          </div>
+        </div>
+        <div>
+          <label className="mb-2 block text-xs uppercase tracking-widest text-[#888]">
+            Additional Notes
+          </label>
+          <textarea
+            className="form-input min-h-[100px] resize-y"
+            name="notes"
+            value={formik.values.notes}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            disabled={formik.isSubmitting}
+            placeholder="Any specific questions or requirements?"
+          />
+          <FieldError
+            message={
+              (formik.touched.notes && formik.errors.notes) ||
+              apiErrors.notes?.[0]
+            }
+          />
+        </div>
+        <button
+          type="submit"
+          disabled={formik.isSubmitting}
+          className="w-full bg-[#E8231A] py-5 text-sm font-bold uppercase tracking-widest text-white transition-colors hover:bg-[#C41C14] disabled:cursor-not-allowed disabled:opacity-60"
+        >
+          {formik.isSubmitting ? (
+            <LoadingLabel text="BOOKING..." />
+          ) : (
+            "BOOK MY TEST RIDE"
+          )}
+        </button>
+        <p className="text-center text-xs text-[#555]">
+          Our team will confirm your booking via phone within 24 hours.
+        </p>
+      </form>
+    </>
   );
 }

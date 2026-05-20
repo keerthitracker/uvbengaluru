@@ -102,14 +102,27 @@ export default function Navbar() {
         >
           <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-4 md:px-8">
             <Link href="/" className="flex items-center">
-              <Image
-                src="/images/uv-logo.svg"
-                alt="UV Bengaluru"
-                width={180}
-                height={32}
-                className="h-8 w-auto"
-                priority
-              />
+              <div className="flex items-center gap-3">
+                <Image
+                  src="/images/ultraviolette-logo-official.svg"
+                  alt="Ultraviolette logo"
+                  width={32}
+                  height={32}
+                  className="h-8 w-8 invert"
+                  priority
+                />
+                <span
+                  style={{
+                    fontSize: "14px",
+                    letterSpacing: "0.28em",
+                    fontWeight: 700,
+                    color: "#FFFFFF",
+                  }}
+                  className="uppercase"
+                >
+                  UV BENGALURU
+                </span>
+              </div>
             </Link>
 
             <div className="hidden items-center gap-8 md:flex">
@@ -199,13 +212,26 @@ export default function Navbar() {
         style={{ background: "#0D0D0D" }}
       >
         <div className="mb-4">
-          <Image
-            src="/images/uv-logo.svg"
-            alt="UV Bengaluru"
-            width={180}
-            height={32}
-            className="h-8 w-auto opacity-70"
-          />
+          <div className="flex items-center gap-3 opacity-70">
+            <Image
+              src="/images/ultraviolette-logo-official.svg"
+              alt="Ultraviolette logo"
+              width={32}
+              height={32}
+              className="h-8 w-8 invert"
+            />
+            <span
+              style={{
+                fontSize: "14px",
+                letterSpacing: "0.28em",
+                fontWeight: 700,
+                color: "#FFFFFF",
+              }}
+              className="uppercase"
+            >
+              UV BENGALURU
+            </span>
+          </div>
         </div>
         {navLinks.map((link) => (
           <Link
