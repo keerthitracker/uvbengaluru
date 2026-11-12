@@ -10,7 +10,7 @@ import {
 } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Book Ultraviolette Workshop Service in Bengaluru",
+  title: "Book Ultraviolette Workshop Service Online",
   description:
     "Book Ultraviolette workshop service at UV Bengaluru, Nagarbhavi: diagnostics, software support and genuine parts. Sales counter in Rajajinagar.",
   alternates: {

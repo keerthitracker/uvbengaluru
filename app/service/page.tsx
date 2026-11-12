@@ -10,7 +10,7 @@ import {
 } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Ultraviolette Service Centre in Bengaluru",
+  title: "Ultraviolette Service & Spares, Nagarbhavi",
   description:
     "Official Ultraviolette service, workshop and spares at UV Bengaluru, Nagarbhavi. Diagnostics, OTA updates, genuine parts. Sales counter in Rajajinagar.",
   alternates: {

@@ -5,7 +5,7 @@ import StructuredData from "@/components/StructuredData";
 import { siteConfig, absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Electric Bike Finance in Bengaluru — Ultraviolette EMI Options",
+  title: "Electric Bike Finance & EMI in Bengaluru",
   description:
     "Looking for electric bike finance in Bengaluru? UV Bengaluru helps buyers understand EMI, on-road cost context, and ownership planning for Ultraviolette models.",
   alternates: { canonical: "/electric-bike-finance-bengaluru" },

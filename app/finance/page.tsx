@@ -5,7 +5,7 @@ import StructuredData from "@/components/StructuredData";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Electric Bike Finance in Bengaluru — EMI for Ultraviolette",
+  title: "Ultraviolette Finance & EMI in Bengaluru",
   description:
     "Finance your Ultraviolette in Bengaluru. X-47 Venom EMIs from about INR 7,650 a month, with guidance at UV Bengaluru, Nagarbhavi and Rajajinagar.",
   alternates: {
@@ -48,11 +48,11 @@ const emiExamples = [
   },
   {
     model: "F77 SuperStreet",
-    price: "INR 3,09,000*",
+    price: "INR 3.09 lakh",
     emi: "INR 9,000/month (approx.)",
   },
   {
-    model: "F77 Mach 2",
+    model: "F77 Mach 2 Recon",
     price: "INR 3.99 lakh",
     emi: "INR 11,500/month (approx.)",
   },

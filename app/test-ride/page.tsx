@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import LocationAddresses from "@/components/LocationAddresses";
 import SeoH1 from "@/components/SeoH1";
+import StructuredData from "@/components/StructuredData";
 import TestRideForm from "@/components/TestRideForm";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
@@ -39,8 +40,40 @@ const steps = [
 ];
 
 export default function TestRidePage() {
+  const testRideStructuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: "Ultraviolette test ride in Bengaluru",
+      serviceType: "Motorcycle test ride",
+      url: absoluteUrl("/test-ride"),
+      provider: { "@id": `${siteConfig.url}/#dealer` },
+      areaServed: "Bengaluru",
+      offers: { "@type": "Offer", price: 0, priceCurrency: "INR" },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: absoluteUrl("/"),
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Test Ride",
+          item: absoluteUrl("/test-ride"),
+        },
+      ],
+    },
+  ];
+
   return (
     <>
+      <StructuredData data={testRideStructuredData} />
       <section className="hero-gradient border-b border-[#1a1a1a] px-4 pb-20 pt-32 md:px-8">
         <div className="mx-auto max-w-7xl text-center">
           <SeoH1>Book an Ultraviolette Test Ride in Bengaluru</SeoH1>

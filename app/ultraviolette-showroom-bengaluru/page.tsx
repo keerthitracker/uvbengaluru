@@ -11,7 +11,7 @@ import {
 } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Ultraviolette Showroom in Bengaluru — Visit UV Bengaluru",
+  title: "Ultraviolette Showroom Bengaluru: Visit Guide",
   description:
     "Ultraviolette showroom in Bengaluru: UV Bengaluru, the official dealer, in Nagarbhavi and Rajajinagar. See the X-47 Venom and F77 and book a test ride.",
   alternates: { canonical: "/ultraviolette-showroom-bengaluru" },

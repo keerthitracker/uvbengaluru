@@ -6,7 +6,7 @@ import { getVehicle } from "@/lib/vehicles";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "F77 Mach 2 vs F77 SuperStreet — Which Ultraviolette to Buy?",
+  title: "F77 Mach 2 vs F77 SuperStreet: Which to Buy?",
   description:
     "Compare F77 Mach 2 and F77 SuperStreet with rider-fit, price context, and buying guidance from UV Bengaluru in Bengaluru.",
   alternates: {
