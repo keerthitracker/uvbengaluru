@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PriceDisclaimer from "@/components/PriceDisclaimer";
 import Link from "next/link";
 import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
@@ -6,9 +7,9 @@ import { getVehicle } from "@/lib/vehicles";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "F77 Price in Bengaluru 2026 — Mach 2 and SuperStreet Costs",
+  title: "F77 Price in Bengaluru: Mach 2 & SuperStreet",
   description:
-    "Current F77 Mach 2 price from ₹3.99L and F77 SuperStreet from ₹3.09L in Bengaluru. Compare variants, pricing context, and next steps with UV Bengaluru.",
+    "F77 Mach 2 and F77 SuperStreet prices in Bengaluru from ₹3.09L, Recon variants from ₹3.99L. Compare variants, pricing context, and next steps with UV Bengaluru.",
   alternates: {
     canonical: "/f77-price-bengaluru",
   },
@@ -33,7 +34,7 @@ const faqs = [
   {
     question: "Which is more affordable in the F77 range?",
     answer:
-      "The F77 SuperStreet typically sits below the F77 Mach 2 in entry price, while the Mach 2 is positioned as the sharper sport-focused option.",
+      "The F77 SuperStreet and F77 Mach 2 start at the same entry price, from INR 3.09 lakh, with Recon variants from INR 3.99 lakh. The SuperStreet is the street-focused option and the Mach 2 the sharper sport-focused one.",
   },
   {
     question: "Should I trust only a price listed online?",
@@ -149,6 +150,7 @@ export default function F77PriceBengaluruPage() {
                 </article>
               ))}
           </div>
+          <PriceDisclaimer className="mt-8 max-w-4xl" />
         </div>
       </section>
 

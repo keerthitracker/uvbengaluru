@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ImmersiveHero from "@/components/ImmersiveHero";
-import SeoH1 from "@/components/SeoH1";
+import PriceDisclaimer from "@/components/PriceDisclaimer";
 import StructuredData from "@/components/StructuredData";
 import VehicleImage from "@/components/VehicleImage";
 import VehicleVariantExplorer from "@/components/VehicleVariantExplorer";
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${vehicle.name} Price in Bengaluru`,
-    description: `${vehicle.subheadline} ${vehicle.price}. Visit UV Bengaluru, Nagarbhavi for current pricing, availability, and booking guidance.`,
+    description: `${vehicle.name} at UV Bengaluru: ${vehicle.price}. See variants, specs and colours, and book at Nagarbhavi or Rajajinagar.`,
     alternates: {
       canonical: `/vehicles/${vehicle.slug}`,
     },
@@ -68,19 +68,12 @@ function extractOfferPrice(value: string) {
   return Number.isFinite(amount) ? amount : undefined;
 }
 
-function statusLabel(status: string) {
-  if (status === "available") return "Available / Test Ride";
-  if (status === "pre-book") return "Pre-book / Register Interest";
-  if (status === "enquiry-only") return "Enquiry Only";
-  return "Story / Archive";
-}
-
 function buildVehicleFaqs(vehicle: NonNullable<ReturnType<typeof getVehicle>>) {
   const priceAnswer =
     vehicle.status === "available"
       ? `${vehicle.name} is currently positioned at ${vehicle.price}. UV Bengaluru can confirm the latest Bengaluru ex-showroom and on-road pricing before purchase.`
       : vehicle.status === "pre-book"
-        ? `${vehicle.name} is currently in ${statusLabel(vehicle.status).toLowerCase()} mode. Contact UV Bengaluru for the latest price context, expected availability, and booking guidance.`
+        ? `${vehicle.name} is launching soon and is open for registering interest. Any price or range shown is indicative and may change at the official launch. Contact UV Bengaluru for the latest price context, expected availability, and booking guidance.`
         : `${vehicle.name} is not positioned as regular in-stock showroom inventory. Contact UV Bengaluru for current enquiry guidance and availability context.`;
 
   const rideAnswer =
@@ -95,7 +88,36 @@ function buildVehicleFaqs(vehicle: NonNullable<ReturnType<typeof getVehicle>>) {
         ? `${vehicle.name} suits riders who want a lighter, more playful, more unconventional electric performance machine rather than a typical commuter format.`
         : `${vehicle.name} suits riders who want ${vehicle.subheadline.toLowerCase()}`;
 
+  const venomFaqs =
+    vehicle.slug === "x-47-venom"
+      ? [
+          {
+            question: "What are the X-47 Venom variants and prices?",
+            answer: (vehicle.variants ?? [])
+              .map(
+                (variant) =>
+                  `${variant.name}: ${variant.priceLabel?.replace("From ", "")}, ${variant.battery}, ${variant.range}`,
+              )
+              .join("; ")
+              .concat(
+                ". These are effective ex-showroom prices in Karnataka after the Carbon Farewell Fund offer of INR 35,000, and they vary by colour. Prices are set by Ultraviolette and can change, so please confirm the latest price with UV Bengaluru.",
+              ),
+          },
+          {
+            question: "Which colours does the X-47 Venom come in?",
+            answer:
+              "The X-47 Venom Original and Original+ come in Cosmic Black, Turbo Red, and Afterburner Yellow. The Recon and Recon+ add Stellar White.",
+          },
+          {
+            question: "Has the X-47 Venom replaced the X-47?",
+            answer:
+              "Yes. The earlier X-47 and X-47 Desert Wing are discontinued, and the X-47 Venom on the VX-100 platform is the current X-47 at UV Bengaluru. Existing X-47 owners continue to be supported at the Nagarbhavi service facility.",
+          },
+        ]
+      : [];
+
   return [
+    ...venomFaqs,
     {
       question: `What is the ${vehicle.name} price in Bengaluru?`,
       answer: priceAnswer,
@@ -130,7 +152,7 @@ function buildWhyBuyPoints(
     ];
   }
 
-  if (vehicle.slug === "x-47" || vehicle.slug === "x-47-desert-wing") {
+  if (vehicle.slug.startsWith("x-47")) {
     return [
       `${vehicle.name} is built for riders who want a more versatile Ultraviolette format for Bengaluru roads, outskirts, and occasional longer rides.`,
       "The combination of crossover ergonomics, strong range claims, and advanced rider-assist tech makes it easier to justify as more than a city-only machine.",
@@ -167,7 +189,7 @@ function buildBookingChecklist(
 
   if (vehicle.status === "pre-book") {
     verificationItems.unshift(
-      "Ask what the current pre-booking flow means for delivery priority and expected launch timing.",
+      "Ask about the expected launch timing and how registering interest affects delivery priority.",
     );
   }
 
@@ -209,7 +231,7 @@ function buildRelatedGuides(
     );
   }
 
-  if (vehicle.slug === "x-47" || vehicle.slug === "x-47-desert-wing") {
+  if (vehicle.slug.startsWith("x-47")) {
     links.push({
       href: "/ultraviolette-showroom-bengaluru",
       label: "Ultraviolette Showroom Bengaluru",
@@ -248,6 +270,14 @@ export default async function VehicleDetailPage({ params }: Props) {
   const offerPrice = extractOfferPrice(
     vehicle.variants?.[0]?.priceLabel ?? vehicle.price,
   );
+  const variantPrices = vehicle.priceList
+    ? vehicle.priceList.rows.map((row) => row.effective)
+    : (vehicle.variants ?? [])
+        .map((variant) => extractOfferPrice(variant.priceLabel ?? ""))
+        .filter((price): price is number => typeof price === "number");
+  const formatInr = (value: number) =>
+    `INR ${value.toLocaleString("en-IN")}`;
+  const hasPriceRange = variantPrices.length > 1;
   const productStructuredData = [
     {
       "@context": "https://schema.org",
@@ -265,14 +295,24 @@ export default async function VehicleDetailPage({ params }: Props) {
         "@type": "Organization",
         name: "Ultraviolette",
       },
+      ...(vehicle.colors.length
+        ? { color: vehicle.colors.map((color) => color.name) }
+        : {}),
       offers: {
-        "@type": "Offer",
-        ...(offerPrice
+        "@type": hasPriceRange ? "AggregateOffer" : "Offer",
+        ...(hasPriceRange
           ? {
               priceCurrency: "INR",
-              price: offerPrice,
+              lowPrice: Math.min(...variantPrices),
+              highPrice: Math.max(...variantPrices),
+              offerCount: variantPrices.length,
             }
-          : {}),
+          : offerPrice
+            ? {
+                priceCurrency: "INR",
+                price: offerPrice,
+              }
+            : {}),
         availability: isAvailable
           ? "https://schema.org/InStock"
           : isPreBook
@@ -337,9 +377,6 @@ export default async function VehicleDetailPage({ params }: Props) {
       <section className="border-t border-white/8 bg-[linear-gradient(180deg,#0b0b0b_0%,#121212_100%)] px-4 py-20 md:px-8 md:py-24">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:gap-14">
           <div className="rounded-[32px] border border-white/8 bg-white/[0.03] p-7 md:p-9">
-            <SeoH1>
-              {vehicle.name} price in Bengaluru at UV Bengaluru
-            </SeoH1>
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#FF3B3B]">
               Positioning
             </p>
@@ -384,6 +421,77 @@ export default async function VehicleDetailPage({ params }: Props) {
           </div>
         </section>
       )}
+
+      <section className="border-t border-white/8 bg-[#101010] px-4 py-16 md:px-8 md:py-20">
+        <div className="mx-auto max-w-7xl">
+          {vehicle.priceList && (
+            <>
+              <div className="mb-8">
+                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#FF3B3B]">
+                  Price List
+                </p>
+                <h2 className="font-display text-4xl font-bold uppercase tracking-[0.06em] text-white">
+                  {vehicle.name} Ex-Showroom Price in Bengaluru
+                </h2>
+              </div>
+              <div className="mb-6 overflow-x-auto rounded-[6px] border border-[#2A2A2A]">
+                <table className="w-full min-w-[640px] text-left text-sm">
+                  <caption className="sr-only">
+                    {vehicle.priceList.title}
+                  </caption>
+                  <thead className="bg-[#181818] text-[11px] uppercase tracking-[0.12em] text-[#A0A0A0]">
+                    <tr>
+                      <th scope="col" className="px-4 py-3">Variant</th>
+                      <th scope="col" className="px-4 py-3">Colour</th>
+                      <th scope="col" className="px-4 py-3 text-right">Ex-Showroom</th>
+                      <th scope="col" className="px-4 py-3 text-right">
+                        {vehicle.priceList.offerLabel}
+                      </th>
+                      <th scope="col" className="px-4 py-3 text-right">
+                        Effective Ex-Showroom
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {vehicle.priceList.rows.map((row, index, rows) => (
+                      <tr
+                        key={`${row.variant}-${row.colour}`}
+                        className={`text-[#C8C8C8] ${
+                          rows[index - 1]?.variant !== row.variant
+                            ? "border-t border-[#2A2A2A]"
+                            : ""
+                        }`}
+                      >
+                        <th
+                          scope="row"
+                          className="px-4 py-2.5 font-semibold text-white"
+                        >
+                          {rows[index - 1]?.variant !== row.variant ? (
+                            row.variant
+                          ) : (
+                            <span className="sr-only">{row.variant}</span>
+                          )}
+                        </th>
+                        <td className="px-4 py-2.5">{row.colour}</td>
+                        <td className="px-4 py-2.5 text-right tabular-nums">
+                          {formatInr(row.exShowroom)}
+                        </td>
+                        <td className="px-4 py-2.5 text-right tabular-nums">
+                          - {formatInr(row.offer)}
+                        </td>
+                        <td className="px-4 py-2.5 text-right font-semibold tabular-nums text-white">
+                          {formatInr(row.effective)}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </>
+          )}
+          <PriceDisclaimer className="max-w-4xl" />
+        </div>
+      </section>
 
       {vehicle.features.length > 0 && (
         <section className="bg-[#0D0D0D] px-4 py-20 md:px-8 md:py-24">

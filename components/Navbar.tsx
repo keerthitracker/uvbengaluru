@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import BrandLogo from "@/components/BrandLogo";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -79,13 +80,13 @@ export default function Navbar() {
             }}
             className="uppercase"
           >
-            Visit us at Nagarbhavi&nbsp;&nbsp;&bull;&nbsp;&nbsp;10 AM-7 PM
+            Visit us at Nagarbhavi &amp; Rajajinagar&nbsp;&nbsp;&bull;&nbsp;&nbsp;10 AM-7 PM
             Daily&nbsp;&nbsp;&bull;&nbsp;&nbsp;
             <a
-              href="tel:+919606955530"
+              href="tel:+918050073309"
               className="transition-colors hover:text-white"
             >
-              96069 55530
+              +91 80500 73309
             </a>
           </p>
         </div>
@@ -101,31 +102,24 @@ export default function Navbar() {
           }}
         >
           <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-4 md:px-8">
-            <Link href="/" className="flex items-center">
-              <div className="flex items-center gap-3">
-                <Image
-                  src="/images/ultraviolette-logo-official.svg"
-                  alt="Ultraviolette logo"
-                  width={32}
-                  height={32}
-                  className="h-8 w-8 invert"
-                  priority
-                />
+            <Link href="/" className="flex shrink-0 items-center">
+              <div className="flex items-center gap-4">
+                <BrandLogo priority />
                 <span
-                  style={{
-                    fontSize: "14px",
-                    letterSpacing: "0.28em",
-                    fontWeight: 700,
-                    color: "#FFFFFF",
-                  }}
-                  className="uppercase"
-                >
-                  UV BENGALURU
-                </span>
+                  aria-hidden="true"
+                  className="hidden h-7 w-px bg-white/20 xl:block"
+                />
+                <Image
+                  src="/images/aadya-inc-logo.png"
+                  alt="Aadya Inc. logo"
+                  width={640}
+                  height={477}
+                  className="hidden h-9 w-auto xl:block"
+                />
               </div>
             </Link>
 
-            <div className="hidden items-center gap-8 md:flex">
+            <div className="hidden items-center gap-5 whitespace-nowrap px-4 md:flex lg:gap-8">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -213,24 +207,7 @@ export default function Navbar() {
       >
         <div className="mb-4">
           <div className="flex items-center gap-3 opacity-70">
-            <Image
-              src="/images/ultraviolette-logo-official.svg"
-              alt="Ultraviolette logo"
-              width={32}
-              height={32}
-              className="h-8 w-8 invert"
-            />
-            <span
-              style={{
-                fontSize: "14px",
-                letterSpacing: "0.28em",
-                fontWeight: 700,
-                color: "#FFFFFF",
-              }}
-              className="uppercase"
-            >
-              UV BENGALURU
-            </span>
+            <BrandLogo />
           </div>
         </div>
         {navLinks.map((link) => (

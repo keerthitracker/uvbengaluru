@@ -3,19 +3,26 @@ import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
 import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
-import { absoluteUrl, showroomAddressText, siteConfig } from "@/lib/site";
+import LocationCards from "@/components/LocationCards";
+import {
+  absoluteUrl,
+  showroomAddressText,
+  siteConfig,
+  branchStructuredData,
+  rajajinagarLine,
+} from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Ultraviolette Showroom in Bengaluru",
   description:
-    "Visit UV Bengaluru's Nagarbhavi showroom, Bengaluru's official Ultraviolette dealership. Explore the lineup, compare variants, and get current pricing.",
+    "Visit UV Bengaluru, the official Ultraviolette dealer, at Nagarbhavi (sales, service, spares) or the Rajajinagar sales counter. See the X-47 Venom.",
   alternates: {
     canonical: "/showroom",
   },
   openGraph: {
     title: "Visit the UV Bengaluru Showroom",
     description:
-      "Plan your visit to UV Bengaluru in Nagarbhavi for model exploration, pricing support, and test-ride assistance.",
+      "Plan your visit to UV Bengaluru in Nagarbhavi or Rajajinagar for model exploration, pricing support, and test-ride assistance.",
     url: absoluteUrl("/showroom"),
     images: [absoluteUrl(siteConfig.ogImage)],
   },
@@ -24,7 +31,7 @@ export const metadata: Metadata = {
 const showroomFeatures = [
   {
     title: "LIVE BIKE DISPLAYS",
-    desc: "Explore the Ultraviolette lineup: X-47 series, F77 Mach 2, F77 SuperStreet, plus pre-book interest for Tesseract and Shockwave. Sit on them where available, explore every detail, and compare variants with the team.",
+    desc: "Explore the Ultraviolette lineup: X-47 Venom, F77 Mach 2, F77 SuperStreet, plus pre-book interest for Tesseract and Shockwave. Sit on them where available, explore every detail, and compare variants with the team.",
   },
   {
     title: "CERTIFIED EXPERTS",
@@ -36,14 +43,14 @@ const showroomFeatures = [
   },
   {
     title: "TEST RIDE BOOKINGS",
-    desc: "Book your test ride on-site or online. Our Nagarbhavi facility is designed to help you experience the Ultraviolette ride before you commit.",
+    desc: "Book your test ride on-site or online. Both showrooms are set up to help you experience the Ultraviolette ride before you commit.",
   },
 ];
 
 const visitProof = [
   {
     title: "EASY TO FIND",
-    desc: "The showroom is in Nagarbhavi at SJA Arcade, making it a practical visit point for riders coming from West Bengaluru and nearby neighborhoods.",
+    desc: "Visit us at SJA Arcade in Nagarbhavi or on Dr. Rajkumar Road in Rajajinagar, whichever is closer to your part of Bengaluru.",
   },
   {
     title: "MAP AND CALL READY",
@@ -64,6 +71,7 @@ export default function ShowroomPage() {
     {
       "@context": "https://schema.org",
       "@type": ["MotorcycleDealer", "LocalBusiness"],
+      "@id": `${siteConfig.url}/#dealer`,
       name: siteConfig.name,
       legalName: siteConfig.legalName,
       url: absoluteUrl("/showroom"),
@@ -92,6 +100,9 @@ export default function ShowroomPage() {
       hasMap:
         "https://maps.google.com/?q=SJA+Arcade+904+10th+Cross+Rd+ITI+Layout+Papareddipalya+Naagarabhaavi+Bengaluru+Karnataka+560072",
     },
+    ...[branchStructuredData("rajajinagar")].filter(
+      (item): item is NonNullable<typeof item> => item !== null,
+    ),
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
@@ -119,10 +130,10 @@ export default function ShowroomPage() {
       <section className="hero-gradient border-b border-[#1a1a1a] px-4 pb-20 pt-32 md:px-8">
         <div className="mx-auto max-w-7xl">
           <SeoH1>
-            Ultraviolette Showroom in Bengaluru — UV Bengaluru, Nagarbhavi
+            Ultraviolette Showrooms in Bengaluru — UV Bengaluru, Nagarbhavi and Rajajinagar
           </SeoH1>
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#FF3B3B]">
-            Nagarbhavi, Bengaluru
+            Nagarbhavi &amp; Rajajinagar, Bengaluru
           </p>
           <div
             aria-hidden="true"
@@ -130,13 +141,27 @@ export default function ShowroomPage() {
           >
             VISIT OUR
             <br />
-            <span className="text-[#FF3B3B]">SHOWROOM</span>
+            <span className="text-[#FF3B3B]">SHOWROOMS</span>
           </div>
           <p className="max-w-xl text-lg leading-relaxed text-[#888]">
             Experience the full Ultraviolette lineup in person. Our Nagarbhavi
-            showroom is open 7 days a week, so you can walk in or book an
+            and Rajajinagar showrooms are open 7 days a week, so you can walk in or book an
             appointment in advance.
           </p>
+        </div>
+      </section>
+
+      <section className="border-b border-[#1a1a1a] px-4 py-24 md:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-12">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-[#FF3B3B]">
+              Our Locations
+            </p>
+            <h2 className="font-display text-4xl font-extrabold uppercase text-white md:text-5xl">
+              TWO LOCATIONS IN BENGALURU
+            </h2>
+          </div>
+          <LocationCards />
         </div>
       </section>
 
@@ -148,7 +173,7 @@ export default function ShowroomPage() {
                 ADDRESS
               </h2>
               <p className="text-base leading-relaxed text-white">
-                UV Bengaluru
+                UV Bengaluru - Nagarbhavi (Sales, Service &amp; Spares)
                 <br />
                 {showroomAddressText}
               </p>
@@ -196,10 +221,10 @@ export default function ShowroomPage() {
                       Phone
                     </p>
                     <a
-                      href="tel:+919606955530"
+                      href="tel:+918050073309"
                       className="text-sm text-white transition-colors hover:text-white"
                     >
-                      96069 55530
+                      +91 80500 73309
                     </a>
                   </div>
                   <div>
@@ -329,7 +354,8 @@ export default function ShowroomPage() {
               </h3>
               <div className="space-y-3">
                 {[
-                  `Address: ${showroomAddressText}`,
+                  `Nagarbhavi (sales, service and spares): ${showroomAddressText}`,
+                  rajajinagarLine,
                   "Hours: Monday to Sunday, 10:00 AM to 7:00 PM",
                   `Phone: ${siteConfig.phoneDisplay}`,
                   `WhatsApp: ${siteConfig.whatsappDisplay}`,

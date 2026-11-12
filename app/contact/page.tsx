@@ -1,20 +1,25 @@
 import type { Metadata } from "next";
 import ContactForm from "@/components/ContactForm";
+import LocationCards from "@/components/LocationCards";
 import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
-import { absoluteUrl, siteConfig } from "@/lib/site";
+import {
+  absoluteUrl,
+  siteConfig,
+  branchStructuredData,
+} from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact UV Bengaluru in Bengaluru",
   description:
-    "Get in touch with UV Bengaluru, the official Ultraviolette dealership in Nagarbhavi, Bengaluru. Call, email, or visit us for enquiries, test rides, and service.",
+    "Contact UV Bengaluru, the official Ultraviolette dealer. Call, WhatsApp, or visit Nagarbhavi or Rajajinagar for test rides, sales and service.",
   alternates: {
     canonical: "/contact",
   },
   openGraph: {
     title: "Contact UV Bengaluru",
     description:
-      "Call, message, or visit UV Bengaluru in Nagarbhavi for enquiries, test rides, finance support, and service coordination.",
+      "Call, message, or visit UV Bengaluru in Nagarbhavi or Rajajinagar for enquiries, test rides, finance support, and service coordination.",
     url: absoluteUrl("/contact"),
     images: [absoluteUrl(siteConfig.ogImage)],
   },
@@ -22,11 +27,11 @@ export const metadata: Metadata = {
 
 const contactInfo = [
   {
-    title: "VISIT US",
+    title: "VISIT US - NAGARBHAVI",
     lines: [
       "SJA Arcade, 904, 10th Cross Rd",
       "ITI Layout, Papareddipalya",
-      "Naagarabhaavi, Bengaluru",
+      "Nagarbhavi, Bengaluru",
       "Karnataka 560072",
     ],
     cta: {
@@ -58,8 +63,8 @@ const contactInfo = [
   },
   {
     title: "CALL US",
-    lines: ["96069 55530", "", "Mon-Sun: 10:00 AM - 7:00 PM"],
-    cta: { label: "Call Now", href: "tel:+919606955530", external: false },
+    lines: ["+91 80500 73309", "IVR for sales and service", "", "Mon-Sun: 10:00 AM - 7:00 PM"],
+    cta: { label: "Call Now", href: "tel:+918050073309", external: false },
     icon: (
       <svg
         className="h-8 w-8 text-[#FF3B3B]"
@@ -138,7 +143,7 @@ export default function ContactPage() {
       name: "Contact UV Bengaluru",
       url: absoluteUrl("/contact"),
       description:
-        "Contact UV Bengaluru in Nagarbhavi for test rides, sales enquiries, service coordination, and finance support.",
+        "Contact UV Bengaluru in Nagarbhavi or Rajajinagar for test rides, sales enquiries, service coordination, and finance support.",
       mainEntity: {
         "@type": "LocalBusiness",
         name: siteConfig.name,
@@ -156,6 +161,9 @@ export default function ContactPage() {
         sameAs: siteConfig.sameAs,
       },
     },
+    ...[branchStructuredData("rajajinagar")].filter(
+      (item): item is NonNullable<typeof item> => item !== null,
+    ),
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
@@ -240,6 +248,13 @@ export default function ContactPage() {
                 </a>
               </div>
             ))}
+          </div>
+
+          <div className="mb-16">
+            <h2 className="mb-6 font-display text-2xl font-extrabold uppercase text-white">
+              OUR LOCATIONS
+            </h2>
+            <LocationCards />
           </div>
 
           <div className="h-80 w-full overflow-hidden border border-[#222] bg-[#111]">

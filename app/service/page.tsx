@@ -2,12 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
-import { absoluteUrl, showroomAddressText, siteConfig } from "@/lib/site";
+import {
+  absoluteUrl,
+  showroomAddressText,
+  siteConfig,
+  rajajinagarAddressText,
+} from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Ultraviolette Service Centre in Bengaluru",
+  title: "Ultraviolette Service & Spares, Nagarbhavi",
   description:
-    "Official Ultraviolette service and workshop in Nagarbhavi, Bengaluru. Battery diagnostics, OTA updates, scheduled maintenance, and genuine parts support. Book your service slot today.",
+    "Official Ultraviolette service, workshop and spares at UV Bengaluru, Nagarbhavi. Diagnostics, OTA updates, genuine parts. Sales counter in Rajajinagar.",
   alternates: {
     canonical: "/service",
   },
@@ -25,7 +30,7 @@ const serviceFaqs = [
   {
     question: "Where can I service my Ultraviolette in Bengaluru?",
     answer:
-      "UV Bengaluru in Nagarbhavi is the official local touchpoint for Ultraviolette service coordination, workshop planning, diagnostics, and support.",
+      "UV Bengaluru in Nagarbhavi is the official local touchpoint for Ultraviolette service, spares, workshop planning, and diagnostics. The Rajajinagar location is a sales counter and can guide you to a service booking.",
   },
   {
     question: "What does the UV Bengaluru service team help with?",
@@ -67,7 +72,7 @@ const processSteps = [
   {
     step: "02",
     title: "VISIT NAGARBHAVI",
-    desc: "Bring the vehicle to the UV Bengaluru location in Nagarbhavi for inspection and service coordination.",
+    desc: "Bring the vehicle to the UV Bengaluru service and spares facility in Nagarbhavi for inspection. The Rajajinagar location is a sales counter only.",
   },
   {
     step: "03",
@@ -82,7 +87,8 @@ const processSteps = [
 ];
 
 const visitNotes = [
-  `Address: ${showroomAddressText}`,
+  `Service and spares (Nagarbhavi): ${showroomAddressText}`,
+  `Rajajinagar sales counter (sales only; service is at Nagarbhavi): ${rajajinagarAddressText}`,
   "Hours: Monday to Sunday, 10:00 AM to 7:00 PM",
   `Phone: ${siteConfig.phoneDisplay}`,
   `WhatsApp: ${siteConfig.whatsappDisplay}`,
@@ -174,6 +180,8 @@ export default function ServicePage() {
             UV Bengaluru in Nagarbhavi is the official Ultraviolette service
             touchpoint in Bengaluru for scheduled maintenance, battery
             diagnostics, OTA support, and genuine-parts workshop coordination.
+            Our Rajajinagar location is a sales counter, so all service and
+            spares work is handled at Nagarbhavi.
             Use this page to plan your visit, confirm support scope, and book
             ahead before you travel.
           </p>

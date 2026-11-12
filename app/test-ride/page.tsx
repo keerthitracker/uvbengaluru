@@ -1,19 +1,21 @@
 import type { Metadata } from "next";
+import LocationAddresses from "@/components/LocationAddresses";
 import SeoH1 from "@/components/SeoH1";
+import StructuredData from "@/components/StructuredData";
 import TestRideForm from "@/components/TestRideForm";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Book Ultraviolette Test Ride in Bengaluru",
   description:
-    "Book a free Ultraviolette test ride in Bengaluru at UV Bengaluru, Nagarbhavi. Experience the X-47 and F77 range seven days a week, 10 AM–7 PM.",
+    "Book a free Ultraviolette test ride in Bengaluru with UV Bengaluru, at Nagarbhavi or Rajajinagar. Ride the X-47 Venom and F77 range, 10 AM–7 PM daily.",
   alternates: {
     canonical: "/test-ride",
   },
   openGraph: {
     title: "Book Ultraviolette Test Ride in Bengaluru | UV Bengaluru",
     description:
-      "Reserve an Ultraviolette test ride in Bengaluru with UV Bengaluru in Nagarbhavi and confirm the right model before you visit.",
+      "Reserve an Ultraviolette test ride in Bengaluru with UV Bengaluru in Nagarbhavi or Rajajinagar and confirm the right model before you visit.",
     url: absoluteUrl("/test-ride"),
     images: [absoluteUrl(siteConfig.ogImage)],
   },
@@ -23,7 +25,7 @@ const steps = [
   {
     step: "01",
     title: "PICK YOUR MODEL",
-    desc: "Choose the Ultraviolette you want to experience, such as the X-47 range or the F77 family.",
+    desc: "Choose the Ultraviolette you want to experience, such as the X-47 Venom or the F77 family.",
   },
   {
     step: "02",
@@ -33,18 +35,50 @@ const steps = [
   {
     step: "03",
     title: "RIDE & EXPERIENCE",
-    desc: "Visit our Nagarbhavi facility, meet the team, and experience the ride without pressure or obligation.",
+    desc: "Visit our Nagarbhavi or Rajajinagar location, meet the team, and experience the ride without pressure or obligation.",
   },
 ];
 
 export default function TestRidePage() {
+  const testRideStructuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      name: "Ultraviolette test ride in Bengaluru",
+      serviceType: "Motorcycle test ride",
+      url: absoluteUrl("/test-ride"),
+      provider: { "@id": `${siteConfig.url}/#dealer` },
+      areaServed: "Bengaluru",
+      offers: { "@type": "Offer", price: 0, priceCurrency: "INR" },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: absoluteUrl("/"),
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Test Ride",
+          item: absoluteUrl("/test-ride"),
+        },
+      ],
+    },
+  ];
+
   return (
     <>
+      <StructuredData data={testRideStructuredData} />
       <section className="hero-gradient border-b border-[#1a1a1a] px-4 pb-20 pt-32 md:px-8">
         <div className="mx-auto max-w-7xl text-center">
           <SeoH1>Book an Ultraviolette Test Ride in Bengaluru</SeoH1>
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#FF3B3B]">
-            UV Bengaluru · Nagarbhavi
+            UV Bengaluru · Nagarbhavi &amp; Rajajinagar
           </p>
           <div
             aria-hidden="true"
@@ -59,7 +93,8 @@ export default function TestRidePage() {
             TEST RIDE.
           </div>
           <p className="mx-auto max-w-xl text-lg leading-relaxed text-[#888]">
-            UV Bengaluru in Nagarbhavi is the official place to book an
+            UV Bengaluru, with locations in Nagarbhavi and Rajajinagar, is the
+            official place to book an
             Ultraviolette test ride in Bengaluru. Use this page to request the
             model you want, choose a preferred slot, and confirm your visit
             before you arrive at the showroom.
@@ -118,14 +153,10 @@ export default function TestRidePage() {
           <div className="grid gap-8 text-center md:grid-cols-3">
             <div>
               <h3 className="mb-1 font-display text-base font-bold uppercase text-white">
-                Location
+                Locations
               </h3>
-              <p className="text-sm text-[#888]">
-                SJA Arcade, 904, 10th Cross Rd
-                <br />
-                ITI Layout, Naagarabhaavi
-                <br />
-                Bengaluru, Karnataka 560072
+              <p className="space-y-2 text-sm text-[#888]">
+                <LocationAddresses />
               </p>
             </div>
             <div>
@@ -143,8 +174,8 @@ export default function TestRidePage() {
                 Contact
               </h3>
               <p className="text-sm text-[#888]">
-                <a href="tel:+919606955530" className="transition-colors hover:text-white">
-                  96069 55530
+                <a href="tel:+918050073309" className="transition-colors hover:text-white">
+                  +91 80500 73309
                 </a>
                 <br />
                 <a

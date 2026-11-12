@@ -1,7 +1,5 @@
 const PRODUCT_IMAGE_MARKERS = [
   '/card-side.',
-  '/vehicles/x47/hero.png',
-  '/vehicles/x47-desert-wing/hero.png',
   '/vehicles/shockwave/hero.png',
   '/colors/',
   '/tesseract/card-side.png',

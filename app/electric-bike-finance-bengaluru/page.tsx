@@ -5,7 +5,7 @@ import StructuredData from "@/components/StructuredData";
 import { siteConfig, absoluteUrl } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Electric Bike Finance in Bengaluru — Ultraviolette EMI Options",
+  title: "Electric Bike Finance & EMI in Bengaluru",
   description:
     "Looking for electric bike finance in Bengaluru? UV Bengaluru helps buyers understand EMI, on-road cost context, and ownership planning for Ultraviolette models.",
   alternates: { canonical: "/electric-bike-finance-bengaluru" },
@@ -146,7 +146,7 @@ export default function ElectricBikeFinanceBengaluruPage() {
                 "Ask for the full Bengaluru on-road estimate, not only the EMI.",
                 "Clarify what down payment range changes the monthly outcome most meaningfully.",
                 "Understand how insurance and accessory decisions affect the ownership number.",
-                "If you are comparing F77 or X-47 variants, ask for finance context on the exact one you want.",
+                "If you are comparing F77 or X-47 Venom variants, ask for finance context on the exact one you want.",
               ].map((item) => (
                 <div
                   key={item}

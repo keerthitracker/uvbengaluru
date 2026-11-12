@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
+import BrandLogo from "@/components/BrandLogo";
+import { siteConfig } from "@/lib/site";
 import { retailVehicles } from "@/lib/vehicles";
 
 const services = [
@@ -45,20 +47,11 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-6 gap-10">
           <div>
-            <div className="mb-4 flex items-center gap-3">
-              <Image
-                src="/images/ultraviolette-logo-official.svg"
-                alt="Ultraviolette logo"
-                width={32}
-                height={32}
-                className="h-8 w-8 invert"
-              />
-              <span className="text-sm font-bold uppercase tracking-[0.28em] text-white">
-                UV BENGALURU
-              </span>
+            <div className="mb-5">
+              <BrandLogo />
             </div>
             <p className="text-sm leading-relaxed text-[#666]">
-              Official Ultraviolette dealership in Nagarbhavi, Bengaluru.
+              Official Ultraviolette dealership in Bengaluru. Sales, service and spares in Nagarbhavi; sales counter in Rajajinagar.
             </p>
           </div>
 
@@ -153,16 +146,23 @@ export default function Footer() {
               Contact Us
             </h3>
             <ul className="space-y-3">
-              <li className="text-sm leading-relaxed text-[#A0A0A0]">
-                SJA Arcade, 904, 10th Cross Rd, ITI Layout, Papareddipalya,
-                Naagarabhaavi, Bengaluru, Karnataka 560072
-              </li>
+              {siteConfig.locations.map((location) => (
+                <li
+                  key={location.id}
+                  className="text-sm leading-relaxed text-[#A0A0A0]"
+                >
+                  <span className="block text-white">
+                    {location.name} - {location.type}
+                  </span>
+                  {location.addressLines.join(", ")}
+                </li>
+              ))}
               <li>
                 <a
-                  href="tel:+919606955530"
+                  href="tel:+918050073309"
                   className="text-sm text-[#A0A0A0] hover:text-white"
                 >
-                  Phone: 96069 55530
+                  Call (IVR): +91 80500 73309
                 </a>
               </li>
               <li>
@@ -182,7 +182,43 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-[#333] pt-6 md:flex-row">
+        <div className="mt-12 flex flex-col items-center gap-6 border-t border-[#333] pt-8 sm:flex-row sm:justify-center sm:gap-10">
+          <a
+            href="https://www.ultraviolette.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Ultraviolette Automotive website"
+          >
+            <Image
+              src="/images/ultraviolette-logo-footer-official.svg"
+              alt="Ultraviolette logo"
+              width={240}
+              height={32}
+              className="h-7 w-auto"
+            />
+          </a>
+          <span
+            aria-hidden="true"
+            className="hidden h-10 w-px bg-[#333] sm:block"
+          />
+          <div className="flex items-center gap-4">
+            <Image
+              src="/images/aadya-inc-logo.png"
+              alt="Aadya Inc. logo"
+              width={640}
+              height={477}
+              className="h-14 w-auto"
+            />
+            <p className="text-xs uppercase leading-relaxed tracking-[0.14em] text-[#A0A0A0]">
+              Authorised dealer
+              <span className="block text-sm font-semibold tracking-[0.1em] text-white">
+                {siteConfig.legalName}
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-[#333] pt-6 md:flex-row">
           <p className="text-xs tracking-[0.06em] text-[#666]">
             (c) 2025 Aadya Inc. | Authorized Ultraviolette Dealer, Bengaluru
           </p>

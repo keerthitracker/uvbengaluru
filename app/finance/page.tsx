@@ -1,20 +1,21 @@
 import type { Metadata } from "next";
+import PriceDisclaimer from "@/components/PriceDisclaimer";
 import Link from "next/link";
 import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
 import { absoluteUrl, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Electric Bike Finance in Bengaluru — EMI for Ultraviolette",
+  title: "Ultraviolette Finance & EMI in Bengaluru",
   description:
-    "Finance your Ultraviolette in Bengaluru with flexible EMI options. X-47 from approximately INR 7,200 per month. Section 80EEB tax benefits and ownership guidance available at UV Bengaluru.",
+    "Finance your Ultraviolette in Bengaluru. X-47 Venom EMIs from about INR 7,700 a month, with guidance at UV Bengaluru, Nagarbhavi and Rajajinagar.",
   alternates: {
     canonical: "/finance",
   },
   openGraph: {
     title: "Electric Bike Finance in Bengaluru | UV Bengaluru",
     description:
-      "Explore EMI plans, ownership support, and finance guidance for Ultraviolette motorcycles at UV Bengaluru in Nagarbhavi.",
+      "Explore EMI plans, ownership support, and finance guidance for Ultraviolette motorcycles at UV Bengaluru in Nagarbhavi and Rajajinagar.",
     url: absoluteUrl("/finance"),
     images: [absoluteUrl(siteConfig.ogImage)],
   },
@@ -36,20 +37,24 @@ const financeOptions = [
 ];
 
 const emiExamples = [
-  { model: "X-47", price: "INR 2.49 lakh", emi: "INR 7,200/month (approx.)" },
   {
-    model: "X-47 Recon",
-    price: "INR 3.59 lakh",
-    emi: "INR 10,400/month (approx.)",
+    model: "X-47 Venom Original",
+    price: "INR 2,65,000",
+    emi: "INR 7,700/month (approx.)",
+  },
+  {
+    model: "X-47 Venom Recon",
+    price: "INR 3,75,000",
+    emi: "INR 10,900/month (approx.)",
   },
   {
     model: "F77 SuperStreet",
-    price: "INR 3,09,000*",
+    price: "INR 3,09,000",
     emi: "INR 9,000/month (approx.)",
   },
   {
-    model: "F77 Mach 2",
-    price: "INR 3.99 lakh",
+    model: "F77 Mach 2 Recon",
+    price: "INR 3,99,000",
     emi: "INR 11,500/month (approx.)",
   },
 ];
@@ -261,6 +266,7 @@ export default function FinancePage() {
               EMI values are indicative for a sample tenure. Actual EMI depends
               on lender, tenure, rate, profile, and the final on-road quote.
             </p>
+            <PriceDisclaimer className="mb-6" />
             <Link href="/contact" className="btn-primary inline-block">
               GET A CUSTOM QUOTE
             </Link>
@@ -329,8 +335,8 @@ export default function FinancePage() {
               SPEAK TO OUR FINANCE TEAM
             </h3>
             <p className="mb-6 text-sm leading-relaxed text-[#888]">
-              Our finance desk is available at Nagarbhavi, Mon-Sun, 10 AM - 7
-              PM. Walk in or reach us on WhatsApp or phone.
+              Our finance desk is available at Nagarbhavi and at the
+              Rajajinagar sales counter, Mon-Sun, 10 AM - 7 PM. Walk in or reach us on WhatsApp or phone.
             </p>
             <div className="space-y-3">
               <a
@@ -342,10 +348,10 @@ export default function FinancePage() {
                 WhatsApp: 96069 55529
               </a>
               <a
-                href="tel:+919606955530"
+                href="tel:+918050073309"
                 className="flex items-center gap-3 border border-white px-5 py-3 text-xs font-bold uppercase tracking-widest text-[#FF3B3B] transition-all hover:bg-white/10"
               >
-                Call: 96069 55530
+                Call: +91 80500 73309
               </a>
             </div>
           </div>

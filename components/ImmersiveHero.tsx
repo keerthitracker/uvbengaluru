@@ -70,6 +70,10 @@ export default function ImmersiveHero({
   const selectedHeroImage = activeColor ? resolveColorImage(activeColor) : activeVariant.transparentImage || vehicle.heroImage
   const heroImageMode = activeColor?.heroImageMode ?? 'product'
   const shouldRenderOverlay = heroImageMode === 'product'
+  const priceRow = vehicle.priceList?.rows.find(
+    (row) => row.variant === activeVariant.name && row.colour === activeColor?.name,
+  )
+  const formatInr = (value: number) => `INR ${value.toLocaleString('en-IN')}`
   const statItems = [
     { label: 'IDC Range', value: activeVariant.range },
     { label: 'Top Speed', value: activeVariant.topSpeed },
@@ -148,6 +152,10 @@ export default function ImmersiveHero({
             </p>
             <h1 className="font-display text-[clamp(40px,7vw,92px)] font-extrabold uppercase leading-[0.95] tracking-[0.06em] text-white">
               {activeVariant.name}
+              <span className="sr-only">
+                {" "}
+                price in Bengaluru at UV Bengaluru
+              </span>
             </h1>
             <p className="mt-4 text-sm font-semibold uppercase tracking-[0.18em] text-white/48">
               {vehicle.tagline}
@@ -226,10 +234,18 @@ export default function ImmersiveHero({
             <div className="w-full rounded-[28px] border border-white/10 bg-black/40 p-5 backdrop-blur-2xl md:p-6">
               <div className="flex flex-col gap-5">
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.18em] text-white/48">Starting At</p>
-                  <p className="mt-2 font-display text-3xl font-bold text-[#FF5A4E]">
-                    {activeVariant.priceLabel ?? vehicle.price}
+                  <p className="text-[10px] uppercase tracking-[0.18em] text-white/48">
+                    {priceRow ? 'Effective Ex-Showroom' : 'Starting At'}
                   </p>
+                  <p className="mt-2 font-display text-3xl font-bold text-[#FF5A4E]">
+                    {priceRow ? formatInr(priceRow.effective) : (activeVariant.priceLabel ?? vehicle.price)}
+                  </p>
+                  {priceRow && vehicle.priceList && (
+                    <p className="mt-2 text-xs leading-relaxed text-white/62">
+                      Ex-showroom {formatInr(priceRow.exShowroom)} less {formatInr(priceRow.offer)}{' '}
+                      {vehicle.priceList.offerLabel}
+                    </p>
+                  )}
                   {activeVariant.battery && (
                     <p className="mt-2 text-sm uppercase tracking-[0.16em] text-white/52">
                       Battery: <span className="text-white/78">{activeVariant.battery}</span>

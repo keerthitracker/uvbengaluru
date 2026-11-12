@@ -2,12 +2,18 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
-import { showroomAddressText, siteConfig, absoluteUrl } from "@/lib/site";
+import {
+  showroomAddressText,
+  siteConfig,
+  absoluteUrl,
+  rajajinagarLine,
+  branchStructuredData,
+} from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Ultraviolette Showroom in Bengaluru — Visit UV Bengaluru",
+  title: "Ultraviolette Showroom Bengaluru: Visit Guide",
   description:
-    "Looking for an Ultraviolette showroom in Bengaluru? UV Bengaluru in Nagarbhavi is the official dealership for model discovery, test rides, and ownership support.",
+    "Ultraviolette showroom in Bengaluru: UV Bengaluru, the official dealer, in Nagarbhavi and Rajajinagar. See the X-47 Venom and F77 and book a test ride.",
   alternates: { canonical: "/ultraviolette-showroom-bengaluru" },
   openGraph: {
     title: "Ultraviolette Showroom Bengaluru | UV Bengaluru",
@@ -22,7 +28,7 @@ const faqs = [
   {
     question: "Where is the Ultraviolette showroom in Bengaluru?",
     answer:
-      "UV Bengaluru in Nagarbhavi is the official dealership touchpoint for customers looking to explore the Ultraviolette lineup in Bengaluru.",
+      "UV Bengaluru is the official dealership for customers looking to explore the Ultraviolette lineup in Bengaluru, with a sales, service and spares facility in Nagarbhavi and a sales counter in Rajajinagar.",
   },
   {
     question: "Can I test ride from the showroom?",
@@ -37,7 +43,7 @@ const faqs = [
 ];
 
 const visitSignals = [
-  "Official Ultraviolette dealership touchpoint in Nagarbhavi, Bengaluru",
+  "Official Ultraviolette dealership with locations in Nagarbhavi and Rajajinagar, Bengaluru",
   "Open daily from 10:00 AM to 7:00 PM",
   "Use the visit for lineup discovery, pricing discussion, finance context, and test-ride planning",
   "Call ahead if you want a specific model or test-ride slot confirmed before visiting",
@@ -77,6 +83,9 @@ export default function UltravioletteShowroomBengaluruPage() {
       hasMap:
         "https://maps.google.com/?q=SJA+Arcade+904+10th+Cross+Rd+ITI+Layout+Papareddipalya+Naagarabhaavi+Bengaluru+Karnataka+560072",
     },
+    ...[branchStructuredData("rajajinagar")].filter(
+      (item): item is NonNullable<typeof item> => item !== null,
+    ),
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
@@ -126,7 +135,8 @@ export default function UltravioletteShowroomBengaluruPage() {
             <span className="text-[#FF3B3B]">BENGALURU</span>
           </div>
           <p className="max-w-3xl text-lg leading-relaxed text-[#888]">
-            UV Bengaluru in Nagarbhavi is the official dealership destination
+            UV Bengaluru, with locations in Nagarbhavi and Rajajinagar, is the
+            official dealership destination
             for riders who want to explore the lineup, understand pricing, and
             book a test ride in Bengaluru.
           </p>
@@ -135,7 +145,8 @@ export default function UltravioletteShowroomBengaluruPage() {
       <section className="border-b border-[#1a1a1a] px-4 py-20 md:px-8">
         <div className="mx-auto max-w-5xl grid gap-4">
           {[
-            `Location: ${showroomAddressText}`,
+            `Nagarbhavi (sales, service and spares): ${showroomAddressText}`,
+            rajajinagarLine,
             "Hours: 10:00 AM - 7:00 PM",
             `Phone: ${siteConfig.phoneDisplay}`,
             "Support: showroom visits, test rides, pricing, finance guidance",
@@ -163,7 +174,7 @@ export default function UltravioletteShowroomBengaluruPage() {
                 "Ask which models are currently on display.",
                 "Confirm whether your preferred bike is available for a same-day test ride.",
                 "Tell the team if you want pricing, finance, or booking guidance during the visit.",
-                "Use WhatsApp or phone first if you are coming from outside Nagarbhavi and want a productive visit window.",
+                "Use WhatsApp or phone first if you are coming from outside Nagarbhavi or Rajajinagar and want a productive visit window.",
               ].map((item) => (
                 <div
                   key={item}
