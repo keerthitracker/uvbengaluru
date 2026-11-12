@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PriceDisclaimer from "@/components/PriceDisclaimer";
 import Link from "next/link";
 import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
@@ -18,7 +19,7 @@ import { absoluteUrl, siteConfig } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Ultraviolette Motorcycles in Bengaluru",
   description:
-    "Ultraviolette lineup at UV Bengaluru: X-47 Venom from ₹2.64L, F77 SuperStreet and F77 Mach 2 from ₹3.09L. Test rides at Nagarbhavi and Rajajinagar.",
+    "Ultraviolette lineup at UV Bengaluru: X-47 Venom from ₹2.65L, F77 SuperStreet and F77 Mach 2 from ₹3.09L. Test rides at Nagarbhavi and Rajajinagar.",
   alternates: {
     canonical: "/vehicles",
   },
@@ -53,7 +54,7 @@ function VehicleCard({ vehicle }: { vehicle: Vehicle }) {
         {!isAvailable && (
           <span className="absolute left-3 top-3 btn-yellow">
             {vehicle.status === "pre-book"
-              ? "PRE-BOOK"
+              ? "LAUNCHING SOON"
               : vehicle.status === "enquiry-only"
                 ? "ENQUIRY"
                 : "STORY"}
@@ -149,6 +150,7 @@ export default function VehiclesPage() {
               <VehicleCard key={vehicle.slug} vehicle={vehicle} />
             ))}
           </div>
+          <PriceDisclaimer className="mt-8 max-w-4xl" />
         </div>
       </section>
 
@@ -156,11 +158,12 @@ export default function VehiclesPage() {
         <div className="max-w-7xl mx-auto">
           <div className="mb-8">
             <h2 className="mb-2 text-sm font-semibold uppercase tracking-[0.16em] text-[#A0A0A0]">
-              Pre-book / Register Interest
+              Launching Soon / Register Interest
             </h2>
             <p className="text-sm text-[#666]">
-              Upcoming models stay in pre-book mode until final retail
-              specifications are confirmed.
+              Upcoming models are launching soon. Prices and specifications
+              shown are indicative and may change once they are officially
+              launched.
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-6">

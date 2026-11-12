@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PriceDisclaimer from "@/components/PriceDisclaimer";
 import Link from "next/link";
 import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
@@ -7,7 +8,7 @@ import { absoluteUrl, siteConfig } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Ultraviolette Finance & EMI in Bengaluru",
   description:
-    "Finance your Ultraviolette in Bengaluru. X-47 Venom EMIs from about INR 7,650 a month, with guidance at UV Bengaluru, Nagarbhavi and Rajajinagar.",
+    "Finance your Ultraviolette in Bengaluru. X-47 Venom EMIs from about INR 7,700 a month, with guidance at UV Bengaluru, Nagarbhavi and Rajajinagar.",
   alternates: {
     canonical: "/finance",
   },
@@ -38,22 +39,22 @@ const financeOptions = [
 const emiExamples = [
   {
     model: "X-47 Venom Original",
-    price: "INR 2.64 lakh",
-    emi: "INR 7,650/month (approx.)",
+    price: "INR 2,65,000",
+    emi: "INR 7,700/month (approx.)",
   },
   {
     model: "X-47 Venom Recon",
-    price: "INR 3.59 lakh",
-    emi: "INR 10,400/month (approx.)",
+    price: "INR 3,75,000",
+    emi: "INR 10,900/month (approx.)",
   },
   {
     model: "F77 SuperStreet",
-    price: "INR 3.09 lakh",
+    price: "INR 3,09,000",
     emi: "INR 9,000/month (approx.)",
   },
   {
     model: "F77 Mach 2 Recon",
-    price: "INR 3.99 lakh",
+    price: "INR 3,99,000",
     emi: "INR 11,500/month (approx.)",
   },
 ];
@@ -265,6 +266,7 @@ export default function FinancePage() {
               EMI values are indicative for a sample tenure. Actual EMI depends
               on lender, tenure, rate, profile, and the final on-road quote.
             </p>
+            <PriceDisclaimer className="mb-6" />
             <Link href="/contact" className="btn-primary inline-block">
               GET A CUSTOM QUOTE
             </Link>

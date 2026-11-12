@@ -70,6 +70,20 @@ export interface VehicleGalleryItem {
   src: string
 }
 
+export interface VehiclePriceRow {
+  variant: string
+  colour: string
+  exShowroom: number
+  offer: number
+  effective: number
+}
+
+export interface VehiclePriceList {
+  title: string
+  offerLabel: string
+  rows: VehiclePriceRow[]
+}
+
 export interface Vehicle {
   slug: string
   name: string
@@ -84,6 +98,7 @@ export interface Vehicle {
   availableFrom?: string
   price: string
   priceNote?: string
+  priceList?: VehiclePriceList
   image: string
   cardImage: string
   heroImage: string
@@ -118,9 +133,29 @@ export const vehicles: Vehicle[] = [
     theme: 'dark',
     heroBackdropImage: asset('vehicles/x47-venom/backdrop.webp'),
     pagePriority: 'high',
-    price: 'From INR 2.64 lakh',
+    price: 'From INR 2,65,000',
     priceNote:
-      'Prices are Bengaluru ex-showroom as listed by Ultraviolette and include the Carbon Farewell Fund offer of up to INR 35,000. Verify final on-road pricing and offer validity with the dealership.',
+      'Effective ex-showroom price in Karnataka after the Carbon Farewell Fund offer of INR 35,000. Price varies by colour; see the full price list below.',
+    priceList: {
+      title: 'X-47 Venom price list - Karnataka',
+      offerLabel: 'Carbon Farewell Fund offer',
+      rows: [
+        { variant: 'X-47 Venom Original', colour: 'Cosmic Black', exShowroom: 300000, offer: 35000, effective: 265000 },
+        { variant: 'X-47 Venom Original', colour: 'Turbo Red', exShowroom: 304500, offer: 35000, effective: 269500 },
+        { variant: 'X-47 Venom Original', colour: 'Afterburner Yellow', exShowroom: 312500, offer: 35000, effective: 277500 },
+        { variant: 'X-47 Venom Original+', colour: 'Cosmic Black', exShowroom: 350000, offer: 35000, effective: 315000 },
+        { variant: 'X-47 Venom Original+', colour: 'Turbo Red', exShowroom: 354500, offer: 35000, effective: 319500 },
+        { variant: 'X-47 Venom Original+', colour: 'Afterburner Yellow', exShowroom: 362500, offer: 35000, effective: 327500 },
+        { variant: 'X-47 Venom Recon', colour: 'Cosmic Black', exShowroom: 410000, offer: 35000, effective: 375000 },
+        { variant: 'X-47 Venom Recon', colour: 'Turbo Red', exShowroom: 414500, offer: 35000, effective: 379500 },
+        { variant: 'X-47 Venom Recon', colour: 'Stellar White', exShowroom: 417500, offer: 35000, effective: 382500 },
+        { variant: 'X-47 Venom Recon', colour: 'Afterburner Yellow', exShowroom: 422500, offer: 35000, effective: 387500 },
+        { variant: 'X-47 Venom Recon+', colour: 'Cosmic Black', exShowroom: 434900, offer: 35000, effective: 399900 },
+        { variant: 'X-47 Venom Recon+', colour: 'Turbo Red', exShowroom: 439400, offer: 35000, effective: 404400 },
+        { variant: 'X-47 Venom Recon+', colour: 'Stellar White', exShowroom: 442400, offer: 35000, effective: 407400 },
+        { variant: 'X-47 Venom Recon+', colour: 'Afterburner Yellow', exShowroom: 447400, offer: 35000, effective: 412400 },
+      ],
+    },
     image: asset('vehicles/x47-venom/colors/turbo-red-cutout.webp'),
     cardImage: asset('vehicles/x47-venom/colors/turbo-red-cutout.webp'),
     heroImage: asset('vehicles/x47-venom/colors/turbo-red-cutout.webp'),
@@ -178,7 +213,7 @@ export const vehicles: Vehicle[] = [
     variants: [
       {
         name: 'X-47 Venom Original',
-        priceLabel: 'From INR 2.64 lakh',
+        priceLabel: 'From INR 2,65,000',
         battery: '7.5 kWh',
         range: '227 km IDC',
         power: '30 kW / 40 hp',
@@ -200,7 +235,7 @@ export const vehicles: Vehicle[] = [
       },
       {
         name: 'X-47 Venom Original+',
-        priceLabel: 'From INR 3.09 lakh',
+        priceLabel: 'From INR 3,15,000',
         battery: '7.5 kWh',
         range: '227 km IDC',
         power: '30 kW / 40 hp',
@@ -221,7 +256,7 @@ export const vehicles: Vehicle[] = [
       },
       {
         name: 'X-47 Venom Recon',
-        priceLabel: 'From INR 3.59 lakh',
+        priceLabel: 'From INR 3,75,000',
         battery: '11 kWh',
         range: '343 km IDC',
         power: '30 kW / 40 hp',
@@ -243,7 +278,7 @@ export const vehicles: Vehicle[] = [
       },
       {
         name: 'X-47 Venom Recon+',
-        priceLabel: 'From INR 4.09 lakh',
+        priceLabel: 'From INR 3,99,900',
         battery: '11 kWh',
         range: '343 km IDC',
         power: '30 kW / 40 hp',
@@ -369,8 +404,8 @@ export const vehicles: Vehicle[] = [
       'Aviation-derived electric performance with up to 40.2 hp, 100 Nm torque, 323 km IDC range, and a 155 km/h top speed.',
     status: 'available',
     pagePriority: 'high',
-    price: 'From INR 3.09 lakh',
-    priceNote: 'Use India/dealership pricing and warranty data for India-facing pages. Verify final on-road price locally.',
+    price: 'From INR 3,09,000',
+    priceNote: 'Indicative ex-showroom price. Please confirm the current Bengaluru ex-showroom and on-road price with UV Bengaluru.',
     image: asset('vehicles/f77-mach-2/card-side.png'),
     cardImage: asset('vehicles/f77-mach-2/card-side.png'),
     heroImage: asset('vehicles/f77-mach-2/card-side.png'),
@@ -407,7 +442,7 @@ export const vehicles: Vehicle[] = [
     variants: [
       {
         name: 'F77 Mach 2',
-        priceLabel: 'From INR 3.09 lakh',
+        priceLabel: 'From INR 3,09,000',
         battery: '7.1 kWh',
         range: '211 km IDC',
         power: '27 kW / 36.2 hp',
@@ -424,7 +459,7 @@ export const vehicles: Vehicle[] = [
       },
       {
         name: 'F77 Mach 2 Recon',
-        priceLabel: 'From INR 3.99 lakh',
+        priceLabel: 'From INR 3,99,000',
         battery: '10.3 kWh',
         range: '323 km IDC',
         power: '30 kW / 40.2 hp',
@@ -522,8 +557,8 @@ export const vehicles: Vehicle[] = [
       'F77 performance tuned for everyday aggression, urban comfort, and real-world riding.',
     status: 'available',
     pagePriority: 'high',
-    price: 'From INR 3.09 lakh',
-    priceNote: 'Verify final Bengaluru ex-showroom, on-road pricing, and offer terms with the dealership.',
+    price: 'From INR 3,09,000',
+    priceNote: 'Indicative ex-showroom price. Please confirm the current Bengaluru ex-showroom and on-road price with UV Bengaluru.',
     image: asset('vehicles/f77-superstreet/card-side.png'),
     cardImage: asset('vehicles/f77-superstreet/card-side.png'),
     heroImage: asset('vehicles/f77-superstreet/card-side.png'),
@@ -555,7 +590,7 @@ export const vehicles: Vehicle[] = [
     variants: [
       {
         name: 'F77 SuperStreet',
-        priceLabel: 'From INR 3.09 lakh',
+        priceLabel: 'From INR 3,09,000',
         battery: '7.1 kWh',
         range: '211 km IDC',
         power: '27 kW / 36.2 hp',
@@ -572,7 +607,7 @@ export const vehicles: Vehicle[] = [
       },
       {
         name: 'F77 SuperStreet Recon',
-        priceLabel: 'From INR 3.99 lakh',
+        priceLabel: 'From INR 3,99,000',
         battery: '10.3 kWh',
         range: '323 km IDC',
         power: '30 kW / 40.2 hp',
@@ -639,9 +674,8 @@ export const vehicles: Vehicle[] = [
       'Radar intelligence, smart dashcam, ARAS 360 awareness, long range, fast charging, and everyday convenience in one futuristic scooter.',
     status: 'pre-book',
     pagePriority: 'medium',
-    availableFrom: 'Q2 2026',
-    price: 'Pre-book / Register interest',
-    priceNote: 'Final variant selection, retail specifications, pricing, and delivery details must be verified with the dealership before publishing.',
+    price: 'From INR 1,45,000 (indicative)',
+    priceNote: 'Indicative pre-launch price published by Ultraviolette. Final price, variants, and specifications may change once the Tesseract is officially launched.',
     image: asset('vehicles/tesseract/hero.png'),
     cardImage: asset('vehicles/tesseract/card-side.png'),
     heroImage: asset('vehicles/tesseract/hero.png'),
@@ -662,7 +696,6 @@ export const vehicles: Vehicle[] = [
     ],
     specs: [
       { label: 'Status', value: 'Pre-book' },
-      { label: 'Expected', value: 'Q2 2026' },
       { label: 'Range (IDC)', value: 'Up to 261 km' },
       { label: 'Power', value: 'Up to 20 hp' },
       { label: 'Top Speed', value: 'Up to 125 km/h' },
@@ -729,14 +762,13 @@ export const vehicles: Vehicle[] = [
       'A high-torque electric fun-bike built for thrill seekers, rally lovers, and riders who want something lighter, sharper, and more rebellious.',
     status: 'pre-book',
     pagePriority: 'medium',
-    availableFrom: 'Q1 2026',
     price: 'INR 1,75,000*',
     priceNote:
-      'Official page shows INR 1,75,000* and INR 999 pre-book amount. Do not publish battery capacity or riding range until Ultraviolette/dealership confirms them.',
+      'Launching soon. Indicative pre-launch price and range published by Ultraviolette; both may change once the Shockwave is officially launched.',
     image: asset('vehicles/shockwave/hero.png'),
     cardImage: asset('vehicles/shockwave/hero.png'),
     heroImage: asset('vehicles/shockwave/hero.png'),
-    primaryCta: 'Pre-book adrenaline',
+    primaryCta: 'Register interest',
     secondaryCta: 'Register interest',
     colors: [
       {
@@ -757,17 +789,16 @@ export const vehicles: Vehicle[] = [
       { label: 'Power', value: '14.5 hp' },
       { label: 'Top Speed', value: '120 km/h' },
       { label: 'Weight', value: '120 kg' },
-      { label: 'Pre-book', value: 'INR 999' },
+      { label: 'IDC Range', value: '165 km (indicative)' },
     ],
     specs: [
-      { label: 'Status', value: 'Pre-book' },
-      { label: 'Expected', value: 'Q1 2026' },
+      { label: 'Status', value: 'Launching soon' },
       { label: 'Rear Wheel Torque', value: '505 Nm' },
       { label: 'Power', value: '14.5 hp' },
       { label: 'Top Speed', value: '120 km/h' },
       { label: 'Weight', value: '120 kg' },
       { label: 'Display', value: '5-inch TFT full-color display' },
-      { label: 'Pre-book Amount', value: 'INR 999' },
+      { label: 'Range (IDC)', value: '165 km (indicative, may change at launch)' },
     ],
     specGroups: [
       {
@@ -806,7 +837,7 @@ export const vehicles: Vehicle[] = [
       },
       {
         title: 'Confirmed Specs Only',
-        description: 'Shockwave pages must avoid battery capacity and riding range until Ultraviolette or the dealership confirms those values.',
+        description: 'Ultraviolette lists an indicative 165 km IDC range for Shockwave. Final range and battery details will be confirmed at the official launch.',
         image: asset('vehicles/shockwave/features/display.png'),
       },
     ],
@@ -816,9 +847,9 @@ export const vehicles: Vehicle[] = [
       { type: 'detail', alt: 'Shockwave suspension detail', src: asset('vehicles/shockwave/details/suspension.png') },
     ],
     description:
-      'Shockwave is a lightweight electric fun-bike with huge rear-wheel torque, off-road stance, switchable ride controls, and a rebellious pre-book positioning.',
+      'Shockwave is a lightweight electric fun-bike with huge rear-wheel torque, off-road stance, switchable ride controls, and a launching-soon status at UV Bengaluru.',
     sourceRefs: ['S8'],
-    dealerVerificationRequired: ['Final price terms', 'Delivery timeline', 'Battery capacity and range before publishing'],
+    dealerVerificationRequired: ['Final price at launch', 'Launch and delivery timeline', 'Final battery capacity and range'],
   },
   {
     slug: 'f99',

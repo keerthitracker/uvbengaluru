@@ -124,7 +124,7 @@ const landingFaqs = [
   {
     question: "Which Ultraviolette models can I explore at UV Bengaluru?",
     answer:
-      "The lineup includes the new X-47 Venom, F77 Mach 2, F77 SuperStreet, and selected pre-book platforms such as Tesseract and Shockwave, subject to current availability.",
+      "The lineup includes the new X-47 Venom, F77 Mach 2, F77 SuperStreet, and upcoming models such as Tesseract and Shockwave, subject to current availability.",
   },
   {
     question: "Can I book an Ultraviolette test ride in Bengaluru?",
@@ -144,7 +144,7 @@ const landingFaqs = [
   {
     question: "Is the X-47 Venom available for test rides in Bengaluru?",
     answer:
-      "Yes. The X-47 Venom is available at UV Bengaluru with prices starting at INR 2.64 lakh ex-showroom, and you can book a test ride online or by phone.",
+      "Yes. The X-47 Venom is available at UV Bengaluru with effective ex-showroom prices starting at INR 2,65,000, and you can book a test ride online or by phone.",
   },
 ];
 
@@ -469,7 +469,7 @@ export default function HomePage() {
                         : "border border-[#2A2A2A] bg-[#111] text-white"
                     }`}
                   >
-                    {vehicle.status === "pre-book" ? "Pre-book" : "Available"}
+                    {vehicle.status === "pre-book" ? "Launching Soon" : "Available"}
                   </span>
                 </div>
                 <div className="flex flex-1 flex-col p-5">

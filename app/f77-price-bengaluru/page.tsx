@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PriceDisclaimer from "@/components/PriceDisclaimer";
 import Link from "next/link";
 import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
@@ -149,6 +150,7 @@ export default function F77PriceBengaluruPage() {
                 </article>
               ))}
           </div>
+          <PriceDisclaimer className="mt-8 max-w-4xl" />
         </div>
       </section>
 
