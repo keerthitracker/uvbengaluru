@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { siteConfig } from "@/lib/site";
 import { retailVehicles } from "@/lib/vehicles";
 
 const services = [
@@ -58,7 +59,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-sm leading-relaxed text-[#666]">
-              Official Ultraviolette dealership in Nagarbhavi, Bengaluru.
+              Official Ultraviolette dealership in Bengaluru, with showrooms in Nagarbhavi and Rajajinagar.
             </p>
           </div>
 
@@ -153,16 +154,21 @@ export default function Footer() {
               Contact Us
             </h3>
             <ul className="space-y-3">
-              <li className="text-sm leading-relaxed text-[#A0A0A0]">
-                SJA Arcade, 904, 10th Cross Rd, ITI Layout, Papareddipalya,
-                Naagarabhaavi, Bengaluru, Karnataka 560072
-              </li>
+              {siteConfig.locations.map((location) => (
+                <li
+                  key={location.id}
+                  className="text-sm leading-relaxed text-[#A0A0A0]"
+                >
+                  <span className="block text-white">{location.name}</span>
+                  {location.addressLines.join(", ")}
+                </li>
+              ))}
               <li>
                 <a
-                  href="tel:+919606955530"
+                  href="tel:+918050073309"
                   className="text-sm text-[#A0A0A0] hover:text-white"
                 >
-                  Phone: 96069 55530
+                  Call (IVR): +91 80500 73309
                 </a>
               </li>
               <li>

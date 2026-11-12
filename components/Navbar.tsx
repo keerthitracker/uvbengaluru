@@ -79,13 +79,13 @@ export default function Navbar() {
             }}
             className="uppercase"
           >
-            Visit us at Nagarbhavi&nbsp;&nbsp;&bull;&nbsp;&nbsp;10 AM-7 PM
+            Visit us at Nagarbhavi &amp; Rajajinagar&nbsp;&nbsp;&bull;&nbsp;&nbsp;10 AM-7 PM
             Daily&nbsp;&nbsp;&bull;&nbsp;&nbsp;
             <a
-              href="tel:+919606955530"
+              href="tel:+918050073309"
               className="transition-colors hover:text-white"
             >
-              96069 55530
+              +91 80500 73309
             </a>
           </p>
         </div>

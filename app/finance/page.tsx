@@ -342,10 +342,10 @@ export default function FinancePage() {
                 WhatsApp: 96069 55529
               </a>
               <a
-                href="tel:+919606955530"
+                href="tel:+918050073309"
                 className="flex items-center gap-3 border border-white px-5 py-3 text-xs font-bold uppercase tracking-widest text-[#FF3B3B] transition-all hover:bg-white/10"
               >
-                Call: 96069 55530
+                Call: +91 80500 73309
               </a>
             </div>
           </div>

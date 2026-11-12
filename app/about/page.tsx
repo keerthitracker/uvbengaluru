@@ -51,7 +51,7 @@ const stats = [
   { value: "2024", label: "Year Established" },
   { value: "3+", label: "Retail Models" },
   { value: "7 Days", label: "Open Every Week" },
-  { value: "1 Showroom", label: "Nagarbhavi, Bengaluru" },
+  { value: "2 Showrooms", label: "Nagarbhavi & Rajajinagar" },
 ];
 
 const differentiators = [

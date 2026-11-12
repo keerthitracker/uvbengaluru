@@ -22,6 +22,8 @@ export const metadata: Metadata = {
     "Naagarabhaavi",
     "F77 Mach 2 Bengaluru",
     "X-47 Bengaluru",
+    "X-47 Venom Bengaluru",
+    "Rajajinagar",
   ],
   alternates: {
     canonical: "/",

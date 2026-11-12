@@ -8,19 +8,19 @@ import {
   getVehicleImageObjectClass,
 } from "@/lib/vehicleImagePresentation";
 import { getVehicle, retailVehicles } from "@/lib/vehicles";
-import { absoluteUrl, showroomAddressText, siteConfig } from "@/lib/site";
+import { absoluteUrl, showroomAddressText, siteConfig, branchStructuredData } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Official Ultraviolette Dealership in Bengaluru",
   description:
-    "UV Bengaluru is the official Ultraviolette dealership in Nagarbhavi, Bengaluru. Explore X-47, F77 Mach 2, F77 SuperStreet, book a test ride, or get finance support. Open daily 10 AM–7 PM.",
+    "UV Bengaluru is the official Ultraviolette dealership in Bengaluru, with showrooms in Nagarbhavi and Rajajinagar. Explore the X-47 Venom, X-47, F77 Mach 2, F77 SuperStreet, book a test ride, or get finance support. Open daily 10 AM–7 PM.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "UV Bengaluru | Official Ultraviolette Dealership, Nagarbhavi",
+    title: "UV Bengaluru | Official Ultraviolette Dealership, Bengaluru",
     description:
-      "Explore Ultraviolette's X-47, F77 Mach 2, and F77 SuperStreet in Bengaluru. Book a test ride at our Nagarbhavi showroom. Performance electric motorcycles for the next generation.",
+      "Explore Ultraviolette's X-47 Venom, X-47, F77 Mach 2, and F77 SuperStreet in Bengaluru. Book a test ride at our Nagarbhavi or Rajajinagar showroom. Performance electric motorcycles for the next generation.",
     url: absoluteUrl("/"),
     images: [
       {
@@ -55,7 +55,7 @@ const ownershipActions = [
   {
     title: "Visit Our Showroom",
     description:
-      "See the current lineup in person at Nagarbhavi, compare variants, and understand current Bengaluru pricing with the team.",
+      "See the current lineup in person at Nagarbhavi or Rajajinagar, compare variants, and understand current Bengaluru pricing with the team.",
     href: "/showroom",
     cta: "Get Directions",
   },
@@ -118,12 +118,12 @@ const landingFaqs = [
   {
     question: "Is UV Bengaluru an official Ultraviolette dealership?",
     answer:
-      "Yes. UV Bengaluru is the official Ultraviolette dealership in Nagarbhavi, Bengaluru, operated by Aadya Inc.",
+      "Yes. UV Bengaluru is the official Ultraviolette dealership in Bengaluru, operated by Aadya Inc., with showrooms in Nagarbhavi and Rajajinagar.",
   },
   {
     question: "Which Ultraviolette models can I explore at UV Bengaluru?",
     answer:
-      "The lineup includes the X-47 range, F77 Mach 2, F77 SuperStreet, and selected pre-book platforms such as Tesseract and Shockwave, subject to current availability.",
+      "The lineup includes the new X-47 Venom, the X-47 range, F77 Mach 2, F77 SuperStreet, and selected pre-book platforms such as Tesseract and Shockwave, subject to current availability.",
   },
   {
     question: "Can I book an Ultraviolette test ride in Bengaluru?",
@@ -143,7 +143,7 @@ const deferredSectionStyle = {
 };
 
 export default function HomePage() {
-  const featured = getVehicle("x-47") ?? retailVehicles[0];
+  const featured = getVehicle("x-47-venom") ?? retailVehicles[0];
 
   if (!featured) return null;
 
@@ -181,6 +181,9 @@ export default function HomePage() {
       },
       sameAs: siteConfig.sameAs,
     },
+    ...[branchStructuredData("rajajinagar")].filter(
+      (item): item is NonNullable<typeof item> => item !== null,
+    ),
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
@@ -228,8 +231,9 @@ export default function HomePage() {
                 <span className="text-[#E8231A]">Refined.</span>
               </div>
               <p className="mb-6 max-w-xl text-[15px] leading-relaxed text-[#666]">
-                UV Bengaluru in Nagarbhavi is the official Ultraviolette
-                dealership in Bengaluru, where riders can explore the X-47, F77
+                UV Bengaluru is the official Ultraviolette dealership in
+                Bengaluru, with showrooms in Nagarbhavi and Rajajinagar, where
+                riders can explore the X-47 Venom, X-47, F77
                 Mach 2, and F77 SuperStreet, compare variants, and book a test
                 ride with showroom guidance. The experience stays design-led and
                 performance-first, but the first step is practical: get the
@@ -340,7 +344,7 @@ export default function HomePage() {
               Featured Model Story
             </p>
             <h2 className="font-display text-[clamp(28px,4vw,42px)] font-bold uppercase tracking-[0.08em] text-white">
-              X-47:
+              {featured.name}:
               <span className="text-[#FF3B3B]"> The Flagship Crossover</span>
             </h2>
           </div>
@@ -390,7 +394,7 @@ export default function HomePage() {
                 href={`/vehicles/${featured.slug}`}
                 className="btn-primary text-xs"
               >
-                Explore X-47
+                Explore {featured.name}
               </Link>
             </div>
           </div>

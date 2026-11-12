@@ -18,7 +18,7 @@ import { absoluteUrl, siteConfig } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Ultraviolette Motorcycles in Bengaluru",
   description:
-    "Browse the full Ultraviolette lineup at UV Bengaluru. X-47 from ₹2.49L, F77 SuperStreet from ₹3.09L, and F77 Mach 2 from ₹3.99L. Book a test ride at our Nagarbhavi showroom.",
+    "Browse the full Ultraviolette lineup at UV Bengaluru. X-47 Venom from ₹2.64L, X-47 from ₹2.49L, F77 SuperStreet from ₹3.09L, and F77 Mach 2 from ₹3.99L. Book a test ride at our Nagarbhavi or Rajajinagar showroom.",
   alternates: {
     canonical: "/vehicles",
   },
@@ -119,7 +119,7 @@ export default function VehiclesPage() {
             Bengaluru
           </SeoH1>
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#A0A0A0]">
-            UV Bengaluru - Nagarbhavi
+            UV Bengaluru - Nagarbhavi & Rajajinagar
           </p>
           <div
             aria-hidden="true"

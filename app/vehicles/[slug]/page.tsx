@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${vehicle.name} Price in Bengaluru`,
-    description: `${vehicle.subheadline} ${vehicle.price}. Visit UV Bengaluru, Nagarbhavi for current pricing, availability, and booking guidance.`,
+    description: `${vehicle.subheadline} ${vehicle.price}. Visit UV Bengaluru in Nagarbhavi or Rajajinagar for current pricing, availability, and booking guidance.`,
     alternates: {
       canonical: `/vehicles/${vehicle.slug}`,
     },
@@ -130,7 +130,7 @@ function buildWhyBuyPoints(
     ];
   }
 
-  if (vehicle.slug === "x-47" || vehicle.slug === "x-47-desert-wing") {
+  if (vehicle.slug.startsWith("x-47")) {
     return [
       `${vehicle.name} is built for riders who want a more versatile Ultraviolette format for Bengaluru roads, outskirts, and occasional longer rides.`,
       "The combination of crossover ergonomics, strong range claims, and advanced rider-assist tech makes it easier to justify as more than a city-only machine.",
@@ -209,7 +209,7 @@ function buildRelatedGuides(
     );
   }
 
-  if (vehicle.slug === "x-47" || vehicle.slug === "x-47-desert-wing") {
+  if (vehicle.slug.startsWith("x-47")) {
     links.push({
       href: "/ultraviolette-showroom-bengaluru",
       label: "Ultraviolette Showroom Bengaluru",

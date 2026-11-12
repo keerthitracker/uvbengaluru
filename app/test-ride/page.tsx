@@ -143,8 +143,8 @@ export default function TestRidePage() {
                 Contact
               </h3>
               <p className="text-sm text-[#888]">
-                <a href="tel:+919606955530" className="transition-colors hover:text-white">
-                  96069 55530
+                <a href="tel:+918050073309" className="transition-colors hover:text-white">
+                  +91 80500 73309
                 </a>
                 <br />
                 <a

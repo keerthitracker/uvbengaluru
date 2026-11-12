@@ -70,11 +70,12 @@ export const buttons = {
 export const DEALER = {
   name:        'UV Bengaluru',
   legal:       'Aadya Inc.',
-  phone:       '96069 55530',
-  phoneTel:    'tel:+919606955530',
+  phone:       '+91 80500 73309',
+  phoneTel:    'tel:+918050073309',
   whatsapp:    '96069 55529',
   whatsappUrl: 'https://wa.me/919606955529?text=Hi%2C%20I%27m%20interested%20in%20Ultraviolette%20motorcycles',
   address:     'SJA Arcade, 904, 10th Cross Rd, ITI Layout, Papareddipalya, Naagarabhaavi, Bengaluru, Karnataka 560072',
+  addressRajajinagar: 'No. 35/2, Ground Floor, Shop No. 001, Opp. Suguna Hospital, Dr. Rajkumar Road, Rajajinagar, Bengaluru, Karnataka 560010',
   timings:     '10:00 AM – 7:00 PM, all days',
   copyright:   '© 2025 Aadya Inc. | Authorized Ultraviolette Dealer, Bengaluru',
 } as const
