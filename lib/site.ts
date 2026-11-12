@@ -5,6 +5,7 @@ export const siteConfig = {
     "UV Bengaluru is the official Ultraviolette dealership in Bengaluru, with a sales, service and spares facility in Nagarbhavi and a sales counter in Rajajinagar. Explore the X-47 Venom and F77 range and book a test ride.",
   url: "https://uvbengaluru.com",
   ogImage: "/opengraph-image",
+  logo: "/images/aadya-inc-logo.png",
   phoneDisplay: "+91 80500 73309",
   phoneHref: "+918050073309",
   whatsappDisplay: "96069 55529",

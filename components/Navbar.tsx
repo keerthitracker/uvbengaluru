@@ -122,6 +122,17 @@ export default function Navbar() {
                 >
                   UV BENGALURU
                 </span>
+                <span
+                  aria-hidden="true"
+                  className="hidden h-7 w-px bg-white/20 xl:block"
+                />
+                <Image
+                  src="/images/aadya-inc-logo.png"
+                  alt="Aadya Inc. logo"
+                  width={640}
+                  height={477}
+                  className="hidden h-9 w-auto xl:block"
+                />
               </div>
             </Link>
 

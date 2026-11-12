@@ -166,6 +166,7 @@ export default function HomePage() {
       "@type": ["MotorcycleDealer", "LocalBusiness"],
       "@id": `${siteConfig.url}/#dealer`,
       name: siteConfig.name,
+      logo: absoluteUrl(siteConfig.logo),
       legalName: siteConfig.legalName,
       description: siteConfig.description,
       url: siteConfig.url,

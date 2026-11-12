@@ -190,7 +190,43 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-[#333] pt-6 md:flex-row">
+        <div className="mt-12 flex flex-col items-center gap-6 border-t border-[#333] pt-8 sm:flex-row sm:justify-center sm:gap-10">
+          <a
+            href="https://www.ultraviolette.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Ultraviolette Automotive website"
+          >
+            <Image
+              src="/images/ultraviolette-logo-footer-official.svg"
+              alt="Ultraviolette logo"
+              width={240}
+              height={32}
+              className="h-7 w-auto"
+            />
+          </a>
+          <span
+            aria-hidden="true"
+            className="hidden h-10 w-px bg-[#333] sm:block"
+          />
+          <div className="flex items-center gap-4">
+            <Image
+              src="/images/aadya-inc-logo.png"
+              alt="Aadya Inc. logo"
+              width={640}
+              height={477}
+              className="h-14 w-auto"
+            />
+            <p className="text-xs uppercase leading-relaxed tracking-[0.14em] text-[#A0A0A0]">
+              Authorised dealer
+              <span className="block text-sm font-semibold tracking-[0.1em] text-white">
+                {siteConfig.legalName}
+              </span>
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-[#333] pt-6 md:flex-row">
           <p className="text-xs tracking-[0.06em] text-[#666]">
             (c) 2025 Aadya Inc. | Authorized Ultraviolette Dealer, Bengaluru
           </p>
