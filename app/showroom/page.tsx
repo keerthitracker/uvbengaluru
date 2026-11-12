@@ -4,12 +4,18 @@ import ContactForm from "@/components/ContactForm";
 import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
 import LocationCards from "@/components/LocationCards";
-import { absoluteUrl, showroomAddressText, siteConfig, branchStructuredData } from "@/lib/site";
+import {
+  absoluteUrl,
+  showroomAddressText,
+  siteConfig,
+  branchStructuredData,
+  rajajinagarLine,
+} from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Ultraviolette Showroom in Bengaluru",
   description:
-    "Visit UV Bengaluru's Nagarbhavi and Rajajinagar showrooms, Bengaluru's official Ultraviolette dealership. Explore the lineup, compare variants, and get current pricing.",
+    "Visit UV Bengaluru, the official Ultraviolette dealer, at Nagarbhavi (sales, service, spares) or the Rajajinagar sales counter. See the X-47 Venom.",
   alternates: {
     canonical: "/showroom",
   },
@@ -25,7 +31,7 @@ export const metadata: Metadata = {
 const showroomFeatures = [
   {
     title: "LIVE BIKE DISPLAYS",
-    desc: "Explore the Ultraviolette lineup: X-47 Venom, X-47 series, F77 Mach 2, F77 SuperStreet, plus pre-book interest for Tesseract and Shockwave. Sit on them where available, explore every detail, and compare variants with the team.",
+    desc: "Explore the Ultraviolette lineup: X-47 Venom, F77 Mach 2, F77 SuperStreet, plus pre-book interest for Tesseract and Shockwave. Sit on them where available, explore every detail, and compare variants with the team.",
   },
   {
     title: "CERTIFIED EXPERTS",
@@ -65,6 +71,7 @@ export default function ShowroomPage() {
     {
       "@context": "https://schema.org",
       "@type": ["MotorcycleDealer", "LocalBusiness"],
+      "@id": `${siteConfig.url}/#dealer`,
       name: siteConfig.name,
       legalName: siteConfig.legalName,
       url: absoluteUrl("/showroom"),
@@ -151,7 +158,7 @@ export default function ShowroomPage() {
               Our Locations
             </p>
             <h2 className="font-display text-4xl font-extrabold uppercase text-white md:text-5xl">
-              TWO SHOWROOMS IN BENGALURU
+              TWO LOCATIONS IN BENGALURU
             </h2>
           </div>
           <LocationCards />
@@ -166,7 +173,7 @@ export default function ShowroomPage() {
                 ADDRESS
               </h2>
               <p className="text-base leading-relaxed text-white">
-                UV Bengaluru
+                UV Bengaluru - Nagarbhavi (Sales, Service &amp; Spares)
                 <br />
                 {showroomAddressText}
               </p>
@@ -347,7 +354,8 @@ export default function ShowroomPage() {
               </h3>
               <div className="space-y-3">
                 {[
-                  `Address: ${showroomAddressText}`,
+                  `Nagarbhavi (sales, service and spares): ${showroomAddressText}`,
+                  rajajinagarLine,
                   "Hours: Monday to Sunday, 10:00 AM to 7:00 PM",
                   `Phone: ${siteConfig.phoneDisplay}`,
                   `WhatsApp: ${siteConfig.whatsappDisplay}`,

@@ -7,14 +7,14 @@ import { absoluteUrl, siteConfig } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Electric Bike Finance in Bengaluru — EMI for Ultraviolette",
   description:
-    "Finance your Ultraviolette in Bengaluru with flexible EMI options. X-47 from approximately INR 7,200 per month. Section 80EEB tax benefits and ownership guidance available at UV Bengaluru.",
+    "Finance your Ultraviolette in Bengaluru. X-47 Venom EMIs from about INR 7,650 a month, with guidance at UV Bengaluru, Nagarbhavi and Rajajinagar.",
   alternates: {
     canonical: "/finance",
   },
   openGraph: {
     title: "Electric Bike Finance in Bengaluru | UV Bengaluru",
     description:
-      "Explore EMI plans, ownership support, and finance guidance for Ultraviolette motorcycles at UV Bengaluru in Nagarbhavi.",
+      "Explore EMI plans, ownership support, and finance guidance for Ultraviolette motorcycles at UV Bengaluru in Nagarbhavi and Rajajinagar.",
     url: absoluteUrl("/finance"),
     images: [absoluteUrl(siteConfig.ogImage)],
   },
@@ -36,9 +36,13 @@ const financeOptions = [
 ];
 
 const emiExamples = [
-  { model: "X-47", price: "INR 2.49 lakh", emi: "INR 7,200/month (approx.)" },
   {
-    model: "X-47 Recon",
+    model: "X-47 Venom Original",
+    price: "INR 2.64 lakh",
+    emi: "INR 7,650/month (approx.)",
+  },
+  {
+    model: "X-47 Venom Recon",
     price: "INR 3.59 lakh",
     emi: "INR 10,400/month (approx.)",
   },
@@ -329,8 +333,8 @@ export default function FinancePage() {
               SPEAK TO OUR FINANCE TEAM
             </h3>
             <p className="mb-6 text-sm leading-relaxed text-[#888]">
-              Our finance desk is available at Nagarbhavi, Mon-Sun, 10 AM - 7
-              PM. Walk in or reach us on WhatsApp or phone.
+              Our finance desk is available at Nagarbhavi and at the
+              Rajajinagar sales counter, Mon-Sun, 10 AM - 7 PM. Walk in or reach us on WhatsApp or phone.
             </p>
             <div className="space-y-3">
               <a

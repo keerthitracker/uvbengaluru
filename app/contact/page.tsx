@@ -3,12 +3,16 @@ import ContactForm from "@/components/ContactForm";
 import LocationCards from "@/components/LocationCards";
 import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
-import { absoluteUrl, siteConfig } from "@/lib/site";
+import {
+  absoluteUrl,
+  siteConfig,
+  branchStructuredData,
+} from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact UV Bengaluru in Bengaluru",
   description:
-    "Get in touch with UV Bengaluru, the official Ultraviolette dealership in Bengaluru, with showrooms in Nagarbhavi and Rajajinagar. Call, email, or visit us for enquiries, test rides, and service.",
+    "Contact UV Bengaluru, the official Ultraviolette dealer. Call, WhatsApp, or visit Nagarbhavi or Rajajinagar for test rides, sales and service.",
   alternates: {
     canonical: "/contact",
   },
@@ -27,7 +31,7 @@ const contactInfo = [
     lines: [
       "SJA Arcade, 904, 10th Cross Rd",
       "ITI Layout, Papareddipalya",
-      "Naagarabhaavi, Bengaluru",
+      "Nagarbhavi, Bengaluru",
       "Karnataka 560072",
     ],
     cta: {
@@ -139,7 +143,7 @@ export default function ContactPage() {
       name: "Contact UV Bengaluru",
       url: absoluteUrl("/contact"),
       description:
-        "Contact UV Bengaluru in Nagarbhavi for test rides, sales enquiries, service coordination, and finance support.",
+        "Contact UV Bengaluru in Nagarbhavi or Rajajinagar for test rides, sales enquiries, service coordination, and finance support.",
       mainEntity: {
         "@type": "LocalBusiness",
         name: siteConfig.name,
@@ -157,6 +161,9 @@ export default function ContactPage() {
         sameAs: siteConfig.sameAs,
       },
     },
+    ...[branchStructuredData("rajajinagar")].filter(
+      (item): item is NonNullable<typeof item> => item !== null,
+    ),
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
@@ -245,7 +252,7 @@ export default function ContactPage() {
 
           <div className="mb-16">
             <h2 className="mb-6 font-display text-2xl font-extrabold uppercase text-white">
-              OUR SHOWROOMS
+              OUR LOCATIONS
             </h2>
             <LocationCards />
           </div>

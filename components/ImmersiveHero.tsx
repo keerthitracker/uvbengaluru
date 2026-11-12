@@ -148,6 +148,10 @@ export default function ImmersiveHero({
             </p>
             <h1 className="font-display text-[clamp(40px,7vw,92px)] font-extrabold uppercase leading-[0.95] tracking-[0.06em] text-white">
               {activeVariant.name}
+              <span className="sr-only">
+                {" "}
+                price in Bengaluru at UV Bengaluru
+              </span>
             </h1>
             <p className="mt-4 text-sm font-semibold uppercase tracking-[0.18em] text-white/48">
               {vehicle.tagline}

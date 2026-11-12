@@ -2,19 +2,24 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
-import { absoluteUrl, showroomAddressText, siteConfig } from "@/lib/site";
+import LocationAddresses from "@/components/LocationAddresses";
+import {
+  absoluteUrl,
+  siteConfig,
+  branchStructuredData,
+} from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "About UV Bengaluru — Official Ultraviolette Dealer, Nagarbhavi",
+  title: "About UV Bengaluru — Ultraviolette Dealer",
   description:
-    "UV Bengaluru, operated by Aadya Inc., is the official authorized Ultraviolette dealership in Nagarbhavi, Bengaluru. Test rides, finance support, service, and ownership guidance are available under one roof.",
+    "UV Bengaluru, by Aadya Inc., is the official Ultraviolette dealer in Bengaluru, at Nagarbhavi and Rajajinagar: test rides, finance, service and spares.",
   alternates: {
     canonical: "/about",
   },
   openGraph: {
     title: "About UV Bengaluru | Official Ultraviolette Dealer",
     description:
-      "Learn about UV Bengaluru, the official Ultraviolette dealership in Nagarbhavi, Bengaluru, operated by Aadya Inc.",
+      "Learn about UV Bengaluru, the official Ultraviolette dealership in Bengaluru with locations in Nagarbhavi and Rajajinagar, operated by Aadya Inc.",
     url: absoluteUrl("/about"),
     images: [absoluteUrl(siteConfig.ogImage)],
   },
@@ -27,7 +32,7 @@ const services = [
   },
   {
     title: "TEST RIDES",
-    desc: "Book a test ride through the week at our Nagarbhavi facility and experience the torque, ride modes, and real-world feel first-hand.",
+    desc: "Book a test ride through the week at our Nagarbhavi or Rajajinagar location and experience the torque, ride modes, and real-world feel first-hand.",
   },
   {
     title: "WORKSHOP & SERVICE",
@@ -51,7 +56,7 @@ const stats = [
   { value: "2024", label: "Year Established" },
   { value: "3+", label: "Retail Models" },
   { value: "7 Days", label: "Open Every Week" },
-  { value: "2 Showrooms", label: "Nagarbhavi & Rajajinagar" },
+  { value: "2 Locations", label: "Nagarbhavi & Rajajinagar" },
 ];
 
 const differentiators = [
@@ -97,6 +102,9 @@ export default function AboutPage() {
       sameAs: siteConfig.sameAs,
       areaServed: ["Bengaluru", "Karnataka"],
     },
+    ...[branchStructuredData("rajajinagar")].filter(
+      (item): item is NonNullable<typeof item> => item !== null,
+    ),
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
@@ -124,7 +132,7 @@ export default function AboutPage() {
         <div className="mx-auto max-w-7xl">
           <SeoH1>
             About UV Bengaluru — Official Ultraviolette Dealership in
-            Nagarbhavi, Bengaluru
+            Nagarbhavi and Rajajinagar, Bengaluru
           </SeoH1>
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#FF3B3B]">
             About UV Bengaluru
@@ -140,8 +148,9 @@ export default function AboutPage() {
             FUTURE
           </div>
           <p className="max-w-2xl text-lg leading-relaxed text-[#888]">
-            UV Bengaluru is the official Ultraviolette dealership in Nagarbhavi,
-            operated by Aadya Inc. We bring performance-led electric mobility,
+            UV Bengaluru is the official Ultraviolette dealership in Bengaluru,
+            operated by Aadya Inc., with a sales, service and spares facility in
+            Nagarbhavi and a sales counter in Rajajinagar. We bring performance-led electric mobility,
             test rides, service, and ownership guidance to riders across
             Bengaluru.
           </p>
@@ -162,7 +171,7 @@ export default function AboutPage() {
             <p className="mb-5 text-base leading-relaxed text-[#888]">
               UV Bengaluru was created to give Bengaluru riders a direct,
               reliable, and well-supported entry point into the Ultraviolette
-              ecosystem. From our Nagarbhavi location, we help customers compare
+              ecosystem. From our Nagarbhavi and Rajajinagar locations, we help customers compare
               the lineup, understand pricing, book test rides, and make informed
               ownership decisions.
             </p>
@@ -252,11 +261,11 @@ export default function AboutPage() {
             <h2 className="mb-6 font-display text-4xl font-extrabold uppercase text-white md:text-5xl">
               VISIT US IN
               <br />
-              <span className="text-[#FF3B3B]">NAGARBHAVI</span>
+              <span className="text-[#FF3B3B]">NAGARBHAVI OR RAJAJINAGAR</span>
             </h2>
             <div className="mb-8 space-y-3">
-              <p className="text-sm leading-relaxed text-[#888]">
-                {showroomAddressText}
+              <p className="space-y-2 text-sm leading-relaxed text-[#888]">
+                <LocationAddresses />
               </p>
               <p className="text-sm text-[#888]">
                 <a

@@ -9,12 +9,10 @@ import { submitTestRideRequest } from "@/lib/formSubmissionHandlers";
 import type { TestRideSubmissionPayload } from "@/lib/formSubmissionTypes";
 
 const models = [
-  "X-47",
-  "X-47 Original",
-  "X-47 Original+",
-  "X-47 Recon",
-  "X-47 Recon+",
-  "X-47 Desert Wing",
+  "X-47 Venom Original",
+  "X-47 Venom Original+",
+  "X-47 Venom Recon",
+  "X-47 Venom Recon+",
   "F77 Mach 2",
   "F77 SuperStreet",
 ];

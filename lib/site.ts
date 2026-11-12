@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "UV Bengaluru",
   legalName: "Aadya Inc.",
   description:
-    "UV Bengaluru is the official Ultraviolette dealership in Bengaluru, with showrooms in Nagarbhavi and Rajajinagar. Explore the lineup, compare models, and book a test ride.",
+    "UV Bengaluru is the official Ultraviolette dealership in Bengaluru, with a sales, service and spares facility in Nagarbhavi and a sales counter in Rajajinagar. Explore the X-47 Venom and F77 range and book a test ride.",
   url: "https://uvbengaluru.com",
   ogImage: "/opengraph-image",
   phoneDisplay: "+91 80500 73309",
@@ -13,7 +13,7 @@ export const siteConfig = {
   email: "hello@uvbengaluru.com",
   address: {
     streetAddress: "SJA Arcade, 904, 10th Cross Rd, ITI Layout, Papareddipalya",
-    locality: "Naagarabhaavi",
+    locality: "Nagarbhavi",
     city: "Bengaluru",
     region: "Karnataka",
     postalCode: "560072",
@@ -28,7 +28,8 @@ export const siteConfig = {
     {
       id: "nagarbhavi",
       name: "Nagarbhavi",
-      type: "Showroom & Service Centre",
+      type: "Sales, Service & Spares",
+      shortType: "3S facility",
       addressLines: [
         "SJA Arcade, 904, 10th Cross Rd",
         "ITI Layout, Papareddipalya",
@@ -43,7 +44,8 @@ export const siteConfig = {
     {
       id: "rajajinagar",
       name: "Rajajinagar",
-      type: "Showroom",
+      type: "Sales Counter",
+      shortType: "sales counter",
       addressLines: [
         "No. 35/2, Ground Floor, Shop No. 001",
         "Opp. Suguna Hospital, Dr. Rajkumar Road",
@@ -67,6 +69,11 @@ export const siteConfig = {
 export function absoluteUrl(path = "/") {
   return new URL(path, siteConfig.url).toString();
 }
+
+export const rajajinagarAddressText =
+  "No. 35/2, Ground Floor, Shop No. 001, Opp. Suguna Hospital, Dr. Rajkumar Road, Rajajinagar, Bengaluru, Karnataka 560010";
+
+export const rajajinagarLine = `Rajajinagar sales counter: ${rajajinagarAddressText}`;
 
 export const showroomAddressText = `${siteConfig.address.streetAddress}, ${siteConfig.address.locality}, ${siteConfig.address.city}, ${siteConfig.address.region} ${siteConfig.address.postalCode}`;
 
@@ -94,7 +101,10 @@ export function branchStructuredData(locationId: string) {
   return {
     "@context": "https://schema.org",
     "@type": ["MotorcycleDealer", "LocalBusiness"],
+    "@id": `${siteConfig.url}/#${location.id}`,
     name: `${siteConfig.name} - ${location.name}`,
+    description: `UV Bengaluru ${location.name}: official Ultraviolette ${location.shortType} in Bengaluru.`,
+    parentOrganization: { "@id": `${siteConfig.url}/#dealer` },
     legalName: siteConfig.legalName,
     url: absoluteUrl("/showroom"),
     image: absoluteUrl(siteConfig.ogImage),

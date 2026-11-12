@@ -2,12 +2,17 @@ import type { Metadata } from "next";
 import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
 import WorkshopBookingForm from "@/components/WorkshopBookingForm";
-import { absoluteUrl, showroomAddressText, siteConfig } from "@/lib/site";
+import {
+  absoluteUrl,
+  showroomAddressText,
+  siteConfig,
+  rajajinagarAddressText,
+} from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Book Ultraviolette Workshop Service in Bengaluru",
   description:
-    "Book Ultraviolette workshop service in Bengaluru with UV Bengaluru in Nagarbhavi. Use this page for workshop appointments, diagnostics, software support, and genuine-parts service planning.",
+    "Book Ultraviolette workshop service at UV Bengaluru, Nagarbhavi: diagnostics, software support and genuine parts. Sales counter in Rajajinagar.",
   alternates: {
     canonical: "/workshop",
   },
@@ -48,7 +53,7 @@ const services = [
 ];
 
 const visitSignals = [
-  "Official local touchpoint in Nagarbhavi, Bengaluru",
+  "Official service and spares facility in Nagarbhavi, with a sales counter in Rajajinagar",
   "Open Monday to Sunday, 10:00 AM to 7:00 PM",
   "Call or WhatsApp before arriving for smoother workshop planning",
   "Use the booking form for a structured service request",
@@ -142,7 +147,7 @@ export default function WorkshopPage() {
             Book Ultraviolette Workshop Service in Bengaluru
           </SeoH1>
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#FF3B3B]">
-            Nagarbhavi, Bengaluru
+            Workshop at Nagarbhavi, Bengaluru
           </p>
           <div
             aria-hidden="true"
@@ -200,7 +205,8 @@ export default function WorkshopPage() {
             </h2>
             <div className="space-y-3">
               {[
-                `Address: ${showroomAddressText}`,
+                `Workshop and spares (Nagarbhavi): ${showroomAddressText}`,
+                `Rajajinagar sales counter (sales only; service is at Nagarbhavi): ${rajajinagarAddressText}`,
                 "Hours: Monday to Sunday, 10:00 AM to 7:00 PM",
                 `Phone: ${siteConfig.phoneDisplay}`,
                 `WhatsApp: ${siteConfig.whatsappDisplay}`,

@@ -7,7 +7,7 @@ import { absoluteUrl, siteConfig } from "@/lib/site";
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: "UV Bengaluru - Official Ultraviolette Dealership in Nagarbhavi",
+    default: "UV Bengaluru - Official Ultraviolette Dealer in Bengaluru",
     template: "%s | UV Bengaluru",
   },
   description: siteConfig.description,
@@ -21,7 +21,9 @@ export const metadata: Metadata = {
     "Nagarbhavi",
     "Naagarabhaavi",
     "F77 Mach 2 Bengaluru",
-    "X-47 Bengaluru",
+    "Ultraviolette showroom Rajajinagar",
+    "Ultraviolette showroom Nagarbhavi",
+    "X-47 Venom price Bengaluru",
     "X-47 Venom Bengaluru",
     "Rajajinagar",
   ],

@@ -57,7 +57,7 @@ export default function OpenGraphImage() {
               letterSpacing: 2,
             }}
           >
-            Electric Performance • Test Rides • Nagarbhavi
+            Test Rides • Nagarbhavi • Rajajinagar
           </div>
           <div
             style={{

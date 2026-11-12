@@ -8,19 +8,20 @@ import {
   getVehicleImageObjectClass,
 } from "@/lib/vehicleImagePresentation";
 import { getVehicle, retailVehicles } from "@/lib/vehicles";
-import { absoluteUrl, showroomAddressText, siteConfig, branchStructuredData } from "@/lib/site";
+import LocationAddresses from "@/components/LocationAddresses";
+import { absoluteUrl, siteConfig, branchStructuredData } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Official Ultraviolette Dealership in Bengaluru",
   description:
-    "UV Bengaluru is the official Ultraviolette dealership in Bengaluru, with showrooms in Nagarbhavi and Rajajinagar. Explore the X-47 Venom, X-47, F77 Mach 2, F77 SuperStreet, book a test ride, or get finance support. Open daily 10 AM–7 PM.",
+    "Official Ultraviolette dealer in Bengaluru, at Nagarbhavi and Rajajinagar. Explore the X-47 Venom and F77 range and book a test ride. Open 10 AM–7 PM.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: "UV Bengaluru | Official Ultraviolette Dealership, Bengaluru",
     description:
-      "Explore Ultraviolette's X-47 Venom, X-47, F77 Mach 2, and F77 SuperStreet in Bengaluru. Book a test ride at our Nagarbhavi or Rajajinagar showroom. Performance electric motorcycles for the next generation.",
+      "Explore Ultraviolette's X-47 Venom, F77 Mach 2, and F77 SuperStreet in Bengaluru. Book a test ride with UV Bengaluru in Nagarbhavi or Rajajinagar. Performance electric motorcycles for the next generation.",
     url: absoluteUrl("/"),
     images: [
       {
@@ -62,7 +63,7 @@ const ownershipActions = [
   {
     title: "Book Test Ride",
     description:
-      "Experience X-47 and the F77 range first-hand. Test rides are available daily with guided support from the showroom team.",
+      "Experience the X-47 Venom and the F77 range first-hand. Test rides are available daily with guided support from the showroom team.",
     href: "/test-ride",
     cta: "Reserve Slot",
   },
@@ -118,12 +119,12 @@ const landingFaqs = [
   {
     question: "Is UV Bengaluru an official Ultraviolette dealership?",
     answer:
-      "Yes. UV Bengaluru is the official Ultraviolette dealership in Bengaluru, operated by Aadya Inc., with showrooms in Nagarbhavi and Rajajinagar.",
+      "Yes. UV Bengaluru is the official Ultraviolette dealership in Bengaluru, operated by Aadya Inc., with a sales, service and spares facility in Nagarbhavi and a sales counter in Rajajinagar.",
   },
   {
     question: "Which Ultraviolette models can I explore at UV Bengaluru?",
     answer:
-      "The lineup includes the new X-47 Venom, the X-47 range, F77 Mach 2, F77 SuperStreet, and selected pre-book platforms such as Tesseract and Shockwave, subject to current availability.",
+      "The lineup includes the new X-47 Venom, F77 Mach 2, F77 SuperStreet, and selected pre-book platforms such as Tesseract and Shockwave, subject to current availability.",
   },
   {
     question: "Can I book an Ultraviolette test ride in Bengaluru?",
@@ -133,7 +134,17 @@ const landingFaqs = [
   {
     question: "Where is the UV Bengaluru showroom located?",
     answer:
-      "The showroom is located at SJA Arcade, 904, 10th Cross Road, ITI Layout, Papareddipalya, Naagarabhaavi, Bengaluru, Karnataka 560072.",
+      "UV Bengaluru has two locations. The sales, service and spares facility is at SJA Arcade, 904, 10th Cross Road, ITI Layout, Papareddipalya, Nagarbhavi, Bengaluru 560072. The sales counter is at No. 35/2, Ground Floor, Shop No. 001, Opp. Suguna Hospital, Dr. Rajkumar Road, Rajajinagar, Bengaluru 560010.",
+  },
+  {
+    question: "Is there an Ultraviolette showroom in Rajajinagar?",
+    answer:
+      "Yes. UV Bengaluru runs an Ultraviolette sales counter on Dr. Rajkumar Road, Rajajinagar, opposite Suguna Hospital. Vehicle service and spares are handled at the Nagarbhavi facility.",
+  },
+  {
+    question: "Is the X-47 Venom available for test rides in Bengaluru?",
+    answer:
+      "Yes. The X-47 Venom is available at UV Bengaluru with prices starting at INR 2.64 lakh ex-showroom, and you can book a test ride online or by phone.",
   },
 ];
 
@@ -153,6 +164,7 @@ export default function HomePage() {
     {
       "@context": "https://schema.org",
       "@type": ["MotorcycleDealer", "LocalBusiness"],
+      "@id": `${siteConfig.url}/#dealer`,
       name: siteConfig.name,
       legalName: siteConfig.legalName,
       description: siteConfig.description,
@@ -217,10 +229,10 @@ export default function HomePage() {
             <div>
               <SeoH1>
                 Official Ultraviolette Dealership in Bengaluru — UV Bengaluru,
-                Nagarbhavi
+                Nagarbhavi and Rajajinagar
               </SeoH1>
               <p className="mb-6 text-xs font-semibold uppercase tracking-[0.12em] text-[#666]">
-                Official Ultraviolette Dealership - Nagarbhavi, Bengaluru
+                Official Ultraviolette Dealership - Nagarbhavi &amp; Rajajinagar
               </p>
               <div
                 aria-hidden="true"
@@ -232,16 +244,17 @@ export default function HomePage() {
               </div>
               <p className="mb-6 max-w-xl text-[15px] leading-relaxed text-[#666]">
                 UV Bengaluru is the official Ultraviolette dealership in
-                Bengaluru, with showrooms in Nagarbhavi and Rajajinagar, where
-                riders can explore the X-47 Venom, X-47, F77
+                Bengaluru, with a sales, service and spares facility in
+                Nagarbhavi and a sales counter in Rajajinagar, where riders can
+                explore the X-47 Venom, F77
                 Mach 2, and F77 SuperStreet, compare variants, and book a test
                 ride with showroom guidance. The experience stays design-led and
                 performance-first, but the first step is practical: get the
                 right model, pricing context, and ownership support in one
                 place.
               </p>
-              <p className="mb-2 text-[15px] leading-relaxed text-[#666]">
-                {showroomAddressText}
+              <p className="mb-2 space-y-1 text-[14px] leading-relaxed text-[#666]">
+                <LocationAddresses />
               </p>
               <p className="mb-9 text-sm text-[#888]">
                 Open daily - 10:00 AM to 7:00 PM
@@ -555,8 +568,8 @@ export default function HomePage() {
               <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#777]">
                 Location
               </p>
-              <p className="text-sm leading-relaxed text-white">
-                {showroomAddressText}
+              <p className="space-y-2 text-sm leading-relaxed text-white">
+                <LocationAddresses />
               </p>
             </div>
             <div>

@@ -146,7 +146,7 @@ export default function ElectricBikeFinanceBengaluruPage() {
                 "Ask for the full Bengaluru on-road estimate, not only the EMI.",
                 "Clarify what down payment range changes the monthly outcome most meaningfully.",
                 "Understand how insurance and accessory decisions affect the ownership number.",
-                "If you are comparing F77 or X-47 variants, ask for finance context on the exact one you want.",
+                "If you are comparing F77 or X-47 Venom variants, ask for finance context on the exact one you want.",
               ].map((item) => (
                 <div
                   key={item}

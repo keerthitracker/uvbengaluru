@@ -59,7 +59,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-sm leading-relaxed text-[#666]">
-              Official Ultraviolette dealership in Bengaluru, with showrooms in Nagarbhavi and Rajajinagar.
+              Official Ultraviolette dealership in Bengaluru. Sales, service and spares in Nagarbhavi; sales counter in Rajajinagar.
             </p>
           </div>
 
@@ -159,7 +159,9 @@ export default function Footer() {
                   key={location.id}
                   className="text-sm leading-relaxed text-[#A0A0A0]"
                 >
-                  <span className="block text-white">{location.name}</span>
+                  <span className="block text-white">
+                    {location.name} - {location.type}
+                  </span>
                   {location.addressLines.join(", ")}
                 </li>
               ))}

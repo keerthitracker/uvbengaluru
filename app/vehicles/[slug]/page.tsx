@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ImmersiveHero from "@/components/ImmersiveHero";
-import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
 import VehicleImage from "@/components/VehicleImage";
 import VehicleVariantExplorer from "@/components/VehicleVariantExplorer";
@@ -31,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${vehicle.name} Price in Bengaluru`,
-    description: `${vehicle.subheadline} ${vehicle.price}. Visit UV Bengaluru in Nagarbhavi or Rajajinagar for current pricing, availability, and booking guidance.`,
+    description: `${vehicle.name} at UV Bengaluru: ${vehicle.price}. See variants, specs and colours, and book at Nagarbhavi or Rajajinagar.`,
     alternates: {
       canonical: `/vehicles/${vehicle.slug}`,
     },
@@ -95,7 +94,36 @@ function buildVehicleFaqs(vehicle: NonNullable<ReturnType<typeof getVehicle>>) {
         ? `${vehicle.name} suits riders who want a lighter, more playful, more unconventional electric performance machine rather than a typical commuter format.`
         : `${vehicle.name} suits riders who want ${vehicle.subheadline.toLowerCase()}`;
 
+  const venomFaqs =
+    vehicle.slug === "x-47-venom"
+      ? [
+          {
+            question: "What are the X-47 Venom variants and prices?",
+            answer: (vehicle.variants ?? [])
+              .map(
+                (variant) =>
+                  `${variant.name}: ${variant.priceLabel?.replace("From ", "")}, ${variant.battery}, ${variant.range}`,
+              )
+              .join("; ")
+              .concat(
+                ". Prices are Bengaluru ex-showroom and include the Carbon Farewell Fund offer.",
+              ),
+          },
+          {
+            question: "Which colours does the X-47 Venom come in?",
+            answer:
+              "The X-47 Venom Original and Original+ come in Cosmic Black, Turbo Red, and Afterburner Yellow. The Recon and Recon+ add Stellar White.",
+          },
+          {
+            question: "Has the X-47 Venom replaced the X-47?",
+            answer:
+              "Yes. The earlier X-47 and X-47 Desert Wing are discontinued, and the X-47 Venom on the VX-100 platform is the current X-47 at UV Bengaluru. Existing X-47 owners continue to be supported at the Nagarbhavi service facility.",
+          },
+        ]
+      : [];
+
   return [
+    ...venomFaqs,
     {
       question: `What is the ${vehicle.name} price in Bengaluru?`,
       answer: priceAnswer,
@@ -248,6 +276,10 @@ export default async function VehicleDetailPage({ params }: Props) {
   const offerPrice = extractOfferPrice(
     vehicle.variants?.[0]?.priceLabel ?? vehicle.price,
   );
+  const variantPrices = (vehicle.variants ?? [])
+    .map((variant) => extractOfferPrice(variant.priceLabel ?? ""))
+    .filter((price): price is number => typeof price === "number");
+  const hasPriceRange = variantPrices.length > 1;
   const productStructuredData = [
     {
       "@context": "https://schema.org",
@@ -265,14 +297,24 @@ export default async function VehicleDetailPage({ params }: Props) {
         "@type": "Organization",
         name: "Ultraviolette",
       },
+      ...(vehicle.colors.length
+        ? { color: vehicle.colors.map((color) => color.name) }
+        : {}),
       offers: {
-        "@type": "Offer",
-        ...(offerPrice
+        "@type": hasPriceRange ? "AggregateOffer" : "Offer",
+        ...(hasPriceRange
           ? {
               priceCurrency: "INR",
-              price: offerPrice,
+              lowPrice: Math.min(...variantPrices),
+              highPrice: Math.max(...variantPrices),
+              offerCount: variantPrices.length,
             }
-          : {}),
+          : offerPrice
+            ? {
+                priceCurrency: "INR",
+                price: offerPrice,
+              }
+            : {}),
         availability: isAvailable
           ? "https://schema.org/InStock"
           : isPreBook
@@ -337,9 +379,6 @@ export default async function VehicleDetailPage({ params }: Props) {
       <section className="border-t border-white/8 bg-[linear-gradient(180deg,#0b0b0b_0%,#121212_100%)] px-4 py-20 md:px-8 md:py-24">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:gap-14">
           <div className="rounded-[32px] border border-white/8 bg-white/[0.03] p-7 md:p-9">
-            <SeoH1>
-              {vehicle.name} price in Bengaluru at UV Bengaluru
-            </SeoH1>
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#FF3B3B]">
               Positioning
             </p>

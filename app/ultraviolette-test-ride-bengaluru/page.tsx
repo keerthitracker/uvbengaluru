@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import SeoH1 from "@/components/SeoH1";
 import StructuredData from "@/components/StructuredData";
-import { absoluteUrl, showroomAddressText, siteConfig } from "@/lib/site";
+import LocationAddresses from "@/components/LocationAddresses";
+import { absoluteUrl, siteConfig } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Ultraviolette Test Ride in Bengaluru",
   description:
-    "Book an Ultraviolette test ride in Bengaluru at UV Bengaluru, the official dealership in Nagarbhavi. Explore available models, process, timings, and what to expect.",
+    "Book an Ultraviolette test ride in Bengaluru with UV Bengaluru, the official dealer in Nagarbhavi and Rajajinagar. Models, process, timings.",
   alternates: {
     canonical: "/ultraviolette-test-ride-bengaluru",
   },
@@ -24,13 +25,13 @@ const faqs = [
   {
     question: "Where can I book an Ultraviolette test ride in Bengaluru?",
     answer:
-      "You can book an Ultraviolette test ride with UV Bengaluru, the official dealership in Nagarbhavi, Bengaluru.",
+      "You can book an Ultraviolette test ride with UV Bengaluru, the official dealership in Bengaluru, with locations in Nagarbhavi and Rajajinagar.",
   },
   {
     question:
       "Which Ultraviolette models are typically available for test rides?",
     answer:
-      "Availability can change, but the test-ride lineup usually centers on current retail models such as X-47 and the F77 range. Confirm the exact model before visiting.",
+      "Availability can change, but the test-ride lineup usually centers on current retail models such as the X-47 Venom and the F77 range. Confirm the exact model before visiting.",
   },
   {
     question: "Do I need to book a test ride in advance?",
@@ -95,7 +96,8 @@ export default function UltravioletteTestRideBengaluruPage() {
           </div>
           <p className="max-w-3xl text-lg leading-relaxed text-[#888]">
             If you are searching for an Ultraviolette test ride in Bengaluru,
-            the most direct path is UV Bengaluru in Nagarbhavi. This page
+            the most direct path is UV Bengaluru, with locations in Nagarbhavi
+            and Rajajinagar. This page
             explains where to go, how to book, what models to ask for, and what
             to expect before you ride.
           </p>
@@ -114,8 +116,8 @@ export default function UltravioletteTestRideBengaluruPage() {
               pricing conversations, and ownership support from the same
               location.
             </p>
-            <p className="text-sm leading-relaxed text-[#A0A0A0]">
-              Location: {showroomAddressText}
+            <p className="space-y-2 text-sm leading-relaxed text-[#A0A0A0]">
+              <LocationAddresses />
             </p>
           </div>
           <div className="rounded-[6px] border border-[#2A2A2A] bg-[#111] p-8">
@@ -147,7 +149,7 @@ export default function UltravioletteTestRideBengaluruPage() {
             {[
               {
                 title: "Choose the model",
-                text: "Ask specifically for the X-47 or F77 model you want to evaluate, because availability can vary.",
+                text: "Ask specifically for the X-47 Venom variant or F77 model you want to evaluate, because availability can vary.",
               },
               {
                 title: "Confirm the slot",
